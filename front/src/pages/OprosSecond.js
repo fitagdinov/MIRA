@@ -1,12 +1,12 @@
 import React from 'react';
 import { Container, Row, Col, Card, Form} from 'react-bootstrap';
-import babka from '../image/images.jpeg'
+import babka from '../image/grob.jpg'
 import Nav from 'react-bootstrap/Nav';
 const Opros = () => {
  
     return (
         <Container>
-            <h1>Opros_1</h1>
+            <h1>Opros_2</h1>
             <Form>
                 <Row>
                     <Form.Label>вопрос 1</Form.Label>
@@ -21,7 +21,7 @@ const Opros = () => {
                                 <Card.Text>описание</Card.Text>
                                 <Nav defaultActiveKey='/' as='ul'>
                                     <Nav.Item as='li'>
-                                        <Nav.Link href='/opros/2'>выбрать</Nav.Link>
+                                        <Nav.Link href='/opros/3'>выбрать</Nav.Link>
                                     </Nav.Item>
                                 </Nav>
                             </Card.Body>
@@ -35,7 +35,7 @@ const Opros = () => {
                                 <Card.Text>описание</Card.Text>
                                 <Nav defaultActiveKey='/' as='ul'>
                                     <Nav.Item as='li'>
-                                        <Nav.Link href='/opros/2'>выбрать</Nav.Link>
+                                        <Nav.Link href='/opros/3'>выбрать</Nav.Link>
                                     </Nav.Item>
                                 </Nav>
                             </Card.Body>
@@ -49,7 +49,7 @@ const Opros = () => {
                                 <Card.Text>описание</Card.Text>
                                 <Nav defaultActiveKey='/' as='ul'>
                                     <Nav.Item as='li'>
-                                        <Nav.Link href='/opros/2'>выбрать</Nav.Link>
+                                        <Nav.Link href='/opros/3'>выбрать</Nav.Link>
                                     </Nav.Item>
                                 </Nav>
                             </Card.Body>
