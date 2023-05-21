@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Navbar, Button, Nav, Modal, Form} from 'react-bootstrap'
-
+import "../styles/Form.css"
 
 export default function Navibar (){
 
@@ -35,38 +35,45 @@ export default function Navibar (){
         </Navbar>
 
         {/*TODO: при введении данных должна случиться авторизация (прохождение опроса д.б. необязательным)*/}
-        <Modal show={show} onHide={handleClose}>
+        <Modal size={'lg'} show={show} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>
-                    Пожалуйста введите свое ФИО и дату рождения для авторизаии
+                    Пожалуйста введите свое ФИО и дату рождения для авторизации
                 </Modal.Title>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group controlId="fromBasicEmail">
-                            <Form.Label>ФИО</Form.Label>
-                            <Form.Control placeholder="ФИО"/> 
-                            
-                        </Form.Group>
-                        <Form.Group controlId="fromBasicEmail">
-                            <Form.Label>дата  </Form.Label>
-                            <Form.Control placeholder="Дата рождения"/> 
-                        </Form.Group>
-                        <Button variant="primary" className="mr-2" onClick={handleShowOpros}>Готов</Button>
-                    </Form>
-                </Modal.Body>
             </Modal.Header>
+
+            <Modal.Body>
+                <Form>
+                    <Form.Group controlId="fromBasicEmail">
+                        <Form.Label>ФИО</Form.Label>
+                        <Form.Control className={'name'} placeholder="ФИО"/>
+
+                    </Form.Group>
+                    <Form.Group controlId="fromBasicEmail">
+                        <Form.Label>Дата рождения</Form.Label>
+                        <Form.Control className={'date'} placeholder="Дата рождения"/>
+                    </Form.Group>
+                </Form>
+            </Modal.Body>
+            <Modal.Footer >
+                <Button className={'mx-auto'} variant="primary" onClick={handleShowOpros}>Готово</Button>
+            </Modal.Footer>
+
+
         </Modal>
-        <Modal show={showOpros} onHide={handleCloseOpros}>
+        <Modal size={'lg'} show={showOpros} onHide={handleCloseOpros}>
             <Modal.Header closeButton>
                 <Modal.Title>
                 Ответьте на 3 вопроса, чтобы мы могли предложить Вам действительно интересные мероприятия.
                 </Modal.Title>
-                <Modal.Body>
-                    <Form>
-                        <Button>Начать</Button>
-                    </Form>
-                </Modal.Body>
             </Modal.Header>
+
+            <Modal.Footer class={'text-center'}>
+                <Form className={'p-3'}>
+                    <Button className={'mx-auto'}>Начать</Button>
+                </Form>
+            </Modal.Footer>
+
         </Modal>
     </>
     )
