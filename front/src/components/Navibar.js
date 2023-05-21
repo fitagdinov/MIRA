@@ -17,23 +17,24 @@ export default function Navibar (){
     return(
     <>
         <Navbar collapseOnSelect expand='lg' bg='dark' variant="dark">
-            <Navbar.Brand>Привет Бабка</Navbar.Brand>
+            <Navbar.Brand className="navbar-brand px-3"> Привет Бабка </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className='mr-auto'>
+                <Nav className='mx-auto'>
                     <Nav.Link>Рекомендации</Nav.Link>
                     <Nav.Link>Расширеный поиск</Nav.Link>
                     <Nav.Link>История</Nav.Link>  
                     <Nav.Link>Избранное</Nav.Link>                    
                 </Nav>
-                <Nav>
-                    <Button variant="primary" className="mr-2" onClick={handleShow}>FORM</Button>
-                    <Button variant="primary" className="mr-2">вход</Button>
-                    <Button variant="primary">выход</Button>
+                <Nav className="px-3">
+                    <Button variant="primary" className="mr-2" onClick={handleShow}> Авторизация </Button>
+                    {/*<Button variant="primary" className="mr-2">вход</Button>*/}
+                    {/*<Button variant="primary">выход</Button>*/}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
 
+        {/*TODO: при введении данных должна случиться авторизация (прохождение опроса д.б. необязательным)*/}
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>
