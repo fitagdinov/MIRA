@@ -1,6 +1,6 @@
 creation_request = \
     """
-    create table NoOldMen.StaticEvent
+create table NoOldMen.StaticEvent
 (
     SYS_ID_event        int auto_increment
         primary key,
@@ -10,7 +10,9 @@ creation_request = \
     event_detailed_info text   null comment 'Подробное описание мероприятия',
     event_level_1       text   null,
     event_level_2       text   null,
-    event_level_3       text   null
+    event_level_3       text   null,
+    constraint StaticEvent_pk
+        unique (EXTERNAL_ID_event)
 )
     comment 'База данных о доступных мероприятиях';
 
@@ -35,6 +37,8 @@ create table NoOldMen.StaticGroup
     group_address       text                                          null comment 'Честный адрес',
     group_geolocation   text                                          null comment 'Округ',
     group_area          text                                          null comment 'район группы',
+    constraint StaticGroup_pk
+        unique (EXTERNAL_ID_group),
     constraint StaticGroup_StaticEvent_null_fk
         foreign key (SYS_ID_event) references NoOldMen.StaticEvent (SYS_ID_event)
             on update cascade on delete cascade
@@ -75,7 +79,9 @@ create table NoOldMen.StaticMember
     grand_name              text                             null comment 'имя бабушки',
     grand_surname           text                             null comment 'фамилия бабушки',
     grand_sex               enum ('M', 'W', 'N') default 'N' null comment 'пол бабушки',
-    grand_address_raw       text                             null comment 'Сырой адрес бабушки (дальше переводится в координаты).'
+    grand_address_raw       text                             null comment 'Сырой адрес бабушки (дальше переводится в координаты).',
+    constraint StaticMember_pk
+        unique (EXTERNAL_ID_grand)
 )
     comment 'База данных со статикой бабушек';
 

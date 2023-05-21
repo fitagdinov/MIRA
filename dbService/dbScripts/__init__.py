@@ -1,1 +1,2 @@
 from .initializeScripts import createTables
+from .fillScripts.addMemberScript import addMemberScript

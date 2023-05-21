@@ -38,7 +38,7 @@ def addMemberScript(grand_ma_mos_id: List[int], date_of_registration: List[str],
     grand_address = tuple(grand_address)
     insert_query = \
         f"""
-        INSERT INTO NoOldMen.StaticMember (EXTERNAL_ID_grand, grand_birth_date, grand_registration_date, grand_name,
+        INSERT IGNORE INTO NoOldMen.StaticMember (EXTERNAL_ID_grand, grand_birth_date, grand_registration_date, grand_name,
                                    grand_surname, grand_sex, grand_address_raw)
         VALUES
         """
