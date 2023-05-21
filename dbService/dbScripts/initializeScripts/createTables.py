@@ -105,7 +105,8 @@ create table NoOldMen.AttendanceGroup
 
 create table NoOldMen.memberEmbedding
 (
-    SYS_ID_grand int null,
+    SYS_ID_grand    int  null,
+    grand_embedding json null comment 'вектор бабушки из опроса',
     constraint memberEmbedding_pk
         unique (SYS_ID_grand),
     constraint memberEmbedding_memberStatic_null_fk
