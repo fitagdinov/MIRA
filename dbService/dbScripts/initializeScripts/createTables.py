@@ -1,17 +1,20 @@
-create table if not exists NoOldMen.StaticEvent
+creation_request = \
+    """
+    create table NoOldMen.StaticEvent
 (
     SYS_ID_event        int auto_increment
         primary key,
-    CITE_ID_event       text null comment 'код мероприятия для ввода бабушками',
-    event_short_name    text null comment 'Короткое название event (DUPLICATE level3)',
-    event_detailed_info text null comment 'Подробное описание мероприятия',
-    event_level_1       text null,
-    event_level_2       text null,
-    event_level_3       text null
+    EXTERNAL_ID_event   bigint not null,
+    CITE_ID_event       text   null comment 'код мероприятия для ввода бабушками',
+    event_short_name    text   null comment 'Короткое название event (DUPLICATE level3)',
+    event_detailed_info text   null comment 'Подробное описание мероприятия',
+    event_level_1       text   null,
+    event_level_2       text   null,
+    event_level_3       text   null
 )
     comment 'База данных о доступных мероприятиях';
 
-create table if not exists NoOldMen.EventEmbedding
+create table NoOldMen.EventEmbedding
 (
     SYS_ID_event           int  not null,
     event_embedding_vector json null comment 'Вектор описывающий мероприятие',
@@ -21,7 +24,7 @@ create table if not exists NoOldMen.EventEmbedding
 )
     comment 'вектора для event';
 
-create table if not exists NoOldMen.StaticGroup
+create table NoOldMen.StaticGroup
 (
     SYS_ID_group        int auto_increment comment 'системный id группы'
         primary key,
@@ -38,7 +41,7 @@ create table if not exists NoOldMen.StaticGroup
 )
     comment 'База по доступным группам';
 
-create table if not exists NoOldMen.DynamicGroup
+create table NoOldMen.DynamicGroup
 (
     SYS_ID_group       int  not null
         primary key,
@@ -49,7 +52,7 @@ create table if not exists NoOldMen.DynamicGroup
 )
     comment 'база с изменяющимися полями группы';
 
-create table if not exists NoOldMen.EventGroupMap
+create table NoOldMen.EventGroupMap
 (
     SYS_ID_event int not null comment 'id мероприятия',
     SYS_ID_group int not null comment 'id группы',
@@ -62,10 +65,11 @@ create table if not exists NoOldMen.EventGroupMap
 )
     comment 'Связь мероприятия с доступными группами';
 
-create table if not exists NoOldMen.memberStatic
+create table NoOldMen.StaticMember
 (
     SYS_ID_grand            int auto_increment comment 'SYS ID бабушки'
         primary key,
+    EXTERNAL_ID_grand       bigint                           not null comment 'Id бабушки с mos.ru',
     grand_birth_date        bigint                           null comment 'id timestamp format',
     grand_registration_date bigint                           null comment 'Дата регистрации бабушки',
     grand_name              text                             null comment 'имя бабушки',
@@ -75,7 +79,7 @@ create table if not exists NoOldMen.memberStatic
 )
     comment 'База данных со статикой бабушек';
 
-create table if not exists NoOldMen.AttendanceGroup
+create table NoOldMen.AttendanceGroup
 (
     SYS_ID_group             int                                           null comment 'SYS ID группы',
     SYS_ID_grand             int                                           null comment 'SYS ID бабушки',
@@ -88,19 +92,21 @@ create table if not exists NoOldMen.AttendanceGroup
         foreign key (SYS_ID_group) references NoOldMen.StaticGroup (SYS_ID_group)
             on update cascade on delete cascade,
     constraint AttendanceGroup_memberStatic_null_fk
-        foreign key (SYS_ID_grand) references NoOldMen.memberStatic (SYS_ID_grand)
+        foreign key (SYS_ID_grand) references NoOldMen.StaticMember (SYS_ID_grand)
             on update cascade on delete cascade
 )
     comment 'Таблица посещаемости групп бабушками';
 
-create table if not exists NoOldMen.memberEmbedding
+create table NoOldMen.memberEmbedding
 (
     SYS_ID_grand int null,
     constraint memberEmbedding_pk
         unique (SYS_ID_grand),
     constraint memberEmbedding_memberStatic_null_fk
-        foreign key (SYS_ID_grand) references NoOldMen.memberStatic (SYS_ID_grand)
+        foreign key (SYS_ID_grand) references NoOldMen.StaticMember (SYS_ID_grand)
             on update cascade on delete cascade
 )
     comment 'начальный вектор бабушки из опроса';
 
+
+    """
