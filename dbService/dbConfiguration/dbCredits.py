@@ -10,4 +10,3 @@ user = dbInfo["mysqlConfiguration"]["user"]
 password = dbInfo["mysqlConfiguration"]["password"]
 database = dbInfo["mysqlConfiguration"]["database"]
 
-print(host)

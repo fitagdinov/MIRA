@@ -18,16 +18,17 @@ def get_request(query, execute_many=False):
         return cursor.fetchall()
 
 
-def put_request(query, execute_many=False):
-    connection = connector.connect(host=cfg["mysql"]["host"],
-                                   user=cfg["mysql"]["user"],
-                                   password=cfg["mysql"]["password"],
-                                   database=cfg["mysql"]["database"],
+def put_request(query, commit=True):
+    connection = connector.connect(host=host,
+                                   user=user,
+                                   password=password,
+                                   database=database,
                                    ssl_disabled=True)
     cursor = connection.cursor()
-    if not execute_many:
+    if not commit:
         cursor.execute(query)
-        return cursor.fetchone()
+        return
     else:
         cursor.execute(query)
-        return cursor.fetchall()
+        connection.commit()
+        return
