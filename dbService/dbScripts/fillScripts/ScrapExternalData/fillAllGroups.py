@@ -18,6 +18,7 @@ if __name__ == '__main__':
     df["online_status"] = map_online
     for line in tqdm(range(0, df.shape[0])):
         _tmp = df.iloc[line]
+        _rasp = 'Активные:' + str(_tmp['расписание в активных периодах']) + '[-]Закрытые:' + str(_tmp['расписание в закрытых периодах']) + '[-]Плановые:' + str(_tmp['расписание в плановом периоде'])
         addGroupScript(
             external_id_group=_tmp["уникальный номер"],
             group_short_name=_tmp["shorten_name"],
@@ -25,5 +26,5 @@ if __name__ == '__main__':
             group_address=_tmp["адрес площадки"],
             group_geo=_tmp["округ площадки"],
             group_area=_tmp["район площадки"],
-            group_schedule=_tmp["расписание в закрытых периодах"]
+            group_schedule=_rasp
         )

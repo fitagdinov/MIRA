@@ -56,6 +56,12 @@ def addGroupScript(external_id_group: int,
     """
     put_request(query=insert_query)
 
+    insert_query = \
+    f"""
+    INSERT INTO NoOldMen.DynamicGroup (SYS_ID_group, group_schedule_raw) VALUES ({self_id}, '{group_schedule}');
+    """
+    put_request(query=insert_query)
+
 if __name__ == '__main__':
     addGroupScript(
         external_id_group=50,
