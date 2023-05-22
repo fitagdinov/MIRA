@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Nav from 'react-bootstrap/Nav';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRepos } from '../action/repos';
 
 const Home = () => {
+    const dispatch = useDispatch()
+    const repos = useSelector(state => state.repos.items)
+
+    useEffect(()=>{
+        dispatch(getRepos())
+    }, [])
 
     return (
         <>
@@ -9,6 +17,7 @@ const Home = () => {
             <Nav defaultActiveKey='/' as='ul'>
                 <Nav.Item as='li'>
                     <Nav.Link href='/opros/1'>Opros</Nav.Link>
+                    {repos.map(repo => <div>ura</div>)}
                 </Nav.Item>
             </Nav>
         </>
