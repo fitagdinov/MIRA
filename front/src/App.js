@@ -6,14 +6,14 @@ import Opros from "./pages/Opros";
 import Home from "./pages/Home";
 import OprosSecond from "./pages/OprosSecond";
 import OprosThird from "./pages/OprosThird";
-import User from "./pages/User";
+import Recomendation from "./pages/Recomendation";
 function App() {
   return (
     <>
       <Navibar/>
       <Routes>
-        <Route path="/" element={<Home />}/>
-        <Route path="/user" element={<User />}/>
+        <Route path="/home" element={<Home />}/>
+        <Route path="/" element={<Recomendation />}/>
         <Route path="/opros/1" element={<Opros />}/>
         <Route path="/opros/2" element={<OprosSecond />}/>
         <Route path="/opros/3" element={<OprosThird />}/>
