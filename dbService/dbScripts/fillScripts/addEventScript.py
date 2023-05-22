@@ -42,7 +42,7 @@ def addEventScript(external_id_event: int,
     event_level_3 = event_level_3
     insert_query = \
         f"""
-        INSERT IGNORE INTO StaticEvent (EXTERNAL_ID_event, CITE_ID_event,
+        INSERT INTO StaticEvent (EXTERNAL_ID_event, CITE_ID_event,
         event_short_name, event_detailed_info, event_level_1, event_level_2, event_level_3)
         VALUES
         """
@@ -55,10 +55,11 @@ def addEventScript(external_id_event: int,
     word = small_words_storage.iloc[line_number].values[0]
     _create_tag = \
         f"""
-    INSERT IGNORE INTO StaticCiteEventID (CITE_ID_event, CITE_ID_word, id_word, id_additional_number, id_description, id_photo_src, is_group_id) 
+    INSERT INTO StaticCiteEventID (CITE_ID_event, CITE_ID_word, id_word, id_additional_number, id_description, id_photo_src, is_group_id) 
     VALUES ({event_tag_id}, '{word}', '{word}', -1, NULL, NULL, FALSE)
         """
     put_request(query=_create_tag)
+
 
 if __name__ == '__main__':
     addEventScript(

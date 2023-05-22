@@ -19,13 +19,13 @@ create table NoOldMen.StaticEvent
 (
     SYS_ID_event        int auto_increment
         primary key,
-    EXTERNAL_ID_event   bigint   not null,
-    CITE_ID_event       bigint   not null comment 'код мероприятия для ввода бабушками',
-    event_short_name    char(20) null comment 'Короткое название event (DUPLICATE level3)',
-    event_detailed_info text     null comment 'Подробное описание мероприятия',
-    event_level_1       text     null,
-    event_level_2       text     null,
-    event_level_3       text     null,
+    EXTERNAL_ID_event   bigint    not null,
+    CITE_ID_event       bigint    not null comment 'код мероприятия для ввода бабушками',
+    event_short_name    char(255) null comment 'Короткое название event (DUPLICATE level3)',
+    event_detailed_info text      null comment 'Подробное описание мероприятия',
+    event_level_1       text      null,
+    event_level_2       text      null,
+    event_level_3       text      null,
     constraint StaticEvent_cite_id
         unique (CITE_ID_event),
     constraint StaticEvent_cite_pk
