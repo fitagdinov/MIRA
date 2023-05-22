@@ -1,13 +1,27 @@
 import React from 'react';
 import babka from '../image/images.jpeg'
-import { Container, Row, Card, Button, Form, CardGroup} from 'react-bootstrap';
+import {Container, Row, Form, CardGroup, InputGroup, Button} from 'react-bootstrap';
 import RecomendationCard from "../components/RecomendationCard";
 import "../styles/Opros.css"
+import {FaSearch} from "react-icons/fa";
 
 const Recomendation = () => {
 
     return (
         <>
+            <Row>
+            <InputGroup className={'mt-4'} style={{marginLeft: '25%', width: '50%'}} size="lg">
+                <InputGroup.Text id="inputGroup-sizing-lg"><FaSearch/></InputGroup.Text>
+                <Form.Control
+                    aria-label="Large"
+                    aria-describedby="inputGroup-sizing-sm"
+                    placeholder={'Введите код мероприятия'}
+                />
+                <div className={'input-group-append'}><Button variant='primary' size={"lg"}>Искать</Button> </div>
+            </InputGroup>
+
+
+            </Row>
         <Container>
             <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
             <Form>
