@@ -8,9 +8,12 @@ small_words_storage = read_csv(_path_small_words, index_col=None, header=0)
 
 
 def dropEvent(event_short_name: str):
-    event_line = get_request(query=f"SELECT * FROM StaticEvent WHERE event_short_name='{event_short_name}'")
+    event_line = get_request(query=f"SELECT * FROM StaticEvent WHERE event_short_name='{event_short_name}'", execute_many=True)
     if event_line is None:
-        return
+        return 'no data'
+    else:
+        put_request(query=f"DELETE FROM StaticEvent WHERE event_short_name='{event_short_name}'", commit=True)
+        return 'deletion', event_short_name
 
 # TODO: it is possible to create multiple insert pipeline. but it is hard
 def addEventScript(external_id_event: int,

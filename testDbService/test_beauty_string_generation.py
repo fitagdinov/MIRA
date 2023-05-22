@@ -71,6 +71,9 @@ class CodeModulesTest(unittest.TestCase):
         groups2 = get_request(query=f"SELECT * FROM StaticGroup WHERE SYS_ID_event={event_2_sys_id}", execute_many=True)
         cond = len(unique([get_request(query=f"SELECT * FROM StaticCiteEventID WHERE CITE_ID_event={_[1]}")[2] for _ in
                            groups2])) <= 1
+
+        dropEvent(event_short_name=_test_event)
+        dropEvent(event_short_name=_test_event2)
         self.assertEqual(cond, True, msg="Check second test group (sec stage) code equality")
 
 
