@@ -6,6 +6,12 @@ from pandas import read_csv
 _path_small_words = "/".join(__file__.split('/')[:-1]) + "/" + 'fileStorage/small_words.csv'
 small_words_storage = read_csv(_path_small_words, index_col=None, header=0)
 
+
+def dropEvent(event_short_name: str):
+    event_line = get_request(query=f"SELECT * FROM StaticEvent WHERE event_short_name='{event_short_name}'")
+    if event_line is None:
+        return
+
 # TODO: it is possible to create multiple insert pipeline. but it is hard
 def addEventScript(external_id_event: int,
                    event_short_name: str,
@@ -24,6 +30,7 @@ def addEventScript(external_id_event: int,
     :return:
     """
 
+    _cite_id_length = get_request(query="SELECT COUNT(1) FROM StaticCiteEventID")[0]
     external_id_event = external_id_event
     event_short_name = event_short_name
     event_detailed_info = event_detailed_info
@@ -32,11 +39,11 @@ def addEventScript(external_id_event: int,
     event_level_3 = event_level_3
     insert_query = \
         f"""
-        INSERT IGNORE INTO {database}.StaticEvent (EXTERNAL_ID_event, 
+        INSERT IGNORE INTO StaticEvent (EXTERNAL_ID_event, CITE_ID_event,
         event_short_name, event_detailed_info, event_level_1, event_level_2, event_level_3)
         VALUES
         """
-    insert_query += f"({external_id_event}, '{event_short_name}', " \
+    insert_query += f"({external_id_event}, {_cite_id_length}, '{event_short_name}', " \
                     f"'{event_detailed_info}', '{event_level_1}', '{event_level_2}', '{event_level_3}')"
     insert_query += ";"
     put_request(query=insert_query)
@@ -52,10 +59,10 @@ def addEventScript(external_id_event: int,
 
 if __name__ == '__main__':
     addEventScript(
-        external_id_event=-666,
-        event_short_name='шахматы и шашки',
-        event_detailed_info='ddkfkfk',
-        event_level_1='flffl',
-        event_level_2='fkffk',
+        external_id_event=-626,
+        event_short_name='йога для души',
+        event_detailed_info='Крутые и жеские шашки',
+        event_level_1='херня',
+        event_level_2='херня2',
         event_level_3='для души'
     )

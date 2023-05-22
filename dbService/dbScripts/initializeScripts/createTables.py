@@ -1,6 +1,6 @@
 creation_request = \
     """
-create table NoOldMen.StaticCiteEventID
+create table if not exists StaticCiteEventID
 (
     CITE_ID_event        bigint               not null comment 'Int номер для поиска красивого слова'
         primary key,
@@ -15,7 +15,7 @@ create table NoOldMen.StaticCiteEventID
 )
     comment 'таблица с информацией о кодирующих словах в поиске по красивому коду ';
 
-create table NoOldMen.StaticEvent
+create table if not exists StaticEvent
 (
     SYS_ID_event        int auto_increment
         primary key,
@@ -26,6 +26,8 @@ create table NoOldMen.StaticEvent
     event_level_1       text     null,
     event_level_2       text     null,
     event_level_3       text     null,
+    constraint StaticEvent_cite_id
+        unique (CITE_ID_event),
     constraint StaticEvent_cite_pk
         unique (CITE_ID_event),
     constraint StaticEvent_pk
@@ -35,17 +37,17 @@ create table NoOldMen.StaticEvent
 )
     comment 'База данных о доступных мероприятиях';
 
-create table NoOldMen.EventEmbedding
+create table if not exists EventEmbedding
 (
     SYS_ID_event           int  not null,
     event_embedding_vector json null comment 'Вектор описывающий мероприятие',
     constraint EventEmbedding_StaticEvent_null_fk
-        foreign key (SYS_ID_event) references NoOldMen.StaticEvent (SYS_ID_event)
+        foreign key (SYS_ID_event) references StaticEvent (SYS_ID_event)
             on update cascade on delete cascade
 )
     comment 'вектора для event';
 
-create table NoOldMen.StaticGroup
+create table if not exists StaticGroup
 (
     SYS_ID_group        int auto_increment comment 'системный id группы'
         primary key,
@@ -58,37 +60,39 @@ create table NoOldMen.StaticGroup
     group_area          text                                          null comment 'район группы',
     constraint StaticGroup_pk
         unique (EXTERNAL_ID_group),
+    constraint unique_external
+        unique (EXTERNAL_ID_group),
     constraint StaticGroup_StaticEvent_null_fk
-        foreign key (SYS_ID_event) references NoOldMen.StaticEvent (SYS_ID_event)
+        foreign key (SYS_ID_event) references StaticEvent (SYS_ID_event)
             on update cascade on delete cascade
 )
     comment 'База по доступным группам';
 
-create table NoOldMen.DynamicGroup
+create table if not exists DynamicGroup
 (
     SYS_ID_group       int  not null
         primary key,
     group_schedule_raw text null comment 'сырой текст с расписанием',
     constraint DynamicGroup_StaticGroup_null_fk
-        foreign key (SYS_ID_group) references NoOldMen.StaticGroup (SYS_ID_group)
+        foreign key (SYS_ID_group) references StaticGroup (SYS_ID_group)
             on update cascade on delete cascade
 )
     comment 'база с изменяющимися полями группы';
 
-create table NoOldMen.EventGroupMap
+create table if not exists EventGroupMap
 (
     SYS_ID_event int not null comment 'id мероприятия',
     SYS_ID_group int not null comment 'id группы',
     constraint EventGroupMap_StaticEvent_null_fk
-        foreign key (SYS_ID_event) references NoOldMen.StaticEvent (SYS_ID_event)
+        foreign key (SYS_ID_event) references StaticEvent (SYS_ID_event)
             on update cascade on delete cascade,
     constraint EventGroupMap_StaticGroup_null_fk
-        foreign key (SYS_ID_group) references NoOldMen.StaticGroup (SYS_ID_group)
+        foreign key (SYS_ID_group) references StaticGroup (SYS_ID_group)
             on update cascade on delete cascade
 )
     comment 'Связь мероприятия с доступными группами';
 
-create table NoOldMen.StaticMember
+create table if not exists StaticMember
 (
     SYS_ID_grand            int auto_increment comment 'SYS ID бабушки'
         primary key,
@@ -104,7 +108,7 @@ create table NoOldMen.StaticMember
 )
     comment 'База данных со статикой бабушек';
 
-create table NoOldMen.AttendanceGroup
+create table if not exists AttendanceGroup
 (
     SYS_ID_group             int                                           null comment 'SYS ID группы',
     SYS_ID_grand             int                                           null comment 'SYS ID бабушки',
@@ -114,22 +118,22 @@ create table NoOldMen.AttendanceGroup
     attendance_end_time      bigint                                        null comment 'Время окончания занятия',
     attendance_online_status enum ('true', 'false', 'null') default 'null' null comment 'Скорее всего не понадобится',
     constraint AttendanceGroup_StaticGroup_null_fk
-        foreign key (SYS_ID_group) references NoOldMen.StaticGroup (SYS_ID_group)
+        foreign key (SYS_ID_group) references StaticGroup (SYS_ID_group)
             on update cascade on delete cascade,
     constraint AttendanceGroup_memberStatic_null_fk
-        foreign key (SYS_ID_grand) references NoOldMen.StaticMember (SYS_ID_grand)
+        foreign key (SYS_ID_grand) references StaticMember (SYS_ID_grand)
             on update cascade on delete cascade
 )
     comment 'Таблица посещаемости групп бабушками';
 
-create table NoOldMen.memberEmbedding
+create table if not exists memberEmbedding
 (
     SYS_ID_grand    int  null,
     grand_embedding json null comment 'вектор бабушки из опроса',
     constraint memberEmbedding_pk
         unique (SYS_ID_grand),
     constraint memberEmbedding_memberStatic_null_fk
-        foreign key (SYS_ID_grand) references NoOldMen.StaticMember (SYS_ID_grand)
+        foreign key (SYS_ID_grand) references StaticMember (SYS_ID_grand)
             on update cascade on delete cascade
 )
     comment 'начальный вектор бабушки из опроса';
