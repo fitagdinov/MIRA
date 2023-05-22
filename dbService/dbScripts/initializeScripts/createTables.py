@@ -1,20 +1,37 @@
 creation_request = \
     """
+create table NoOldMen.StaticCiteEventID
+(
+    CITE_ID_event        bigint               not null comment 'Int номер для поиска красивого слова'
+        primary key,
+    CITE_ID_word         char(12)             null comment 'красивое слово + номер для ввода бабушками',
+    id_word              text                 not null comment 'Красивое слово для поиска бабушками',
+    id_additional_number int                  not null comment 'Добавка после красивого слова для поиска бабушками',
+    id_description       text                 null comment 'Описание слова в красивом id',
+    id_photo_src         text                 null comment 'Фото для слова',
+    is_group_id          tinyint(1) default 0 not null,
+    constraint StaticCiteEventID_full_structure_pk
+        unique (CITE_ID_word)
+)
+    comment 'таблица с информацией о кодирующих словах в поиске по красивому коду ';
+
 create table NoOldMen.StaticEvent
 (
     SYS_ID_event        int auto_increment
         primary key,
-    EXTERNAL_ID_event   bigint not null,
-    CITE_ID_event       bigint not null comment 'код мероприятия для ввода бабушками',
-    event_short_name    text   null comment 'Короткое название event (DUPLICATE level3)',
-    event_detailed_info text   null comment 'Подробное описание мероприятия',
-    event_level_1       text   null,
-    event_level_2       text   null,
-    event_level_3       text   null,
+    EXTERNAL_ID_event   bigint   not null,
+    CITE_ID_event       bigint   not null comment 'код мероприятия для ввода бабушками',
+    event_short_name    char(20) null comment 'Короткое название event (DUPLICATE level3)',
+    event_detailed_info text     null comment 'Подробное описание мероприятия',
+    event_level_1       text     null,
+    event_level_2       text     null,
+    event_level_3       text     null,
     constraint StaticEvent_cite_pk
         unique (CITE_ID_event),
     constraint StaticEvent_pk
-        unique (EXTERNAL_ID_event)
+        unique (EXTERNAL_ID_event),
+    constraint StaticEvent_short_name_unique
+        unique (event_short_name)
 )
     comment 'База данных о доступных мероприятиях';
 
@@ -27,22 +44,6 @@ create table NoOldMen.EventEmbedding
             on update cascade on delete cascade
 )
     comment 'вектора для event';
-
-create table NoOldMen.StaticCiteEventID
-(
-    CITE_ID_event        bigint   not null comment 'Int номер для поиска красивого слова'
-        primary key,
-    CITE_ID_word         char(12) null comment 'красивое слово + номер для ввода бабушками',
-    id_word              text     not null comment 'Красивое слово для поиска бабушками',
-    id_additional_number int      not null comment 'Добавка после красивого слова для поиска бабушками',
-    id_description       text     null comment 'Описание слова в красивом id',
-    id_photo_src         text     null comment 'Фото для слова',
-    constraint StaticCiteEventID_full_structure_pk
-        unique (CITE_ID_word),
-    constraint StaticCiteEventID_StaticEvent_null_fk
-        foreign key (CITE_ID_event) references NoOldMen.StaticEvent (CITE_ID_event)
-)
-    comment 'таблица с информацией о кодирующих словах в поиске по красивому коду ';
 
 create table NoOldMen.StaticGroup
 (
