@@ -22,10 +22,6 @@ const Home = () => {
                 </Nav.Item>
             </Nav>
         </>
-            
-            // <Link>Home</Link>
-
-            // <Link >Opros</Link>
     );
 };
 
