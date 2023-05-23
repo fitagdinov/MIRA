@@ -1,11 +1,17 @@
 from dbService import addAttendScript
 import pandas as pd
 from tqdm import tqdm
+from numpy import any
 
 
 # 4 sec for filling 52000 lines
 if __name__ == '__main__':
     attend_df = pd.read_csv('../fileStorage/placeAttendFileHere/attend.csv')
+    # Вычищаем свободное посещение. Потому что такого мероприятия не существует.
+    attend_df = attend_df[~any([
+        attend_df["направление 2"] == 'Свободное посещение',
+        attend_df["направление 3"] == 'Свободное посещение'
+    ], axis=0)]
     external_group_id = list(attend_df['уникальный номер группы'].values)
     external_grand_id = list(attend_df['уникальный номер участника'].values)
     attend_date = list(attend_df['дата занятия'].values)
