@@ -6,6 +6,8 @@ from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
 from flask_apispec.extension import FlaskApiSpec
 
+from Getters import GetGrandAuthorizationValidation
+
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
@@ -24,13 +26,13 @@ app.config.update({
 docs = FlaskApiSpec(app)
 
 # TODO: Add resources here
-# api.add_resource(GetUserProfile, "/empty1", methods=['GET'])
+api.add_resource(GetGrandAuthorizationValidation, "/auth_grand", methods=['GET'])
 # api.add_resource(GetFormsAnswers, "/empty2", methods=['GET'])
 # api.add_resource(GetAllUsersId, "/empty3", methods=['GET'])
 # api.add_resource(GetFormInformation, "/form_info", methods=['GET'])
 # api.add_resource(GetComplexForm, "/complex_form", methods=['GET'])
 #
-# docs.register(GetUserProfile)
+docs.register(GetGrandAuthorizationValidation)
 # docs.register(GetFormsAnswers)
 # docs.register(GetAllUsersId)
 # docs.register(GetFormInformation)
