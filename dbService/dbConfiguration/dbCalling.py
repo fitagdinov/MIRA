@@ -12,10 +12,14 @@ def get_request(query, execute_many=False):
     cursor = connection.cursor()
     if not execute_many:
         cursor.execute(query)
-        return cursor.fetchone()
+        ans = cursor.fetchone()
+        connection.close()
+        return ans
     else:
         cursor.execute(query)
-        return cursor.fetchall()
+        ans = cursor.fetchall()
+        connection.close()
+        return ans
 
 
 def put_request(query, commit=True, ssl_disabled=True):
@@ -27,8 +31,10 @@ def put_request(query, commit=True, ssl_disabled=True):
     cursor = connection.cursor()
     if not commit:
         cursor.execute(query)
+        connection.close()
         return
     else:
         cursor.execute(query)
         connection.commit()
+        connection.close()
         return
