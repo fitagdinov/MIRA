@@ -4,10 +4,11 @@ from tqdm import tqdm
 from numpy import any
 
 
-# 4 sec for filling 52000 lines
+# 100%|██████████| 73/73 [14:38<00:00, 12.03s/it] for 6_000_000 lines
 if __name__ == '__main__':
     attend_df = pd.read_csv('../fileStorage/placeAttendFileHere/attend.csv')
     # Вычищаем свободное посещение. Потому что такого мероприятия не существует.
+    # Проверено что размеры бьются (с учетом строки хедера и вычищенными свободными посещениями)
     attend_df = attend_df[~any([
         attend_df["направление 2"] == 'Свободное посещение',
         attend_df["направление 3"] == 'Свободное посещение'
