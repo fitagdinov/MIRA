@@ -38,12 +38,13 @@ def addMemberScript(grand_ma_mos_id: List[int], date_of_registration: List[str],
     grand_address = tuple(grand_address)
     insert_query = \
         f"""
-        INSERT IGNORE INTO NoOldMen.StaticMember (EXTERNAL_ID_grand, grand_birth_date, grand_registration_date, grand_name,
+        INSERT INTO NoOldMen.StaticMember (EXTERNAL_ID_grand, grand_birth_date, grand_registration_date, grand_name,
                                    grand_surname, grand_sex, grand_address_raw)
         VALUES
         """
     for i in range(len(grand_name)):
-        insert_query += f"({grand_ma_mos_id[i]}, {_birth[i]}, {_registration[i]}, '{grand_name[i]}', '{grand_surname[i]}', '{_sex[i]}', '{grand_address[i]}')"
+        insert_query += f"({grand_ma_mos_id[i]}, {_birth[i]}, {_registration[i]}, '{grand_name[i]}', '{grand_surname[i]}', '{_sex[i]}', '{grand_address[i]}'),"
+    insert_query = insert_query[:-1]
     insert_query += ";"
     put_request(query=insert_query)
 

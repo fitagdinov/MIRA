@@ -1,0 +1,1 @@
+Attend File is huge. So to avoid git push error (caused by reaching file limit on 50 MB) you need to but attend.csv file at this dict, and this file will be under git ignore
