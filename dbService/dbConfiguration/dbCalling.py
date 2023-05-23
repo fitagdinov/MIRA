@@ -18,12 +18,12 @@ def get_request(query, execute_many=False):
         return cursor.fetchall()
 
 
-def put_request(query, commit=True):
+def put_request(query, commit=True, ssl_disabled=True):
     connection = connector.connect(host=host,
                                    user=user,
                                    password=password,
                                    database=database,
-                                   ssl_disabled=True)
+                                   ssl_disabled=ssl_disabled)
     cursor = connection.cursor()
     if not commit:
         cursor.execute(query)
