@@ -5,7 +5,7 @@ import RecomendationCard from "../components/RecomendationCard";
 import "../styles/Opros.css"
 import {FaSearch} from "react-icons/fa";
 
-const Recomendation = () => {
+const User = () => {
 
     return (
         <>
@@ -97,4 +97,4 @@ const Recomendation = () => {
     );
 };
 
-export default Recomendation;
+export default User;

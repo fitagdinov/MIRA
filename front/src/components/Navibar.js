@@ -23,7 +23,7 @@ export default function Navibar (){
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className='mx-auto'>
-                    <Nav.Link href={'/'}><FaEye/> Рекомендации</Nav.Link>
+                    <Nav.Link href={'/user'}><FaEye/> Рекомендации</Nav.Link>
                     <Nav.Link><FaSearch/> Расширеный поиск</Nav.Link>
                     <Nav.Link><FaHistory/> История</Nav.Link>
                     <Nav.Link><FaHeart/> Избранное</Nav.Link>
