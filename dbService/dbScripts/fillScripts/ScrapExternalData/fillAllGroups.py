@@ -2,7 +2,6 @@ from dbService.dbScripts import addGroupScript
 import pandas as pd
 from numpy import any
 from tqdm import tqdm
-from ZeroMallocFix import validate_memory_location
 
 if __name__ == '__main__':
     df = pd.read_csv('../fileStorage/groups.csv')
@@ -18,7 +17,7 @@ if __name__ == '__main__':
     )
     df["online_status"] = map_online
     for line in tqdm(range(0, df.shape[0])):
-        validate_memory_location()
+        # validate_memory_location()
         _tmp = df.iloc[line]
         _rasp = 'Активные:' + str(_tmp['расписание в активных периодах']) + '[-]Закрытые:' + str(_tmp['расписание в закрытых периодах']) + '[-]Плановые:' + str(_tmp['расписание в плановом периоде'])
         addGroupScript(
