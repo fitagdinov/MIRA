@@ -14,9 +14,11 @@ class RequestSearchEventByBeautyCode(Schema):
 
 
 class ResponseSearchEventByBeautyCode(Schema):
-    short_event_name = fields.String(required=True, default=None, desciption='Краткое название Ивента')
-    description_event = fields.String(required=True, default=None, desciption='Описание Ивента')
-    beauty_code_event = fields.String(required=True, default=None, desciption='Красивый код для ввода бабушками')
+    sys_event_id = fields.Integer(required=True, default=None, description="Системный ID Ивента")
+    extend_event_id = fields.Integer(required=True, default=None, description="mos.ru ID Ивента")
+    short_event_name = fields.String(required=True, default=None, description='Краткое название Ивента')
+    description_event = fields.String(required=True, default=None, description='Описание Ивента')
+    beauty_code_event = fields.String(required=True, default=None, description='Красивый код для ввода бабушками')
     level1_event = fields.String(required=True, default=None, description='Уровень 1 мероприятия')
     level2_event = fields.String(required=True, default=None, description='Уровень 2 мероприятия')
     level3_event = fields.String(required=True, default=None, description='Уровень 3 мероприятия')
@@ -29,7 +31,10 @@ class SearchEventByBeautyCode(MethodResource, Resource):
     def get(self, beauty_string, **kwargs):
         scrap_beauty_info = get_request(query=f"SELECT * FROM StaticCiteEventID WHERE id_word='{beauty_string}'")
         scrap_matched_static_event = get_request(query=f"SELECT * FROM StaticEvent WHERE CITE_ID_event={scrap_beauty_info[0]}")
+        print(scrap_matched_static_event)
         return {
+               'sys_event_id': scrap_matched_static_event[0],
+               'extend_event_id': scrap_matched_static_event[1],
                'short_event_name': scrap_matched_static_event[3].split('_')[-1],
                'description_event': scrap_matched_static_event[4],
                'beauty_code_event': beauty_string,

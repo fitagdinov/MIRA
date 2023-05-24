@@ -14,6 +14,8 @@ class RequestSearchEventBySysID(Schema):
 
 
 class ResponseSearchEventBySysID(Schema):
+    sys_event_id = fields.Integer(required=True, default=None, description="Системный ID Ивента")
+    extend_event_id = fields.Integer(required=True, default=None, description="mos.ru ID Ивента")
     short_event_name = fields.String(required=True, default=None, desciption='Краткое название Ивента')
     description_event = fields.String(required=True, default=None, desciption='Описание Ивента')
     beauty_code_event = fields.String(required=True, default=None, desciption='Красивый код для ввода бабушками')
@@ -23,7 +25,7 @@ class ResponseSearchEventBySysID(Schema):
 
 
 @doc(tags=[TAGS.event_search])
-class SearchEventBySyslID(MethodResource, Resource):
+class SearchEventBySysID(MethodResource, Resource):
     @marshal_with(ResponseSearchEventBySysID)
     @use_kwargs(RequestSearchEventBySysID, location='query')
     def get(self, sys_external_id, **kwargs):
@@ -31,6 +33,8 @@ class SearchEventBySyslID(MethodResource, Resource):
             scrap_matched_static_event = get_request(query=f"SELECT * FROM StaticEvent WHERE SYS_ID_event={sys_external_id}")
             get_beauty_code_of_event = get_request(query=f"SELECT * FROM StaticCiteEventID WHERE CITE_ID_event={scrap_matched_static_event[2]}")
             return {
+                   'sys_event_id': scrap_matched_static_event[0],
+                   'extend_event_id': scrap_matched_static_event[1],
                    'short_event_name': scrap_matched_static_event[3].split('_')[-1],
                    'description_event': scrap_matched_static_event[4],
                    'beauty_code_event': get_beauty_code_of_event[1],
