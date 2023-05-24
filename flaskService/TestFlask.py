@@ -9,6 +9,7 @@ from flask_apispec.extension import FlaskApiSpec
 from Getters import GetGrandAuthorizationValidation
 from Getters import SearchEventByExternalID
 from Getters import SearchEventBySyslID
+from Getters import SearchEventByBeautyCode
 
 app = Flask(__name__)
 CORS(app)
@@ -31,6 +32,7 @@ docs = FlaskApiSpec(app)
 api.add_resource(GetGrandAuthorizationValidation, "/auth_grand", methods=['GET'])
 api.add_resource(SearchEventByExternalID, "/search_event/by_ext_id", methods=['GET'])
 api.add_resource(SearchEventBySyslID, "/search_event/by_sys_id", methods=['GET'])
+api.add_resource(SearchEventByBeautyCode, "/search_event/by_beauty_word", methods=['GET'])
 # api.add_resource(GetAllUsersId, "/empty3", methods=['GET'])
 # api.add_resource(GetFormInformation, "/form_info", methods=['GET'])
 # api.add_resource(GetComplexForm, "/complex_form", methods=['GET'])
@@ -38,6 +40,7 @@ api.add_resource(SearchEventBySyslID, "/search_event/by_sys_id", methods=['GET']
 docs.register(GetGrandAuthorizationValidation)
 docs.register(SearchEventByExternalID)
 docs.register(SearchEventBySyslID)
+docs.register(SearchEventByBeautyCode)
 # docs.register(GetAllUsersId)
 # docs.register(GetFormInformation)
 # docs.register(GetComplexForm)
