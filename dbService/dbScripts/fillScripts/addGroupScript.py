@@ -1,7 +1,6 @@
 from typing import List
 from dbService.dbConfiguration import get_request, put_request, database
 
-
 def addGroupScript(external_id_group: int,
                    group_short_name: str,
                    online_status: bool,
