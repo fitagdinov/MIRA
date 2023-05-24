@@ -10,7 +10,7 @@ from marshmallow import Schema, fields
 
 
 class RequestSearchEventByExternalID(Schema):
-    event_external_id = fields.Integer(required=True, description="Системный ID Мероприятия")
+    event_external_id = fields.Integer(required=True, description="mos.ru ID Мероприятия")
 
 
 class ResponseSearchEventByExternalID(Schema):
