@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from "react";
 import {Card, Button} from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import '../styles/Opros.css';
 
 export default class RecomendationCard extends React.Component {
+
     render() {
         return (
             <Card style={{width: "17rem", margin: "5px"}}>
