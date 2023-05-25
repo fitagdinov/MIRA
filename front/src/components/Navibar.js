@@ -1,44 +1,36 @@
-import React, {useState, useEffect } from "react";
+import React, {useState } from "react";
 import {Navbar, Button, Nav, Modal, Form} from 'react-bootstrap'
 import "../styles/Form.css"
 import {FaSearch, FaHistory, FaHeart, FaEye} from "react-icons/fa";
 
-import { authUser, test } from "../action/auth";
+import { authUser, changeGrandLocation } from "../action/auth";
 import { useDispatch, useSelector } from 'react-redux';
 
 
 export default function Navibar (){
 
     const [show, setShow] = useState(false)
-    const [fio, setFio] = useState(101391104)
-    const [birthDate, setBirthDate] = useState('1978-01-01')
+    const [fio, setFio] = useState(101387414)
+    const [birthDate, setBirthDate] = useState('1937-02-17')
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
 
     const dispatch = useDispatch()
-    const auth = useSelector(state => state.auth.items)
+    const auth = useSelector(state => state.auth) // важно чтоб было так 
 
     const [showOpros, setShowOpros] = useState(false)
     const handleCloseOpros = () => setShowOpros(false)
 
-    const handleShowOpros = () => {
-        setShowOpros(true)
-        setShow(false)
-        authUser(fio, birthDate)
-        test(fio, birthDate)
+    const handleShowOpros = (fio, birthDate) => {
+        setShowOpros(true) // 
+        setShow(false) // 
+        dispatch(authUser(fio, birthDate)) // заполняем store таской на закгрузку данных и обновления state
     }
-
-    const authUserPipeline = () => {
-        authUser(fio, birthDate)
-    }
-    useEffect(()=>{
-        dispatch(authUser(fio, birthDate))
-    }, [])
 
     return(
     <>
         <Navbar collapseOnSelect expand='lg' bg='dark' variant="dark">
-            <Navbar.Brand className="navbar-brand px-3"> Привет Бабка </Navbar.Brand>
+            <Navbar.Brand className="navbar-brand px-3"> Привет,{auth.grand_address}  </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className='mx-auto'>
@@ -46,6 +38,7 @@ export default function Navibar (){
                     <Nav.Link><FaSearch/> Расширеный поиск</Nav.Link>
                     <Nav.Link><FaHistory/> История</Nav.Link>
                     <Nav.Link><FaHeart/> Избранное</Nav.Link>
+                    <Button onClick={() => {dispatch(changeGrandLocation())}}>Андрей обмдел Макса</Button>
                 </Nav>
                 <Nav className="px-3">
                     <Button variant="primary" className="mr-2" onClick={handleShow}> Авторизация </Button>
@@ -88,7 +81,10 @@ export default function Navibar (){
                 <Button 
                     className={'mx-auto'}
                     variant="primary" 
-                    onClick={handleShowOpros}>Готово</Button>
+                    onClick={() => {handleShowOpros(fio, birthDate);}} // при нажатии вызываем функцию происходит действи
+                                                                
+                    >
+                        Готово</Button>
             </Modal.Footer>
 
 
