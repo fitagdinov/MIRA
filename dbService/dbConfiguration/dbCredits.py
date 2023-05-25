@@ -9,4 +9,5 @@ host = dbInfo["mysqlConfiguration"]["host"]
 user = dbInfo["mysqlConfiguration"]["user"]
 password = dbInfo["mysqlConfiguration"]["password"]
 database = dbInfo["mysqlConfiguration"]["database"]
+embedding_size = dbInfo["mysqlConfiguration"]["embedding_size"]
 
