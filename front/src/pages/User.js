@@ -4,6 +4,7 @@ import {Container, Row, Form, CardGroup, InputGroup, Button} from 'react-bootstr
 import RecomendationCard from "../components/RecomendationCard";
 import "../styles/Opros.css"
 import {FaSearch} from "react-icons/fa";
+import {TEST_EVENT} from "../utils/consts";
 
 const User = () => {
 
@@ -31,18 +32,18 @@ const User = () => {
                             <RecomendationCard title={'первое мероприятие'}
                                                description={'описание'}
                                                image={babka}
-                                               href={'#'}
+                                               link={TEST_EVENT}
                             />
                             <RecomendationCard title={'второе мероприятие'}
                                                description={'описание'}
                                                image={babka}
-                                               href={'#'}
+                                               link={'#'}
                             />
 
                             <RecomendationCard title={'третье мероприятие'}
                                                description={'описание'}
                                                image={babka}
-                                               href={'#'}
+                                               link={'#'}
                             />
                         </CardGroup>
                     <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
@@ -51,18 +52,18 @@ const User = () => {
                         <RecomendationCard title={'первое мероприятие'}
                                            description={'описание'}
                                            image={babka}
-                                           href={'#'}
+                                           link={'#'}
                         />
                         <RecomendationCard title={'второе мероприятие'}
                                            description={'описание'}
                                            image={babka}
-                                           href={'#'}
+                                           link={'#'}
                         />
 
                         <RecomendationCard title={'третье мероприятие'}
                                            description={'описание'}
                                            image={babka}
-                                           href={'#'}
+                                           link={'#'}
                         />
                         </CardGroup>
                     <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
@@ -71,18 +72,18 @@ const User = () => {
                             <RecomendationCard title={'первое мероприятие'}
                                                description={'описание'}
                                                image={babka}
-                                               href={'#'}
+                                               link={'#'}
                             />
                             <RecomendationCard title={'второе мероприятие'}
                                                description={'описание'}
                                                image={babka}
-                                               href={'#'}
+                                               link={'#'}
                             />
 
                             <RecomendationCard title={'третье мероприятие'}
                                                description={'описание'}
                                                image={babka}
-                                               href={'#'}
+                                               link={'#'}
                             />
                         </CardGroup>
                 </Row>
