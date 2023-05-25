@@ -1,6 +1,6 @@
 from typing import List
 from dbService.dbConfiguration import get_request, put_request, database
-
+from sys import getrefcount
 
 def addGroupScript(external_id_group: int,
                    group_short_name: str,
@@ -10,6 +10,7 @@ def addGroupScript(external_id_group: int,
                    group_area: str,
                    group_schedule: str):
     # TODO: clear bad requests
+    print(getrefcount(None))
     if group_short_name == "Свободное посещение_Свободное посещение":
         return
     _parent_event = get_request(query=f"SELECT * FROM NoOldMen.StaticEvent WHERE event_short_name='{group_short_name}'")

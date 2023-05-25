@@ -1,19 +1,38 @@
-import React, {useState} from "react";
+import React, {useState, useEffect } from "react";
 import {Navbar, Button, Nav, Modal, Form} from 'react-bootstrap'
 import "../styles/Form.css"
+import { authUser, test } from "../action/auth";
+import { useDispatch, useSelector } from 'react-redux';
+
 
 export default function Navibar (){
 
     const [show, setShow] = useState(false)
+    const [fio, setFio] = useState(101391104)
+    const [birthDate, setBirthDate] = useState('1978-01-01')
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
 
+    const dispatch = useDispatch()
+    const auth = useSelector(state => state.auth.items)
+
     const [showOpros, setShowOpros] = useState(false)
     const handleCloseOpros = () => setShowOpros(false)
+
     const handleShowOpros = () => {
         setShowOpros(true)
         setShow(false)
+        authUser(fio, birthDate)
+        test(fio, birthDate)
     }
+
+    const authUserPipeline = () => {
+        authUser(fio, birthDate)
+    }
+    useEffect(()=>{
+        dispatch(authUser(fio, birthDate))
+    }, [])
+
     return(
     <>
         <Navbar collapseOnSelect expand='lg' bg='dark' variant="dark">
@@ -46,17 +65,28 @@ export default function Navibar (){
                 <Form>
                     <Form.Group controlId="fromBasicEmail">
                         <Form.Label>ФИО</Form.Label>
-                        <Form.Control className={'name'} placeholder="ФИО"/>
+                        <Form.Control 
+                            className={'name'} 
+                            placeholder="ФИО"
+                            value={fio}
+                            onChange={(e) => setFio(e.target.value)}/>
 
                     </Form.Group>
                     <Form.Group controlId="fromBasicEmail">
                         <Form.Label>Дата рождения</Form.Label>
-                        <Form.Control className={'date'} placeholder="Дата рождения"/>
+                        <Form.Control 
+                        className={'date'} 
+                        placeholder="Дата рождения"
+                        value={birthDate}
+                        onChange={(e) => setBirthDate(e.target.value)}/>
                     </Form.Group>
                 </Form>
             </Modal.Body>
             <Modal.Footer >
-                <Button className={'mx-auto'} variant="primary" onClick={handleShowOpros}>Готово</Button>
+                <Button 
+                    className={'mx-auto'}
+                    variant="primary" 
+                    onClick={handleShowOpros}>Готово</Button>
             </Modal.Footer>
 
 

@@ -16,7 +16,7 @@ if __name__ == '__main__':
         axis=0
     )
     df["online_status"] = map_online
-    for line in tqdm(range(0, df.shape[0])):
+    for line in range(0, df.shape[0]):
         _tmp = df.iloc[line]
         _rasp = 'Активные:' + str(_tmp['расписание в активных периодах']) + '[-]Закрытые:' + str(_tmp['расписание в закрытых периодах']) + '[-]Плановые:' + str(_tmp['расписание в плановом периоде'])
         addGroupScript(
