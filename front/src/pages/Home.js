@@ -21,7 +21,7 @@ const Home = () => {
             <Nav defaultActiveKey='/' as='ul'>
                 <Nav.Item as='li'>
                     <Nav.Link href='/opros/1'>Opros</Nav.Link>
-                    {repos.map(repo => <div>ura</div>)}
+                    {repos.map((repo, i) => <div key={i}>ura {i}</div>)}
                 </Nav.Item>
             </Nav>
         </>
