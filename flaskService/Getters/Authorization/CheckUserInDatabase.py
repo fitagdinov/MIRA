@@ -32,7 +32,6 @@ class GetGrandAuthorizationValidation(MethodResource, Resource):
     @marshal_with(ResponseGrandAuthorizationValidation)
     @use_kwargs(RequestGrandAuthorizationValidation, location='query')
     def get(self, grand_external_id, **kwargs):
-        print('Called get for user')
         grand_birth_date = '1970-01-01' if 'grand_birth_date' not in kwargs else kwargs['grand_birth_date']
         _test_grand_birth_date = None if '_test_grand_birth_date' not in kwargs else kwargs['_test_grand_birth_date']
         if not _test_grand_birth_date:
