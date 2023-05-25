@@ -31,7 +31,6 @@ class SearchEventByBeautyCode(MethodResource, Resource):
     def get(self, beauty_string, **kwargs):
         scrap_beauty_info = get_request(query=f"SELECT * FROM StaticCiteEventID WHERE id_word='{beauty_string}'")
         scrap_matched_static_event = get_request(query=f"SELECT * FROM StaticEvent WHERE CITE_ID_event={scrap_beauty_info[0]}")
-        print(scrap_matched_static_event)
         return {
                'sys_event_id': scrap_matched_static_event[0],
                'extend_event_id': scrap_matched_static_event[1],
