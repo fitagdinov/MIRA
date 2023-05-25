@@ -3,27 +3,25 @@ import {Navbar, Button, Nav, Modal, Form} from 'react-bootstrap'
 import "../styles/Form.css"
 import {FaSearch, FaHistory, FaHeart, FaEye} from "react-icons/fa";
 
-import { authUser, changeGrandLocation } from "../action/auth";
+import { authUser } from "../action/auth";
 import { useDispatch, useSelector } from 'react-redux';
 
 
 export default function Navibar (){
 
-    const [show, setShow] = useState(false)
-    const [fio, setFio] = useState(101387414)
-    const [birthDate, setBirthDate] = useState('1937-02-17')
-    const handleClose = () => setShow(false)
-    const handleShow = () => setShow(true)
+    const [show, setShow] = useState(false) // хранит состояни модального окна авторизации
+    const [fio, setFio] = useState(101387414) // хранит в себе состояние ввыода ФИО
+    const [birthDate, setBirthDate] = useState('1937-02-17') // хранит в себе состояние ввыода даты рождения
+    const [showOpros, setShowOpros] = useState(false) // хранит в себе состояние модального окна с просьбой пройти опрос 
+    const dispatch = useDispatch() 
+    const auth = useSelector(state => state.authTest) // важно чтоб было authTest - название редюсера 
+    const handleClose = () => setShow(false) //закрывает окно авторизации
+    const handleShow = () => setShow(true) // открывает окно авторизации
+    const handleCloseOpros = () => setShowOpros(false) // закрывает окно "пройдите опрос"
 
-    const dispatch = useDispatch()
-    const auth = useSelector(state => state.auth) // важно чтоб было так 
-
-    const [showOpros, setShowOpros] = useState(false)
-    const handleCloseOpros = () => setShowOpros(false)
-
-    const handleShowOpros = (fio, birthDate) => {
-        setShowOpros(true) // 
-        setShow(false) // 
+    const handleShowOpros = (fio, birthDate) => { // хранит в себе 3 функции
+        setShowOpros(true) // открывает окно "пройдите опрос"
+        setShow(false) // закрывает окно авторизации
         dispatch(authUser(fio, birthDate)) // заполняем store таской на закгрузку данных и обновления state
     }
 
@@ -38,12 +36,9 @@ export default function Navibar (){
                     <Nav.Link><FaSearch/> Расширеный поиск</Nav.Link>
                     <Nav.Link><FaHistory/> История</Nav.Link>
                     <Nav.Link><FaHeart/> Избранное</Nav.Link>
-                    <Button onClick={() => {dispatch(changeGrandLocation())}}>Андрей обмдел Макса</Button>
                 </Nav>
                 <Nav className="px-3">
                     <Button variant="primary" className="mr-2" onClick={handleShow}> Авторизация </Button>
-                    {/*<Button variant="primary" className="mr-2">вход</Button>*/}
-                    {/*<Button variant="primary">выход</Button>*/}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
@@ -81,13 +76,10 @@ export default function Navibar (){
                 <Button 
                     className={'mx-auto'}
                     variant="primary" 
-                    onClick={() => {handleShowOpros(fio, birthDate);}} // при нажатии вызываем функцию происходит действи
-                                                                
+                    onClick={() => {handleShowOpros(fio, birthDate);}} // при нажатии вызываем функцию происходит действи (описано выше)                                           
                     >
                         Готово</Button>
             </Modal.Footer>
-
-
         </Modal>
         <Modal size={'lg'} show={showOpros} onHide={handleCloseOpros}>
             <Modal.Header closeButton>

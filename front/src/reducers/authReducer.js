@@ -9,7 +9,7 @@ const defaultState = {
     grand_surname: "",
     grand_sys_id: true
 }
-
+// редюсер пользователя
 export default function authReducer(state = defaultState, action) {
     switch (action.type) {
         case SET_AUTH:
@@ -33,5 +33,4 @@ export default function authReducer(state = defaultState, action) {
 }
 
 // ответ от сервера = auth_event
-export const setAuth = (auth_event) => ({type:SET_AUTH, server_answer:auth_event}) // так надо Роберт соси хуй
-export const setCurrentLocation = () => ({type:SET_LOCATION, server_answer:null}) // так надо Роберт соси хуй
+export const setAuth = (auth_event) => ({type:SET_AUTH, server_answer:auth_event}) // так надо 

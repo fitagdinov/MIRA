@@ -10,21 +10,4 @@ export const getRepos = (searchQuery = "stars:%3E1") => {
     }
 }
 
-// export const userAuth = () => dispatch => {
-//     axios.post(`localhost:5000/auth_grand'`)
-//     .then( userdata => 
-//         dispatch({
-//             type: ADD_USER,
-//             payload: userdata
-//         })
-//     )
-//     .catch( error => {
-//         console.log(error);
-//     });
-// };
-
-const $api = axios.create({
-    withCredentials: true,
-    baseURL: API_URL
-}) 
 

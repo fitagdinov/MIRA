@@ -1,13 +1,20 @@
-import React from 'react';
+import { React, useEffect }  from 'react';
 import babka from '../image/images.jpeg'
 import {Container, Row, Form, CardGroup, InputGroup, Button} from 'react-bootstrap';
 import RecomendationCard from "../components/RecomendationCard";
 import "../styles/Opros.css"
 import {FaSearch} from "react-icons/fa";
 import {TEST_EVENT} from "../utils/consts";
+import { showEvents } from '../action/showEvents';
+import { useSelector, useDispatch } from 'react-redux';
 
 const User = () => {
-
+    const dispatch = useDispatch()
+    const events = useSelector( state => state.events )
+    useEffect(() => { //при обновлении строницы загружаем инфу по карточке  зависимости от вi
+        dispatch(showEvents(1));
+      }, []);
+    
     return (
         <>
             <Row>
@@ -19,6 +26,11 @@ const User = () => {
                     placeholder={'Введите код мероприятия'}
                 />
                 <div className={'input-group-append'}><Button variant='primary' size={"lg"}>Искать</Button> </div>
+                <div className={'input-group-append'}>
+                    <Button variant='primary'
+                            size={"lg"}
+                            onClick={() => {dispatch(showEvents(2))}}
+                            >тест мероприятия</Button> </div>
             </InputGroup>
 
 
@@ -29,8 +41,8 @@ const User = () => {
                 <Row>
                         <h3 className={'text-center mt-4'}>проверенное</h3>
                         <CardGroup class='card-group mt-3'>
-                            <RecomendationCard title={'первое мероприятие'}
-                                               description={'описание'}
+                            <RecomendationCard title={events.beauty_code_event}
+                                               description={events.description_event}
                                                image={babka}
                                                link={TEST_EVENT}
                             />
