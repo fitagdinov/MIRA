@@ -6,10 +6,14 @@ from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
 from flask_apispec.extension import FlaskApiSpec
 
+# Event Getters
 from Getters import GetGrandAuthorizationValidation
 from Getters import SearchEventByExternalID
 from Getters import SearchEventBySysID
 from Getters import SearchEventByBeautyCode
+
+# Group Getters
+from Getters import SearchGroupLinkedToEventByEventSysID
 
 app = Flask(__name__)
 CORS(app)
@@ -34,17 +38,13 @@ api.add_resource(GetGrandAuthorizationValidation, "/auth_grand", methods=['GET']
 api.add_resource(SearchEventByExternalID, "/search_event/by_ext_id", methods=['GET'])
 api.add_resource(SearchEventBySysID, "/search_event/by_sys_id", methods=['GET'])
 api.add_resource(SearchEventByBeautyCode, "/search_event/by_beauty_word", methods=['GET'])
-# api.add_resource(GetAllUsersId, "/empty3", methods=['GET'])
-# api.add_resource(GetFormInformation, "/form_info", methods=['GET'])
-# api.add_resource(GetComplexForm, "/complex_form", methods=['GET'])
-#
+api.add_resource(SearchGroupLinkedToEventByEventSysID, "/search_group/by_event_sys_id", methods=['GET'])
+
 docs.register(GetGrandAuthorizationValidation)
 docs.register(SearchEventByExternalID)
 docs.register(SearchEventBySysID)
 docs.register(SearchEventByBeautyCode)
-# docs.register(GetAllUsersId)
-# docs.register(GetFormInformation)
-# docs.register(GetComplexForm)
+docs.register(SearchGroupLinkedToEventByEventSysID)
 
 
 if __name__ == '__main__':
