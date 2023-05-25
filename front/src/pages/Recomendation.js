@@ -13,27 +13,33 @@ const Recomendation = () => {
     const dispatch = useDispatch()
     const events = useSelector( state => state.events )
     const auth = useSelector(state => state.authTest)
+    const [search, setSearch] = useState('')
     useEffect(() => { //при обновлении строницы загружаем инфу по карточке  зависимости от номера
         dispatch(showEvents(1));
-        dispatch(authUser(localStorage.getItem('fio'), localStorage.getItem('birthDate')))
+        dispatch(authUser(localStorage.getItem('fio'), localStorage.getItem('birthDate'))) // хард код для авторизации
       }, []);
     if (auth.grand_exist == true) {
         return (
             <>
                 <Row>
                 <InputGroup className={'mt-4'} style={{marginLeft: '25%', width: '50%'}} size="lg">
-                    <InputGroup.Text id="inputGroup-sizing-lg"><FaSearch/></InputGroup.Text>
+                    <InputGroup.Text id="inputGroup-sizing-lg">
+                        <FaSearch/>
+                    </InputGroup.Text>
                     <Form.Control
                         aria-label="Large"
                         aria-describedby="inputGroup-sizing-sm"
                         placeholder={'Введите код мероприятия'}
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
                     />
-                    <div className={'input-group-append'}><Button variant='primary' size={"lg"}>Искать</Button> </div>
                     <div className={'input-group-append'}>
                         <Button variant='primary'
                                 size={"lg"}
-                                onClick={() => {dispatch(showEvents(2))}}
-                                >тест мероприятия</Button> </div>
+                                onClick={() => {dispatch(showEvents(search))}}>Искать</Button> 
+                                <h1>{events.description_event}</h1>
+                    </div>
+                    <div className={'input-group-append'}></div>
                 </InputGroup>
 
 
