@@ -25,7 +25,6 @@ const Home = () => {
                 </Nav.Item>
             </Nav>
         </>
-            
     );
 };
 

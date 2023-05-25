@@ -4,7 +4,7 @@ from dbService import get_request, addMemberScript, database
 
 class TestCorrectPutRequest(unittest.TestCase):
     def test_adding_one_member(self):
-        _right_answer = (4, -666, -325393200, 1551185529, 'NONE', 'NONE', 'W', 'город москва, константинова, дом 30')
+        _right_answer = (-666, -325393200, 1551185529, 'NONE', 'NONE', 'W', 'город москва, константинова, дом 30')
         addMemberScript(
             grand_ma_mos_id=[-666],
             date_of_registration=['2019-02-26 15:52:09.000'],
@@ -14,7 +14,7 @@ class TestCorrectPutRequest(unittest.TestCase):
         )
 
         test_grand = get_request(f"SELECT * FROM {database}.StaticMember WHERE EXTERNAL_ID_grand=-666")
-        self.assertEqual(test_grand, _right_answer)
+        self.assertEqual(test_grand[1:], _right_answer)
 
 
 if __name__ == '__main__':

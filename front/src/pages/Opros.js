@@ -1,59 +1,44 @@
 import React from 'react';
-import { Container, Row, Col, Card, Form} from 'react-bootstrap';
+import {Container, Row, Col, Form} from 'react-bootstrap';
 import babka from '../image/images.jpeg'
-import Nav from 'react-bootstrap/Nav';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import '../styles/Opros.css';
+import OprosCard from '../components/OprosCard'
+
+
 const Opros = () => {
  
     return (
         <Container>
-            <h1>Opros_1</h1>
+            <h1 className={'item-margin'}>Выберите наиболее интересное мероприятие из предложенных</h1>
+
+            <div className={'item-margin'}>
+            <ProgressBar now={3} />
+            </div>
+
             <Form>
                 <Row>
-                    <Form.Label>вопрос 1</Form.Label>
-                    <Form.Label>вопрос 2</Form.Label>
-                    <Form.Label>вопрос 3</Form.Label>
-                    
                     <Col>
-                        <Card style={{width: "18rem"}}>
-                            <Card.Img variant='top' src={babka}/>
-                            <Card.Body>
-                                <Card.Title>первое мероприятие</Card.Title>
-                                <Card.Text>описание</Card.Text>
-                                <Nav defaultActiveKey='/' as='ul'>
-                                    <Nav.Item as='li'>
-                                        <Nav.Link href='/opros/2'>выбрать</Nav.Link>
-                                    </Nav.Item>
-                                </Nav>
-                            </Card.Body>
-                        </Card>
+                        <OprosCard image={babka}
+                                   title={'первое мероприятие'}
+                                   description={'описание'}
+                                   link={'/opros/2'}
+                        />
+
                     </Col>
                     <Col>
-                        <Card style={{width: "18rem"}}>
-                            <Card.Img variant='top' src={babka}/>
-                            <Card.Body>
-                                <Card.Title>второе мероприятие</Card.Title>
-                                <Card.Text>описание</Card.Text>
-                                <Nav defaultActiveKey='/' as='ul'>
-                                    <Nav.Item as='li'>
-                                        <Nav.Link href='/opros/2'>выбрать</Nav.Link>
-                                    </Nav.Item>
-                                </Nav>
-                            </Card.Body>
-                        </Card>
+                        <OprosCard image={babka}
+                                   title={'второе мероприятие'}
+                                   description={'описание'}
+                                   link={'/opros/2'}
+                        />
                     </Col>
                     <Col>
-                        <Card style={{width: "18rem"}}>
-                            <Card.Img variant='top' src={babka}/>
-                            <Card.Body>
-                                <Card.Title>третье мероприятие</Card.Title>
-                                <Card.Text>описание</Card.Text>
-                                <Nav defaultActiveKey='/' as='ul'>
-                                    <Nav.Item as='li'>
-                                        <Nav.Link href='/opros/2'>выбрать</Nav.Link>
-                                    </Nav.Item>
-                                </Nav>
-                            </Card.Body>
-                        </Card>
+                        <OprosCard image={babka}
+                                   title={'третье мероприятие'}
+                                   description={'описание'}
+                                   link={'/opros/2'}
+                        />
                     </Col>
                 </Row>
             </Form>

@@ -1,108 +1,97 @@
 import React from 'react';
 import babka from '../image/images.jpeg'
-import { Container, Row, Card, Button, Form, CardGroup} from 'react-bootstrap';
+import {Container, Row, Form, CardGroup, InputGroup, Button} from 'react-bootstrap';
+import RecomendationCard from "../components/RecomendationCard";
+import "../styles/Opros.css"
+import {FaSearch} from "react-icons/fa";
+import {TEST_EVENT} from "../utils/consts";
 
 const User = () => {
 
     return (
         <>
+            <Row>
+            <InputGroup className={'mt-4'} style={{marginLeft: '25%', width: '50%'}} size="lg">
+                <InputGroup.Text id="inputGroup-sizing-lg"><FaSearch/></InputGroup.Text>
+                <Form.Control
+                    aria-label="Large"
+                    aria-describedby="inputGroup-sizing-sm"
+                    placeholder={'Введите код мероприятия'}
+                />
+                <div className={'input-group-append'}><Button variant='primary' size={"lg"}>Искать</Button> </div>
+            </InputGroup>
+
+
+            </Row>
         <Container>
-            <h1>User</h1>
+            <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
             <Form>
                 <Row>
-                        проверенное
-                        <CardGroup>
-                            <Card style={{width: "18rem"}}>
-                                <Card.Img variant='top' src={babka}/>
-                                <Card.Body>
-                                    <Card.Title>первое мероприятие</Card.Title>
-                                    <Card.Text>описание</Card.Text>
-                                    <Button variant='primary'>Выбрать</Button>
-                                </Card.Body>
-                            </Card>
+                        <h3 className={'text-center mt-4'}>проверенное</h3>
+                        <CardGroup class='card-group mt-3'>
+                            <RecomendationCard title={'первое мероприятие'}
+                                               description={'описание'}
+                                               image={babka}
+                                               link={TEST_EVENT}
+                            />
+                            <RecomendationCard title={'второе мероприятие'}
+                                               description={'описание'}
+                                               image={babka}
+                                               link={'#'}
+                            />
 
-                            <Card style={{width: "18rem"}}>
-                                <Card.Img variant='top' src={babka}/>
-                                <Card.Body>
-                                    <Card.Title>первое мероприятие</Card.Title>
-                                    <Card.Text>описание</Card.Text>
-                                    <Button variant='primary'>Выбрать</Button>
-                                </Card.Body>
-                            </Card>
-
-                            <Card style={{width: "18rem"}}>
-                                <Card.Img variant='top' src={babka}/>
-                                <Card.Body>
-                                    <Card.Title>первое мероприятие</Card.Title>
-                                    <Card.Text>описание</Card.Text>
-                                    <Button variant='primary'>Выбрать</Button>
-                                </Card.Body>
-                            </Card>
+                            <RecomendationCard title={'третье мероприятие'}
+                                               description={'описание'}
+                                               image={babka}
+                                               link={'#'}
+                            />
                         </CardGroup>
-                    новенькое 
-                    <CardGroup>
-                            <Card style={{width: "18rem"}}>
-                                <Card.Img variant='top' src={babka}/>
-                                <Card.Body>
-                                    <Card.Title>первое мероприятие</Card.Title>
-                                    <Card.Text>описание</Card.Text>
-                                    <Button variant='primary'>Выбрать</Button>
-                                </Card.Body>
-                            </Card>
+                    <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
+                    <h3 className={'text-center mt-4'}>новенькое</h3>
+                    <CardGroup class='card-group mt-3'>
+                        <RecomendationCard title={'первое мероприятие'}
+                                           description={'описание'}
+                                           image={babka}
+                                           link={'#'}
+                        />
+                        <RecomendationCard title={'второе мероприятие'}
+                                           description={'описание'}
+                                           image={babka}
+                                           link={'#'}
+                        />
 
-                            <Card style={{width: "18rem"}}>
-                                <Card.Img variant='top' src={babka}/>
-                                <Card.Body>
-                                    <Card.Title>первое мероприятие</Card.Title>
-                                    <Card.Text>описание</Card.Text>
-                                    <Button variant='primary'>Выбрать</Button>
-                                </Card.Body>
-                            </Card>
-
-                            <Card style={{width: "18rem"}}>
-                                <Card.Img variant='top' src={babka}/>
-                                <Card.Body>
-                                    <Card.Title>первое мероприятие</Card.Title>
-                                    <Card.Text>описание</Card.Text>
-                                    <Button variant='primary'>Выбрать</Button>
-                                </Card.Body>
-                            </Card>
+                        <RecomendationCard title={'третье мероприятие'}
+                                           description={'описание'}
+                                           image={babka}
+                                           link={'#'}
+                        />
                         </CardGroup>
-                        нравится остальным
-                        <CardGroup>
-                            <Card style={{width: "18rem"}}>
-                                <Card.Img variant='top' src={babka}/>
-                                <Card.Body>
-                                    <Card.Title>первое мероприятие</Card.Title>
-                                    <Card.Text>описание</Card.Text>
-                                    <Button variant='primary'>Выбрать</Button>
-                                </Card.Body>
-                            </Card>
+                    <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
+                    <h3 className={'text-center mt-4'}>нравится остальным</h3>
+                        <CardGroup class='card-group mt-3'>
+                            <RecomendationCard title={'первое мероприятие'}
+                                               description={'описание'}
+                                               image={babka}
+                                               link={'#'}
+                            />
+                            <RecomendationCard title={'второе мероприятие'}
+                                               description={'описание'}
+                                               image={babka}
+                                               link={'#'}
+                            />
 
-                            <Card style={{width: "18rem"}}>
-                                <Card.Img variant='top' src={babka}/>
-                                <Card.Body>
-                                    <Card.Title>первое мероприятие</Card.Title>
-                                    <Card.Text>описание</Card.Text>
-                                    <Button variant='primary'>Выбрать</Button>
-                                </Card.Body>
-                            </Card>
-
-                            <Card style={{width: "18rem"}}>
-                                <Card.Img variant='top' src={babka}/>
-                                <Card.Body>
-                                    <Card.Title>первое мероприятие</Card.Title>
-                                    <Card.Text>описание</Card.Text>
-                                    <Button variant='primary'>Выбрать</Button>
-                                </Card.Body>
-                            </Card>
+                            <RecomendationCard title={'третье мероприятие'}
+                                               description={'описание'}
+                                               image={babka}
+                                               link={'#'}
+                            />
                         </CardGroup>
                 </Row>
             </Form>
         </Container>
-    
+
         </>
-            
+
             // <Link>Home</Link>
 
             // <Link >Opros</Link>

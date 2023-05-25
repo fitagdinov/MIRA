@@ -1,6 +1,6 @@
 from typing import List
 from dbService.dbConfiguration import get_request, put_request, database
-from sys import getrefcount
+
 
 def addGroupScript(external_id_group: int,
                    group_short_name: str,

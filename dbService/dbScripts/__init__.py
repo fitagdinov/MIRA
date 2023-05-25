@@ -1,2 +1,8 @@
 from .initializeScripts import createTables
-from .fillScripts import addMemberScript, addGroupScript, addEventScript, dropEvent, addAttendScript
+from .fillScripts import \
+    addMemberScript, \
+    addGroupScript, \
+    addEventScript, \
+    dropEvent, \
+    addAttendScript, \
+    addEventEmbeddingScript

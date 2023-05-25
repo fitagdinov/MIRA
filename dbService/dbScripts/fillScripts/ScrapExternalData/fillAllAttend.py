@@ -2,7 +2,7 @@ from dbService import addAttendScript
 import pandas as pd
 from tqdm import tqdm
 from numpy import any
-
+from ZeroMallocFix import validate_memory_location
 
 # 100%|██████████| 73/73 [14:38<00:00, 12.03s/it] for 6_000_000 lines
 if __name__ == '__main__':
@@ -22,6 +22,9 @@ if __name__ == '__main__':
 
     shape_of_one_req = 80000
     for i in tqdm(range(attend_df.shape[0] // shape_of_one_req)):
+        # FIX FOR MEM LOCATION ERROR:
+        validate_memory_location()
+
         addAttendScript(
             external_group_id=external_group_id[i * shape_of_one_req: (i+1) * shape_of_one_req],
             external_grand_id=external_grand_id[i * shape_of_one_req: (i+1) * shape_of_one_req],
