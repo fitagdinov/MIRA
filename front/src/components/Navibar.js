@@ -96,7 +96,7 @@ export default function Navibar (){
                 </Modal.Title>
             </Modal.Header>
 
-            <Modal.Footer class={'text-center'}>
+            <Modal.Footer className={'text-center'}>
                 <Form className={'p-3'}>
                     <Button className={'mx-auto'} href={'/opros/1'}>Начать</Button>
                 </Form>
