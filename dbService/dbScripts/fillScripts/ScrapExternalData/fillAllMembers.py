@@ -1,7 +1,6 @@
 from dbService.dbScripts import addMemberScript
 import pandas as pd
 from tqdm import tqdm
-from ZeroMallocFix import validate_memory_location
 
 # 4 sec for filling 52000 lines
 if __name__ == '__main__':
@@ -20,7 +19,7 @@ if __name__ == '__main__':
     grand_surname = _grand_surname
     shape_of_one_req = 100
     for i in tqdm(range(members_df.shape[0] // shape_of_one_req)):
-        validate_memory_location()
+        # validate_memory_location()
         addMemberScript(
             grand_ma_mos_id=grand_ma_mos_id[i * shape_of_one_req: (i+1) * shape_of_one_req],
             date_of_registration=date_of_registration[i * shape_of_one_req: (i+1) * shape_of_one_req],

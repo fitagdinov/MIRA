@@ -3,3 +3,5 @@ mysqlConfiguration:
     user: 'root'
     password: 'password'
     database: 'NoOldMen'
+
+    embedding_size: 312

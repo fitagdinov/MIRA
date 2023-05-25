@@ -1,6 +1,8 @@
 from dbService import get_request
+from flaskService import TAGS
+
 from flask_apispec.views import MethodResource
-from flask_apispec import marshal_with, use_kwargs
+from flask_apispec import marshal_with, use_kwargs, doc
 from flask_restful import Resource
 from ciso8601 import parse_datetime
 
@@ -25,6 +27,7 @@ class ResponseGrandAuthorizationValidation(Schema):
     grand_address = fields.String(required=False, description='Адрес бабушки')
 
 
+@doc(tags=[TAGS.auth_tag])
 class GetGrandAuthorizationValidation(MethodResource, Resource):
     @marshal_with(ResponseGrandAuthorizationValidation)
     @use_kwargs(RequestGrandAuthorizationValidation, location='query')
