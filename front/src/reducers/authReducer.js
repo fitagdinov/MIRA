@@ -3,7 +3,7 @@ const SET_LOCATION = "SET_LOCATION"
 
 const defaultState = {
     grand_address: "default",
-    grand_exist: true,
+    grand_exist: false,
     grand_name: "",
     grand_sex: "",
     grand_surname: "",

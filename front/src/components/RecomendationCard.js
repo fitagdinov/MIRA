@@ -13,7 +13,7 @@ export default class RecomendationCard extends React.Component {
                     <Card.Title>{this.props.title}</Card.Title>
                     <Card.Text>{this.props.description}</Card.Text>
                 </Card.Body>
-                <Card.Footer class={'mx-auto'}>
+                <Card.Footer className={'mx-auto'}>
                     <Nav defaultActiveKey='/' as='ul'>
                         <div className={'item-margin-sm'}>
                             <Button variant='primary' href={this.props.link}>Подробнее</Button>

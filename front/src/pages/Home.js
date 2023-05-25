@@ -7,12 +7,10 @@ import { authUser } from '../action/auth';
 const Home = () => {
     return (
         <>
-        <h1>Home</h1>
             <Nav defaultActiveKey='/' as='ul'>
                 <Nav.Item as='li'>
                     <Nav.Link href='/opros/1'>Opros</Nav.Link>
-                    {repos.map((repo, i) => <div key={i}>ura {i}</div>)}
-                    
+                    <h1>{localStorage.getItem('isAuth')}</h1>
                 </Nav.Item>
             </Nav>
         </>

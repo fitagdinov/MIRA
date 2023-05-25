@@ -8,5 +8,14 @@ export const authUser = (fio, birthDate) => {
     return async (dispatch) => {
         const response = await axios.get(`${API_URL}?grand_external_id=${fio}&grand_birth_date=${birthDate}`) // шлем get запрос 
         dispatch(setAuth(response.data)) // заполняем store таской на обновление данных 
+        if (response.data.grand_exist == true){ // проверяем существует ли user в БД
+            localStorage.setItem('fio', fio) // заполняем localStorage значением true -> пользователь авторизован
+            localStorage.setItem('birthDate', birthDate)
+        }
+        else {
+            localStorage.setItem('fio', 101387411) 
+            localStorage.setItem('birthDate', '1937-02-17')
+        }
     }
 }
+
