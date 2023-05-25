@@ -14,7 +14,7 @@ from Getters import SearchEventByBeautyCode
 from Getters import GetAllAvailableEventIDS
 # Group Getters
 from Getters import SearchGroupLinkedToEventByEventSysID
-
+from Getters import GetGroupSchuedle
 
 app = Flask(__name__)
 CORS(app)
@@ -44,7 +44,10 @@ api.add_resource(SearchEventByBeautyCode, "/search_event/by_beauty_word", method
 
 api.add_resource(SearchGroupLinkedToEventByEventSysID, "/search_group/by_event_sys_id", methods=['GET'])
 
+api.add_resource(GetGroupSchuedle, "/search_group/get_schedule", methods=['GET'])
 
+
+#
 docs.register(GetGrandAuthorizationValidation)
 
 docs.register(GetAllAvailableEventIDS)
@@ -54,6 +57,7 @@ docs.register(SearchEventByBeautyCode)
 
 docs.register(SearchGroupLinkedToEventByEventSysID)
 
+docs.register(GetGroupSchuedle)
 
 if __name__ == '__main__':
     app.run(debug=True)
