@@ -1,1 +1,2 @@
-from .BasicGroupDescription import *
+from .BasicGroupDescription import BasicGroupDescription
+from .SmallEventCard import SmallEventCardDescription
