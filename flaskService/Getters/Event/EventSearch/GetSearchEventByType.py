@@ -7,20 +7,25 @@ from flask_restful import Resource
 from ciso8601 import parse_datetime
 
 from marshmallow import Schema, fields
-from flaskService.Getters.Utils import SmallEventCardDescription
+from flaskService.Getters.Utils import SmallEventCardDescription, AvailableTypes
 
-class ResponseGetAllAvailableEventIDS(Schema):
+
+class RequestGetSearchEventByType(Schema):
+    event_level_3 = fields.String(required=True, description="Для ума | Для тела | Для души")
+
+
+class ResponseGetSearchEventByType(Schema):
     number_of_events = fields.Integer(required=True, default=None, description='Сколько есть мероприятий')
+    linked_groups = fields.List(fields.Nested(SmallEventCardDescription, required=True), required=True, description='Список удовлетворяющих мероприятий')
 
-    linked_groups = fields.List(fields.Nested(SmallEventCardDescription, required=True), required=True)
 
-
-@doc(tags=[TAGS.event_search])
-class GetAllAvailableEventIDS(MethodResource, Resource):
-    @marshal_with(ResponseGetAllAvailableEventIDS)
-    def get(self):
+@doc(tags=[TAGS.conditional_event_search])
+class GetSearchEventByType(MethodResource, Resource):
+    @marshal_with(ResponseGetSearchEventByType)
+    @use_kwargs(RequestGetSearchEventByType, location='query')
+    def get(self, event_level_3):
         linked_groups_list = []
-        scrap_all_events = get_request(query=f"SELECT * FROM StaticEvent", execute_many=True)
+        scrap_all_events = get_request(query=f"SELECT * FROM StaticEvent WHERE event_level_3='{str(AvailableTypes.convert_any_to_enum(event_level_3))}'", execute_many=True)
         beauty_codes = get_request(query=f"SELECT * FROM StaticCiteEventID WHERE CITE_ID_event in {tuple([_[2] for _ in scrap_all_events])}", execute_many=True)
         beauty_codes = [_[1] for _ in beauty_codes]
         for num, event in enumerate(scrap_all_events):

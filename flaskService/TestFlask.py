@@ -12,6 +12,7 @@ from Getters import SearchEventByExternalID
 from Getters import SearchEventBySysID
 from Getters import SearchEventByBeautyCode
 from Getters import GetAllAvailableEventIDS
+from Getters import GetSearchEventByType
 # Group Getters
 from Getters import SearchGroupLinkedToEventByEventSysID
 from Getters import GetGroupSchuedle
@@ -41,6 +42,7 @@ api.add_resource(GetAllAvailableEventIDS, "/all_events", methods=['GET'])
 api.add_resource(SearchEventByExternalID, "/search_event/by_ext_id", methods=['GET'])
 api.add_resource(SearchEventBySysID, "/search_event/by_sys_id", methods=['GET'])
 api.add_resource(SearchEventByBeautyCode, "/search_event/by_beauty_word", methods=['GET'])
+api.add_resource(GetSearchEventByType, '/search_event/by_event_type', methods=['GET'])
 
 api.add_resource(SearchGroupLinkedToEventByEventSysID, "/search_group/by_event_sys_id", methods=['GET'])
 
@@ -54,6 +56,7 @@ docs.register(GetAllAvailableEventIDS)
 docs.register(SearchEventByExternalID)
 docs.register(SearchEventBySysID)
 docs.register(SearchEventByBeautyCode)
+docs.register(GetSearchEventByType)
 
 docs.register(SearchGroupLinkedToEventByEventSysID)
 

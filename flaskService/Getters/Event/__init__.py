@@ -2,7 +2,7 @@ from .EventContext.SearchEventByExternalID import SearchEventByExternalID
 from .EventContext.SearchEventBySysID import SearchEventBySysID
 from .EventContext.SearchEventByBeautyCode import SearchEventByBeautyCode
 from .EventSearch.GetAllAvailableEventIDS import GetAllAvailableEventIDS
-# from .EventSearch.GetSearchEventByType import
+from .EventSearch.GetSearchEventByType import GetSearchEventByType
 from .EventContent.GetGroupSchuedle import GetGroupSchuedle
 
 # from .EventContext.SearchEventByShortName import *
