@@ -13,6 +13,7 @@ from Getters import SearchEventBySysID
 from Getters import SearchEventByBeautyCode
 from Getters import GetAllAvailableEventIDS
 from Getters import GetSearchEventByType
+from Getters import GetEventByIdList
 # Group Getters
 from Getters import SearchGroupLinkedToEventByEventSysID
 from Getters import GetGroupSchuedle
@@ -39,6 +40,7 @@ docs = FlaskApiSpec(app)
 api.add_resource(GetGrandAuthorizationValidation, "/auth_grand", methods=['GET'])
 
 api.add_resource(GetAllAvailableEventIDS, "/all_events", methods=['GET'])
+api.add_resource(GetEventByIdList, '/search_event/by_id_list', methods=['GET'])
 api.add_resource(SearchEventByExternalID, "/search_event/by_ext_id", methods=['GET'])
 api.add_resource(SearchEventBySysID, "/search_event/by_sys_id", methods=['GET'])
 api.add_resource(SearchEventByBeautyCode, "/search_event/by_beauty_word", methods=['GET'])
@@ -53,6 +55,7 @@ api.add_resource(GetGroupSchuedle, "/search_group/get_schedule", methods=['GET']
 docs.register(GetGrandAuthorizationValidation)
 
 docs.register(GetAllAvailableEventIDS)
+docs.register(GetEventByIdList)
 docs.register(SearchEventByExternalID)
 docs.register(SearchEventBySysID)
 docs.register(SearchEventByBeautyCode)
