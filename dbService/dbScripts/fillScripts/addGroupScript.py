@@ -9,8 +9,6 @@ def addGroupScript(external_id_group: int,
                    group_geo: str,
                    group_area: str,
                    group_schedule: str):
-    # TODO: clear bad requests
-    print(getrefcount(None))
     if group_short_name == "Свободное посещение_Свободное посещение":
         return
     _parent_event = get_request(query=f"SELECT * FROM NoOldMen.StaticEvent WHERE event_short_name='{group_short_name}'")
