@@ -1,3 +1,5 @@
+from dbService import embedding_size
+
 creation_request = \
     """
 create table NoOldMen.StaticCiteEventID
@@ -36,17 +38,27 @@ create table NoOldMen.StaticEvent
         unique (event_short_name)
 )
     comment 'База данных о доступных мероприятиях';
-
+"""
+creation_request += \
+"""
 create table NoOldMen.EventEmbedding
 (
     SYS_ID_event           int  not null,
-    event_embedding_vector json null comment 'Вектор описывающий мероприятие',
+"""
+
+for embedding_vector in range(embedding_size):
+    creation_request += f"\tevent_embedding_vector_{embedding_vector} float null comment 'emb vector_{embedding_vector}',\n"
+
+creation_request += \
+"""
     constraint EventEmbedding_StaticEvent_null_fk
         foreign key (SYS_ID_event) references NoOldMen.StaticEvent (SYS_ID_event)
             on update cascade on delete cascade
 )
     comment 'вектора для event';
-
+"""
+creation_request += \
+"""
 create table NoOldMen.StaticGroup
 (
     SYS_ID_group        int auto_increment comment 'системный id группы'
@@ -127,11 +139,19 @@ create table NoOldMen.AttendanceGroup
             on update cascade on delete cascade
 )
     comment 'Таблица посещаемости групп бабушками';
+"""
 
+creation_request += \
+"""
 create table NoOldMen.memberEmbedding
 (
     SYS_ID_grand    int  null,
-    grand_embedding json null comment 'вектор бабушки из опроса',
+"""
+
+for embedding_vector in range(embedding_size):
+    creation_request += f"\tgrand_embedding_{embedding_vector} float null comment 'emb vector_{embedding_vector}',\n"
+creation_request += \
+"""
     constraint memberEmbedding_pk
         unique (SYS_ID_grand),
     constraint memberEmbedding_memberStatic_null_fk
@@ -140,4 +160,7 @@ create table NoOldMen.memberEmbedding
 )
     comment 'начальный вектор бабушки из опроса';
 
-    """
+"""
+
+if __name__ == '__main__':
+    print(creation_request)
