@@ -1,18 +1,43 @@
 import React, { useEffect } from 'react';
-import Nav from 'react-bootstrap/Nav';
+
 import { useDispatch, useSelector } from 'react-redux';
-import { getRepos } from '../action/repos';
-import { authUser } from '../action/auth';
+import { showAllEvents } from '../action/showEvents';
+import RecomendationCard from '../components/RecomendationCard';
+import babka from '../image/images.jpeg'
+import { CardGroup,} from 'react-bootstrap';
 
 const Home = () => {
+    const dispatch = useDispatch() 
+    const allEvents = useSelector(state => state.allEvents.linked_groups)
+        useEffect(() => {
+        dispatch(showAllEvents());
+      }, []);
     return (
         <>
-            <Nav defaultActiveKey='/' as='ul'>
-                <Nav.Item as='li'>
-                    <Nav.Link href='/opros/1'>Opros</Nav.Link>
-                    <h1>{localStorage.getItem('isAuth')}</h1>
-                </Nav.Item>
-            </Nav>
+
+            <h1>{allEvents.map(event =>
+                 <div>
+                        <CardGroup className='card-group mt-3'>
+                            <RecomendationCard title={event.short_event_name}
+                                            description={event.description_event}
+                                            image={babka}
+                                            link={'TEST_EVENT'}
+                            />
+                            <RecomendationCard title={event.short_event_name}
+                                            description={'описание'}
+                                            image={babka}
+                                            link={'#'}
+                            />
+
+                            <RecomendationCard title={'третье мероприятие'}
+                                            description={'описание'}
+                                            image={babka}
+                                            link={'#'}
+                            />
+                        </CardGroup>
+                </div>)
+            }</h1>
+
         </>
     );
 };
