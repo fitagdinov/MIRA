@@ -50,7 +50,7 @@ const Home = () => {
                         aria-describedby="inputGroup-sizing-sm"
                         placeholder={'Введите код мероприятия'}
                     />
-                    <div className={'input-group-append'}><Button variant='primary' size={"lg"}>Искать</Button> </div>
+                    <div className={'input-group-append'}><Button variant='success' size={"lg"}>Искать</Button> </div>
                     <div className={'input-group-append'}>
                         <Button variant={'success'}
                                 size={"lg"}
