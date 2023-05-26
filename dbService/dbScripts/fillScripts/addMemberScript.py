@@ -1,7 +1,7 @@
 from dbService.dbConfiguration import get_request, put_request, database
 from ciso8601 import parse_datetime
 from typing import List
-
+import pytz
 
 def addMemberScript(grand_ma_mos_id: List[int], date_of_registration: List[str], grand_SEX: List[str], birth_date: List[str], grand_address: List[str],
                     grand_name: List[str] = ['NONE'], grand_surname: List[str] = ['NONE']):
@@ -17,8 +17,8 @@ def addMemberScript(grand_ma_mos_id: List[int], date_of_registration: List[str],
     :return:
     """
     '101391104,2019-02-26 15:52:09.000,Женщина,1959-09-10,"город москва, константинова, дом 30"'
-    _registration = tuple([int(parse_datetime(_).timestamp()) for _ in date_of_registration])
-    _birth = tuple([int(parse_datetime(_).timestamp()) for _ in birth_date])
+    _registration = tuple([int(parse_datetime(_).replace(tzinfo=pytz.timezone('Europe/Moscow')).timestamp()) for _ in date_of_registration])
+    _birth = tuple([int(parse_datetime(_).replace(tzinfo=pytz.timezone('Europe/Moscow')).timestamp()) for _ in birth_date])
     if len(grand_name) != len(_birth):
         raise KeyError('Unmatched length of names')
 
