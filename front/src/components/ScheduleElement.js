@@ -9,17 +9,17 @@ this.props = undefined;
 
 
 function ScheduleElement() {
-    const [checked, setChecked] = useState(this.props.init_checked);
+    const [checked, setChecked] = useState(false);
 
     return (
         <Card style={{ width: '18rem', marginTop: '20px' }}>
             <ListGroup variant="flush">
-                <ListGroup.Item>{this.props.date} {this.props.time}
+                <ListGroup.Item>23 мая 20:00
                     <ToggleButton
                         className="mb-2"
                         id="toggle-check"
                         type="checkbox"
-                        variant="outline-primary"
+                        variant="outline-success"
                         checked={checked}
                         onChange={(e) => setChecked(e.currentTarget.checked)}
                         value={1}>

@@ -52,7 +52,7 @@ const Home = () => {
                     />
                     <div className={'input-group-append'}><Button variant='primary' size={"lg"}>Искать</Button> </div>
                     <div className={'input-group-append'}>
-                        <Button variant='primary'
+                        <Button variant={'success'}
                                 size={"lg"}
                                 onClick={() => {dispatch(showEvents(2))}}
                             // TODO: add dispatch function in onClick
@@ -73,7 +73,7 @@ const Home = () => {
                 <Card style={{width: "18rem"}}>
                     <Card.Body className={'text-center'}>
                             <div className={'item-margin-sm'}>
-                                <Button size={'lg'} variant='outline-primary'
+                                <Button size={'lg'} variant='outline-success'
                                         href={'/template'}
                                 > <b>Для ума</b>
                                 </Button>
@@ -92,7 +92,7 @@ const Home = () => {
                 <Card style={{width: "18rem"}}>
                     <Card.Body className={'text-center'}>
                         <div className={'item-margin-sm'}>
-                            <Button size={'lg'} variant='outline-primary'
+                            <Button size={'lg'} variant='outline-success'
                                     href={'/template'}
                             ><b> Для тела</b>
                             </Button>
@@ -111,7 +111,7 @@ const Home = () => {
                 <Card style={{width: "18rem"}}>
                     <Card.Body className={'text-center'}>
                         <div className={'item-margin-sm'}>
-                            <Button size={'lg'} variant='outline-primary'
+                            <Button size={'lg'} variant='outline-success'
                                     href={'/template'}
                             > <b>Для души</b>
                             </Button>

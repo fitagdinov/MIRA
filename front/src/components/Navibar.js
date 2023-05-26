@@ -42,7 +42,7 @@ export default function Navibar (){
                             <Nav.Link><FaHeart/> Избранное</Nav.Link>
                         </Nav>
                         <Nav className="px-3">
-                            <Button size={'lg'} variant="primary" className="mr-2" onClick={handleShow}> Авторизация </Button>
+                            <Button size={'lg'} variant={'success'} className="mr-2" onClick={handleShow}> Авторизация </Button>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
@@ -79,7 +79,7 @@ export default function Navibar (){
                     <Modal.Footer >
                         <Button
                             className={'mx-auto'}
-                            variant="primary"
+                            variant={'success'}
                             onClick={() => {handleShowOpros(fio, birthDate);}} // при нажатии вызываем функцию происходит действи (описано выше)
                         >
                             Готово</Button>
@@ -94,7 +94,7 @@ export default function Navibar (){
 
                     <Modal.Footer className={'text-center'}>
                         <Form className={'p-3'}>
-                            <Button className={'mx-auto'} href={'/opros/1'}>Начать</Button>
+                            <Button variant={'success'} className={'mx-auto'} href={'/opros/1'}>Начать</Button>
                         </Form>
                     </Modal.Footer>
 
@@ -119,7 +119,7 @@ export default function Navibar (){
                             {/*<Nav.Link><FaHeart/> Избранное</Nav.Link>*/}
                         </Nav>
                         <Nav className="px-3">
-                            <Button variant="primary" size={'lg'} className="mr-2" onClick={handleShow}> Авторизация </Button>
+                            <Button variant={'success'} size={'lg'} className="mr-2" onClick={handleShow}> Авторизация </Button>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
@@ -156,7 +156,7 @@ export default function Navibar (){
                     <Modal.Footer >
                         <Button
                             className={'mx-auto'}
-                            variant="primary"
+                            variant={'success'}
                             onClick={() => {handleShowOpros(fio, birthDate);}} // при нажатии вызываем функцию происходит действи (описано выше)                                           
                         >
                             Готово</Button>
@@ -171,7 +171,7 @@ export default function Navibar (){
 
                     <Modal.Footer className={'text-center'}>
                         <Form className={'p-3'}>
-                            <Button className={'mx-auto'} href={'/opros/1'}>Начать</Button>
+                            <Button variant={'success'} className={'mx-auto'} href={'/opros/1'}>Начать</Button>
                         </Form>
                     </Modal.Footer>
 
