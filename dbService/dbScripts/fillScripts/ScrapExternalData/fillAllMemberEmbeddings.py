@@ -15,28 +15,39 @@ if __name__ == '__main__':
         even_emb_cols += f"SUM(d.event_embedding_vector_{i}), "
     even_emb_cols = even_emb_cols[:-2]
 
+    em = get_request(
+        query=f"""SELECT * FROM NoOldMen.EventEmbedding""",
+        execute_many=True
+    )
+
+    emb_dict = dict([(el[0], np.array(el[1:])) for el in em])
+
+
     for user_id in tqdm.tqdm(all_users):
 
         _id = user_id[0]
 
-        embs = get_request(
+        events = get_request(
             query=f"""
-            SELECT {even_emb_cols}
+            SELECT c.SYS_ID_event, COUNT(c.SYS_ID_event) as count
              FROM NoOldMen.AttendanceGroup b
              JOIN NoOldMen.EventGroupMap c
                ON b.SYS_ID_group = c.SYS_ID_group
-             JOIN NoOldMen.EventEmbedding d
-               ON c.SYS_ID_event = d.SYS_ID_event
-            WHERE b.SYS_ID_grand = {_id};
+            WHERE b.SYS_ID_grand = {_id}
+         GROUP BY c.SYS_ID_event;
             """,
-            execute_many=False
+            execute_many=True
         )
-        user_emb = embs
-        vals = f"{user_emb}"[1:-1]
+        user_emb = np.zeros(embedding_size)
+
+        for event_id, count in events:
+            user_emb += emb_dict[event_id] * count
+
+        vals = f"{user_emb.astype(float).tolist()}"[1:-1]
         put_request(
             query=f"""
-            INSERT INTO NoOldMen.memberEmbedding 
-            VALUES ({user_id[0]},{vals});
+            INSERT INTO NoOldMen.memberEmbedding
+            VALUES ({_id},{vals});
             """
         )
 
