@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import { useDispatch } from 'react-redux';
 import {
     Button,
-    ButtonToolbar,
+    ButtonToolbar, Card,
     Form,
     InputGroup,
     Row,
@@ -66,84 +66,84 @@ const Home = () => {
                 <h2> Направления занятий </h2>
             </div>
 
-            {/*<Row className={ 'text-center'}>*/}
-            {/*<Col sm={1}/>*/}
-            {/*<Col sm={10}>*/}
-            {/*<CardGroup className='card-group'>*/}
-            {/*    <Card style={{width: "18rem"}}>*/}
-            {/*        <Card.Body className={'text-center'}>*/}
-            {/*                <div className={'item-margin-sm'}>*/}
-            {/*                    <Button size={'lg'} variant='outline-primary'*/}
-            {/*                            href={'/template'}*/}
-            {/*                    > <b>Для ума</b>*/}
-            {/*                    </Button>*/}
-            {/*                </div>*/}
+            <Row className={ 'text-center'}>
+            <Col sm={1}/>
+            <Col sm={10}>
+            <CardGroup className='card-group'>
+                <Card style={{width: "18rem"}}>
+                    <Card.Body className={'text-center'}>
+                            <div className={'item-margin-sm'}>
+                                <Button size={'lg'} variant='outline-primary'
+                                        href={'/template'}
+                                > <b>Для ума</b>
+                                </Button>
+                            </div>
 
-            {/*            <Card.Text>*/}
-            {/*                <i style={{fontSize: 18}}>*/}
-            {/*                    Интеллектуальные игры и образовательные мероприятия.*/}
-            {/*                    Они предназначены для расширения знаний и взаимопонимания отдельных лиц в различных областях.*/}
-            {/*                </i>*/}
-            {/*            </Card.Text>*/}
-            {/*        </Card.Body>*/}
-            {/*    </Card>*/}
-
-
-            {/*    <Card style={{width: "18rem"}}>*/}
-            {/*        <Card.Body className={'text-center'}>*/}
-            {/*            <div className={'item-margin-sm'}>*/}
-            {/*                <Button size={'lg'} variant='outline-primary'*/}
-            {/*                        href={'/template'}*/}
-            {/*                ><b> Для тела</b>*/}
-            {/*                </Button>*/}
-            {/*            </div>*/}
-
-            {/*            <Card.Text>*/}
-            {/*                <i style={{fontSize: 18}}>*/}
-            {/*                    Групповые занятия фитнесом и приключения на свежем воздухе.*/}
-            {/*                    Эти мероприятия направлены на продвижение здорового образа жизни и улучшение физического самочувствия.*/}
-            {/*                </i>*/}
-            {/*            </Card.Text>*/}
-            {/*        </Card.Body>*/}
-            {/*    </Card>*/}
+                        <Card.Text>
+                            <i style={{fontSize: 18}}>
+                                Интеллектуальные игры и образовательные мероприятия.
+                                Они предназначены для расширения знаний и взаимопонимания отдельных лиц в различных областях.
+                            </i>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
 
 
-            {/*    <Card style={{width: "18rem"}}>*/}
-            {/*        <Card.Body className={'text-center'}>*/}
-            {/*            <div className={'item-margin-sm'}>*/}
-            {/*                <Button size={'lg'} variant='outline-primary'*/}
-            {/*                        href={'/template'}*/}
-            {/*                > <b>Для души</b>*/}
-            {/*                </Button>*/}
-            {/*            </div>*/}
+                <Card style={{width: "18rem"}}>
+                    <Card.Body className={'text-center'}>
+                        <div className={'item-margin-sm'}>
+                            <Button size={'lg'} variant='outline-primary'
+                                    href={'/template'}
+                            ><b> Для тела</b>
+                            </Button>
+                        </div>
 
-            {/*            <Card.Text>*/}
-            {/*                <i style={{fontSize: 18}}>*/}
-            {/*                    Медитация, творчество и семинары по осознанности.*/}
-            {/*                    Эти мероприятия направлены на духовный и эмоциональный рост, а также достижение внутреннего покоя.*/}
-            {/*                </i>*/}
-            {/*            </Card.Text>*/}
-            {/*        </Card.Body>*/}
-            {/*    </Card>*/}
-            {/*</CardGroup>*/}
-            {/*</Col>*/}
-            {/*<Col sm={1}/>*/}
-            {/*</Row>*/}
+                        <Card.Text>
+                            <i style={{fontSize: 18}}>
+                                Групповые занятия фитнесом и приключения на свежем воздухе.
+                                Эти мероприятия направлены на продвижение здорового образа жизни и улучшение физического самочувствия.
+                            </i>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
 
-            {/*<br/>*/}
 
+                <Card style={{width: "18rem"}}>
+                    <Card.Body className={'text-center'}>
+                        <div className={'item-margin-sm'}>
+                            <Button size={'lg'} variant='outline-primary'
+                                    href={'/template'}
+                            > <b>Для души</b>
+                            </Button>
+                        </div>
+
+                        <Card.Text>
+                            <i style={{fontSize: 18}}>
+                                Медитация, творчество и семинары по осознанности.
+                                Эти мероприятия направлены на духовный и эмоциональный рост, а также достижение внутреннего покоя.
+                            </i>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </CardGroup>
+            </Col>
+            <Col sm={1}/>
+            </Row>
 
             <br/>
+
+
+        {/*    <br/>*/}
             {/*// TODO: плохо рескейлится при малых ширинах экрана*/}
 
-            <div className={'text-center'} style={{width: '80%', marginLeft: '10%'}}>
+        {/*    <div className={'text-center'} style={{width: '80%', marginLeft: '10%'}}>*/}
 
-                <ToggleButtonGroup size={'lg'}  type='radio'  name="options" justified className={'d-flex'}>
-                    <ToggleButton className={'w-100'} variant='outline-primary' value={1}>Для ума</ToggleButton>
-                    <ToggleButton className={'w-100'} variant='outline-primary' value={2}>Для тела</ToggleButton>
-                    <ToggleButton className={'w-100'} variant='outline-primary' value={3}>Для души</ToggleButton>
-                </ToggleButtonGroup>
-            </div>
+        {/*        <ToggleButtonGroup size={'lg'}  type='radio'  name="options" justified className={'d-flex'}>*/}
+        {/*            <ToggleButton className={'w-100'} variant='outline-primary' value={1}>Для ума</ToggleButton>*/}
+        {/*            <ToggleButton className={'w-100'} variant='outline-primary' value={2}>Для тела</ToggleButton>*/}
+        {/*            <ToggleButton className={'w-100'} variant='outline-primary' value={3}>Для души</ToggleButton>*/}
+        {/*        </ToggleButtonGroup>*/}
+        {/*    </div>*/}
         </div>
     );
 };
