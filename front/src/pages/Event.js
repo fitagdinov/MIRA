@@ -1,11 +1,10 @@
 import React from 'react';
 import EventData from "../components/EventData";
+import ScheduleElement from "../components/ScheduleElement";
+
 
 const Event = () => {
 
-    return (
-        <EventData/>
-    );
 };
 
 export default Event;
