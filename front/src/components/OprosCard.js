@@ -17,7 +17,7 @@ export default class OprosCard extends React.Component {
                 <Card.Footer className={'mx-auto'}>
                     <Nav defaultActiveKey='/' as='ul'>
                         <div className={'item-margin-sm'}>
-                            <Button variant='success'
+                            <Button variant={'success'}
                                 href={this.props.link}
                                 
                             >
