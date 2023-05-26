@@ -8,7 +8,8 @@ import OprosCard from '../components/OprosCard'
 
 const Opros = () => {
     const [show, setShow] = useState(false)
-    const [count, setCount] = useState(1)
+    const [count, setCount] = useState(1)// хард код номера опроса
+    
 //   TO DO: нужно опрос-страницу одну сделать, в ссылку передавать счетчик как номер опроса
     return (
         <Container>
@@ -24,7 +25,7 @@ const Opros = () => {
                         <OprosCard image={babka}
                                    title={'первое мероприятие'}
                                    description={'описание'}
-                                   link={`/opros/${count}`}
+                                   link={`/opros/2`}
                         />
 
                     </Col>
@@ -32,14 +33,14 @@ const Opros = () => {
                         <OprosCard image={babka}
                                    title={'второе мероприятие'}
                                    description={'описание'}
-                                   link={`/opros/${count}`}
+                                   link={`/opros/2`}
                         />
                     </Col>
                     <Col>
                         <OprosCard image={babka}
                                    title={'третье мероприятие'}
                                    description={'описание'}
-                                   link={`/opros/${count}`}
+                                   link={`/opros/2`}
                         />
                     </Col>
                 </Row>

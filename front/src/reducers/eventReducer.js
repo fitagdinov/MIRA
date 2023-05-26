@@ -1,5 +1,6 @@
 const SET_EVENT = "SET_EVENT"
 
+
 const defaultState = {
     beauty_code_event: "",
     description_event: "",
@@ -30,5 +31,7 @@ export default function eventReducer(state = defaultState, action) {
     }
 }
 
+
 // ответ от сервера = event
 export const setEvent = (event) => ({type:SET_EVENT, server_answer:event})
+

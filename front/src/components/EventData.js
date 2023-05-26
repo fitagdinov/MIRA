@@ -2,6 +2,12 @@ import {Button, Col, Container, Image, Row} from "react-bootstrap";
 import babka from '../image/images.jpeg';
 
 const EventData = () => {
+    // const dispatch = useDispatch()
+    // const events = useSelector( state => state.events )
+    // useEffect(() => {
+    //     dispatch(showEvents(1));
+    //   }, []);
+//////////////    НЕТ ДАННЫХ, АНДРЕЙ ЗАЕБАЛ
     return (
     <Container>
         <br/>

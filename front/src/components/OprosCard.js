@@ -6,8 +6,7 @@ import { useSelector } from 'react-redux';
 
 export default class OprosCard extends React.Component {
     render() {
-        // номер опроса в ссылке
-        // важно чтоб было authTest - название редюсера 
+
         return (
             <Card style={{width: "18rem"}}>
                 <Card.Img variant='top' src={this.props.image}/>
@@ -20,8 +19,8 @@ export default class OprosCard extends React.Component {
                         <div className={'item-margin-sm'}>
                             <Button variant={'success'}
                                 href={this.props.link}
-                                // onClick={setCount(count + 1)}
-                                >
+                                
+                            >
                                     Выбрать
                                 </Button>
                         </div>
