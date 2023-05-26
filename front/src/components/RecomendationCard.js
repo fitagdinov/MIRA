@@ -16,7 +16,7 @@ export default class RecomendationCard extends React.Component {
                 <Card.Footer className={'mx-auto'}>
                     <Nav defaultActiveKey='/' as='ul'>
                         <div className={'item-margin-sm'}>
-                            <Button variant='primary' href={this.props.link}>Подробнее</Button>
+                            <Button variant='success' href={this.props.link}>Подробнее</Button>
                             {/*TODO: добавить кнопку добавления в избранное*/}
                         </div>
                     </Nav>

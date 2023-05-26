@@ -42,6 +42,10 @@ if __name__ == '__main__':
                     group_schedule=_rasp
                 )
                 successStatus = True
-            except Exception as e:
-                print(e)
-                time.sleep(1)
+            except mysql.connector.Error as e:
+                if e.errno == 2003:
+                    time.sleep(1)
+                elif e.errno == 1062:
+                    print("Cannot fill line caused by the worst OS system in the world. Loss data:", _tmp)
+                    successStatus = True
+                    continue
