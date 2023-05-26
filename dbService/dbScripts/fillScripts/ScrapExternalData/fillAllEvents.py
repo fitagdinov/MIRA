@@ -1,10 +1,15 @@
 from dbService.dbScripts import addEventScript
 import pandas as pd
 from tqdm import tqdm
+import os
 
 # 10 sec for filling 900 values
 if __name__ == '__main__':
-    df = pd.read_csv('../fileStorage/dict.csv').iloc[:, :-2]
+    if os.name == 'nt':
+        df = pd.read_csv('..\\fileStorage\\dict.csv').iloc[:, :-2]
+    else:
+        df = pd.read_csv('../fileStorage/dict.csv').iloc[:, :-2]
+
     df.loc[['Спецпроект' in _ for _ in df.level1.values], 'leve3'] = df.loc[['Спецпроект' in _ for _ in
                                                                              df.level1.values], 'leve3'] + ' СП'
     df.loc[:, 'leve3'] = df.loc[:, 'level2'] + '_' + df.loc[:, 'leve3']
