@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import { useDispatch } from 'react-redux';
 import {
     Button,
-    ButtonToolbar, Card,
+    ButtonToolbar, Card, CardGroup, Col,
     Form,
     InputGroup,
     Row,
