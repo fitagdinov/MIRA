@@ -1,6 +1,11 @@
 import yaml
+import os
 
-path_to_config = "/".join(__file__.split('/')[:-1]) + "/" + 'dbConfigurationFile.yaml'
+if os.name == 'nt':
+    path_to_config = "\\".join(__file__.split('\\')[:-1]) + "\\" + 'dbConfigurationFile.yaml'
+else:
+    path_to_config = "/".join(__file__.split('/')[:-1]) + "/" + 'dbConfigurationFile.yaml'
+
 with open(path_to_config, "r") as ymlfile:
     dbInfo = yaml.load(ymlfile, Loader=yaml.FullLoader)
 

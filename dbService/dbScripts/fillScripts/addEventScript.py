@@ -1,9 +1,12 @@
 from typing import List
 from dbService.dbConfiguration import get_request, put_request, database
 from pandas import read_csv
+import os
 
-
-_path_small_words = "/".join(__file__.split('/')[:-1]) + "/" + 'fileStorage/small_words.csv'
+if os.name == 'nt':
+    _path_small_words = "\\".join(__file__.split('\\')[:-1]) + "\\" + 'fileStorage\\small_words.csv'
+else:
+    _path_small_words = "/".join(__file__.split('/')[:-1]) + "/" + 'fileStorage/small_words.csv'
 small_words_storage = read_csv(_path_small_words, index_col=None, header=0)
 
 

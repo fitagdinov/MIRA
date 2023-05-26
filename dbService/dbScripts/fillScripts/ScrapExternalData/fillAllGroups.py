@@ -2,9 +2,14 @@ from dbService.dbScripts import addGroupScript
 import pandas as pd
 from numpy import any
 from tqdm import tqdm
+import os
 
 if __name__ == '__main__':
-    df = pd.read_csv('../fileStorage/groups.csv')
+    if os.name == 'nt':
+        df = pd.read_csv('..\\fileStorage\\groups.csv')
+    else:
+        df = pd.read_csv('../fileStorage/groups.csv')
+
     df["shorten_name"] = df["направление 2"] + '_' + df["направление 3"]
     # df["shorten_name"] = [_.replace('ё', 'е').replace('-', '') for _ in df["shorten_name"].values]
     map_online = any(
