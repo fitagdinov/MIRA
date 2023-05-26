@@ -22,7 +22,7 @@ const EventData = () => {
                 {/* TODO: сделать кнопку, зависящей от количества мест и статуса записи */}
 
                 <br/>
-                <Button size={"lg"}>Записаться</Button>
+                <Button variant={'success'} size={"lg"}>Записаться</Button>
                 <h6>Осталось мест: 10 из 15</h6>
                 <br/>
 
