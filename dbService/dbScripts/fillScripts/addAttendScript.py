@@ -1,8 +1,11 @@
+import datetime
+
 from dbService.dbConfiguration import get_request, put_request, database
 from pandas import read_csv
 from typing import List, Optional
 from ciso8601 import parse_datetime
 
+import pytz
 
 # TODO: it is possible to create multiple insert pipeline. but it is hard
 def addAttendScript(external_group_id: List[int],
@@ -35,11 +38,12 @@ def addAttendScript(external_group_id: List[int],
         group_map_dict[_ext_id] = _sys_id
 
     for i in range(len(attend_date)):
-        attend_start_time[i] = int(parse_datetime(attend_date[i] + ' ' + attend_start_time[i]).timestamp())
-        attend_end_time[i] = int(parse_datetime(attend_date[i] + ' ' + attend_end_time[i]).timestamp())
+        attend_start_time[i] = int(parse_datetime(attend_date[i] + ' ' + attend_start_time[i]).replace(tzinfo=pytz.timezone('Europe/Moscow')).timestamp())
+        attend_end_time[i] = int(parse_datetime(attend_date[i] + ' ' + attend_end_time[i]).replace(tzinfo=pytz.timezone('Europe/Moscow')).timestamp())
+
     sys_group_id = tuple([group_map_dict[ext_id] for ext_id in external_group_id])
     sys_grand_id = tuple([grand_map_dict[ext_id] for ext_id in external_grand_id])
-    attend_date = [int(parse_datetime(_).timestamp()) for _ in attend_date]
+    attend_date = [int(parse_datetime(_).replace(tzinfo=pytz.timezone('Europe/Moscow')).timestamp()) for _ in attend_date]
     attend_start_time = tuple(attend_start_time)
     attend_end_time = tuple(attend_end_time)
     attend_score = tuple(attend_score)
