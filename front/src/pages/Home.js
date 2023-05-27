@@ -1,27 +1,91 @@
-import React, { useEffect, useState } from 'react';
-
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { showAllEvents } from '../action/showEvents';
+import {
+    Button,
+    Form,
+    InputGroup,
+    Row,
+} from "react-bootstrap";
+import {FaHeart, FaSearch} from "react-icons/fa";
+import CategorySelector from '../components/CategorySelector'
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import { useEffect } from 'react';
+import { showByTypeEvents } from '../action/showEvents';
+import { CardGroup } from 'react-bootstrap';
 import RecomendationCard from '../components/RecomendationCard';
-import babka from '../image/images.jpeg'
-import { CardGroup,} from 'react-bootstrap';
-import { authUser } from '../action/auth'
 
 const Home = () => {
-    const dispatch = useDispatch() 
-    const allEvents = useSelector(state => state.allEvents.linked_groups)
-    const auth = useSelector(state => state.authTest)
-    const [fio, setFio] = useState(localStorage.getItem('fio'))
-    const [birthDate, setBirthDate] = useState(localStorage.getItem('birthDate'))
-    
-    useEffect(() => {
-        dispatch(showAllEvents());
-        dispatch(authUser(fio, birthDate))
-      }, []);
+    const dispatch = useDispatch()
+    const byEvent = useSelector(state => state.byTypeEvents)
+    // useEffect(() => {
+    //     dispatch(showByTypeEvents('Для ума'))
+    //   }, []);
 
-        return (
-            <>
-                <h1>{allEvents.map((event, k) =>
+    return (
+        <div>
+            <br/><br/>
+            <div className={'text-center'}>
+                <h1> <FaHeart size={'20px'} style={{color: 'green', marginRight: '10px'}}/>
+                    Здесь найдутся занятия по душе
+                    <FaHeart size={'20px'} style={{color: 'green', marginLeft: '10px'}}/>
+                </h1>
+            </div>
+
+            <br/>
+            <div className={'text-center'} style={{marginLeft: '25%', width: '50%',fontSize: 22}}>
+                <ButtonGroup>
+                    <Button variant={'outline-success'} size={'lg'}>
+                        <b>Авторизация</b>
+                    </Button>
+                </ButtonGroup>
+
+                <br/>
+                <br/>
+
+                <h4 style={{color: '#363636'}}>
+                    Авторизуйтесь, чтобы получить весь спектр возможностей
+                    и воспользуйтесь личными рекомендациями
+                </h4>
+            </div>
+            <br/>
+
+            <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
+            <div className={'text-center'} style={{marginLeft: '15%', width: '70%',fontSize: 22}}>
+                <i> Основываясь на Ваших предпочтениях,
+                    мы порекомендуем интересные мероприятия и поможем записаться на них.
+                </i>
+
+            <i>
+                    Вы можете легко пригласить знакомых составить вам компанию.
+                    Благодаря быстрому поиску по кодовому слову
+                    им будет очень легко найти нужное мероприятие среди тысяч других.
+                </i>
+            </div>
+
+
+            <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
+            <Row>
+                <InputGroup className={'mt-1'} style={{marginLeft: '25%', width: '50%'}} size="lg">
+                    <InputGroup.Text id="inputGroup-sizing-lg"><FaSearch/></InputGroup.Text>
+                    <Form.Control
+                        aria-label="Large"
+                        aria-describedby="inputGroup-sizing-sm"
+                        placeholder={'Введите код мероприятия'}
+                    />
+                    <div className={'input-group-append'}><Button variant='success' size={"lg"}>Искать</Button> </div>
+                </InputGroup>
+            </Row>
+            <br/>
+            <br/>
+            <div className={'text-center'}>
+                <h2> Направления занятий </h2>
+            </div>
+            <br/>
+
+            <CategorySelector />
+
+            <br/>
+            <h1>{byEvent.linked_groups.map((event, k) =>
                     <div key={k}>
                             <CardGroup className='card-group mt-3'>
                                 <RecomendationCard title={event.short_event_name}
@@ -33,10 +97,12 @@ const Home = () => {
                                 />
                             </CardGroup>
                     </div>)
-                }</h1>
+                }
+            </h1>
 
-            </>
-        );
+
+        </div>
+    );
 };
 
 export default Home;
