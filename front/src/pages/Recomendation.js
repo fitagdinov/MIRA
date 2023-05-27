@@ -53,7 +53,7 @@ const Recomendation = () => {
                                 <RecomendationCard title={events.beauty_code_event}
                                                 description={events.description_event}
                                                 image={babka}
-                                                link={TEST_EVENT}
+                                                link={'/test_event'}
                                 />
                                 <RecomendationCard title={'второе мероприятие'}
                                                 description={'описание'}

@@ -21,7 +21,7 @@ const Home = () => {
                             <RecomendationCard title={event.short_event_name}
                                             description={event.description_event}
                                             image={babka}
-                                            link={'TEST_EVENT'}
+                                            link={'/test_event'}
                             />
                             <RecomendationCard title={event.short_event_name}
                                             description={'описание'}
