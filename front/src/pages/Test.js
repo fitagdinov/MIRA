@@ -1,5 +1,6 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
+import image from "../image/img.jpg"
 import { useDispatch } from 'react-redux';
 import {
     Button,
@@ -14,35 +15,38 @@ import {FaHeart, FaSearch} from "react-icons/fa";
 import {showEvents} from "../action/showEvents";
 import CategorySelector from "../components/CategorySelector";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
+import QACard from "../components/QACard";
 
 const Test = () => {
     const dispatch = useDispatch()
 
     return (
         <div>
-            <br/><br/>
+
+            <QACard question={'Вы дед'}/>
+
+            <br/>
             <div className={'text-center'}>
-                <h1> <FaHeart size={'20px'} style={{color: 'green', marginRight: '10px'}}/>
+                <h1>
                     Здесь найдутся занятия по душе
                     <FaHeart size={'20px'} style={{color: 'green', marginLeft: '10px'}}/>
                 </h1>
             </div>
-
+            {/*<div className={'text-center'}>*/}
+            {/*    <img style={{width: "10%"}} src={image} alt={'image'}/>*/}
+            {/*</div>*/}
             <br/>
             <div className={'text-center'} style={{marginLeft: '25%', width: '50%',fontSize: 22}}>
-                <ButtonGroup>
-                    <Button variant={'outline-success'} size={'lg'}>
-                        <b>Авторизация</b>
-                    </Button>
-                </ButtonGroup>
-
+                <Button variant={'outline-success'} size={'lg'}>
+                    <b>Авторизация</b>
+                </Button>
                 <br/>
                 <br/>
-
                 <h4 style={{color: '#363636'}}>
                     Авторизуйтесь, чтобы получить весь спектр возможностей
                     и воспользуйтесь личными рекомендациями
                 </h4>
+
             </div>
             <br/>
 
