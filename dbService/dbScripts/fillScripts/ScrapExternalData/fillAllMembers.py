@@ -1,12 +1,16 @@
 from dbService.dbScripts import addMemberScript
 import pandas as pd
 from tqdm import tqdm
+import os
 
 # 4 sec for filling 52000 lines
 if __name__ == '__main__':
-    members_df = pd.read_csv('../fileStorage/users.csv')
-    # print(members_df)
-    # print(members_df.columns)
+    if os.name == 'nt':
+        members_df = pd.read_csv('..\\fileStorage\\users.csv')
+    else:
+        members_df = pd.read_csv('../fileStorage/users.csv')
+    print(members_df)
+    print(members_df.columns)
     _grand_name = ['NONE' for _ in range(members_df.shape[0])]
     _grand_surname = ['NONE' for _ in range(members_df.shape[0])]
 

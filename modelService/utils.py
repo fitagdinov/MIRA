@@ -90,7 +90,7 @@ def get_top_n_events_for_grand(sys_id_grand: int, top_n=10):
     # print(events)
     idx = np.argsort([cos_dist(grand_emb,
                                np.array(event[1:])) for event in events])[::-1]
-    return idx[:top_n]
+    return [int(el[0]) for el in np.array(events)[(idx[:top_n])]]
 
 
 if __name__ == '__main__':

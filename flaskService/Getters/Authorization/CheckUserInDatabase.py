@@ -7,7 +7,7 @@ from flask_restful import Resource
 from ciso8601 import parse_datetime
 
 from marshmallow import Schema, fields
-
+import pytz
 
 class RequestGrandAuthorizationValidation(Schema):
     grand_external_id = fields.Integer(required=True, description="ID бабушки в формате mos.ru. Аналогично логину")
@@ -36,7 +36,7 @@ class GetGrandAuthorizationValidation(MethodResource, Resource):
         _test_grand_birth_date = None if '_test_grand_birth_date' not in kwargs else kwargs['_test_grand_birth_date']
         if not _test_grand_birth_date:
             grand_obj = get_request(f"""SELECT * FROM StaticMember WHERE EXTERNAL_ID_grand={grand_external_id} 
-            AND grand_birth_date={int(parse_datetime(grand_birth_date).timestamp())};""")
+            AND grand_birth_date={int(parse_datetime(grand_birth_date).replace(tzinfo=pytz.timezone('Europe/Moscow')).timestamp())};""")
         else:
             grand_obj = get_request(f"""SELECT * FROM StaticMember WHERE EXTERNAL_ID_grand={grand_external_id}
              AND grand_birth_date={_test_grand_birth_date}""")
