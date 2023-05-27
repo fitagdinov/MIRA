@@ -27,7 +27,8 @@ export default function Navibar (){
 
         return(
             <>
-                <Navbar style={{fontSize: '20px'}} collapseOnSelect expand='lg' bg='dark' variant="dark">
+                <Navbar style={{fontSize: '20px', position: 'sticky',
+                    top: '0', width: '100%'}} collapseOnSelect expand='lg' bg='dark' variant="dark">
                     <Navbar.Brand className="navbar-brand px-3">
                         <img style={{height: '50px'}} src={logo} alt={'Logo'}/> {auth.grand_sex}
                     </Navbar.Brand>
@@ -35,11 +36,12 @@ export default function Navibar (){
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className='mx-auto'>
                             <Nav.Link href={'/'}><FaHome/> Главная</Nav.Link>
-                            <Nav.Link href={'/recomendation'}><FaEye/> Рекомендации</Nav.Link>
                             <Nav.Link><FaSearch/> Расширеный поиск</Nav.Link>
+                            <Nav.Link href={'/recomendation'}> <FaEye/> Рекомендации </Nav.Link>
                             <Nav.Link><FaHistory/> Мои мероприятия </Nav.Link>
                             <Nav.Link><FaHeart/> Избранное</Nav.Link>
                         </Nav>
+
                         <Nav className="px-3">
                             <Button size={'lg'} variant={'success'} className="mr-2" onClick={handleShow}> Авторизация </Button>
                         </Nav>
