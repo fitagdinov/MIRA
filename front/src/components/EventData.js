@@ -1,7 +1,7 @@
 import {Button, Col, Container, Image, Row} from "react-bootstrap";
 import babka from '../image/images.jpeg';
 
-const EventData = () => {
+export default function EventData (){
     // const dispatch = useDispatch()
     // const events = useSelector( state => state.events )
     // useEffect(() => {
@@ -51,5 +51,3 @@ const EventData = () => {
     </Container>
     );
 };
-
-export default EventData;
