@@ -147,7 +147,7 @@ const QACard = () => {
                                     type='checkbox'
                                     id={option}
                                     style={{fontSize: '18px'}}
-                                    onChange={() => question1_1(key+3)}
+                                    onChange={() => question1_1(key)}
                                 />
                             </div>
                         ))}
@@ -197,7 +197,7 @@ const QACard = () => {
                                         type='checkbox'
                                         id={option}
                                         style={{fontSize: '18px'}}
-                                        onChange={() => question2_2(key+4)}
+                                        onChange={() => question2_2(key)}
                                     />
                                 </div>
                             ))}
@@ -243,7 +243,7 @@ const QACard = () => {
                                         type='checkbox'
                                         id={option}
                                         style={{fontSize: '18px'}}
-                                        onChange={() => question3_3(key+2)}
+                                        onChange={() => question3_3(key)}
                                     />
                                 </div>
                             ))}
@@ -290,7 +290,7 @@ const QACard = () => {
                                         type='checkbox'
                                         id={option}
                                         style={{fontSize: '18px'}}
-                                        onChange={() => question4_4(key+3)}
+                                        onChange={() => question4_4(key)}
                                     />
                                 </div>
                             ))}
@@ -338,7 +338,7 @@ const QACard = () => {
                                         type='checkbox'
                                         id={option}
                                         style={{fontSize: '18px'}}
-                                        onChange={() => question5_5(key+3)}
+                                        onChange={() => question5_5(key)}
                                     />
                                 </div>
                             ))}
