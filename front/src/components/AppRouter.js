@@ -25,6 +25,8 @@ const AppRouter = () => {
         // </Switch>
         <Routes>
             <Route path="/" element={<Home />}/>
+            {/* <Route path="/events/1" element={<Home />}/> */}
+            <Route path="/event/:event_id" element={<Event/>}/>
             <Route path="/recomendation" element={<Recomendation />}/>
             <Route path="/opros/1" element={<Opros />}/>
             <Route path="/opros/2" element={<OprosSecond />}/>

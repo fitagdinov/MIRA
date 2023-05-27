@@ -17,6 +17,5 @@ export const showAllEvents = () => {
     return async (dispatch) => {
         const response = await axios.get(`${API_URL}/all_events`) // шлем get запрос достаем ивент
         dispatch(setAllEvents(response.data)) // заполняем store таской на обновление данных данными по ивенту
-        console.log(response.data.linked_groups)
     }
 }
