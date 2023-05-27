@@ -158,6 +158,27 @@ creation_request += \
         foreign key (SYS_ID_grand) references NoOldMen.StaticMember (SYS_ID_grand)
             on update cascade on delete cascade
 )
+    comment 'вектор бабушки';
+
+"""
+
+creation_request += \
+"""
+create table NoOldMen.memberInitialEmbedding
+(
+    SYS_ID_grand    int  null,
+"""
+
+for embedding_vector in range(embedding_size):
+    creation_request += f"\tgrand_init_embedding_{embedding_vector} float null comment 'emb init_vector_{embedding_vector}',\n"
+creation_request += \
+"""
+    constraint memberInitialEmbedding_pk
+        unique (SYS_ID_grand),
+    constraint memberInitialEmbedding_memberStatic_null_fk
+        foreign key (SYS_ID_grand) references NoOldMen.StaticMember (SYS_ID_grand)
+            on update cascade on delete cascade
+)
     comment 'начальный вектор бабушки из опроса';
 
 """
