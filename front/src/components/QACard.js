@@ -4,7 +4,6 @@ import React, {useState}from 'react'
 
 const QACard = () => {
         const [show, setShow] = useState(false);
-
         const handleClose = () => setShow(false);
         const handleShow = () => setShow(true);
 
@@ -62,6 +61,7 @@ const QACard = () => {
                                     type='checkbox'
                                     id={option}
                                     style={{fontSize: '18px'}}
+                                    // onChange={this.}
                                 />
                             </div>
                         ))}

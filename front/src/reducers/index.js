@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import eventReducer from "./eventReducer";
 import allEventsReducer from "./allEventsReducer";
 import byEventsTypeReducer from "./byEventTypeReducer";
+import firstAnswerReducer from "./QaReducer";
 
 const rootReducer = combineReducers({ // главный редюсер, хранит в себе вс существующие
     repos: reposReducer,
@@ -14,8 +15,7 @@ const rootReducer = combineReducers({ // главный редюсер, хран
     events: eventReducer,
     allEvents: allEventsReducer,
     byTypeEvents: byEventsTypeReducer, 
-
-
+    firstAnswer: firstAnswerReducer,
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
