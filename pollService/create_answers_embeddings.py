@@ -81,4 +81,4 @@ q5 = np.array([q5_a1, q5_a2, q5_a3, q5_a4, q5_a5])
 columns = [f"answer_embedding_{i}" for i in range(embedding_size)]
 
 for i, q in enumerate([q1, q2, q3, q4, q5]):
-    pd.DataFrame(q, columns=columns).to_csv(f"q{i+1}.csv", index=False)
+    pd.DataFrame(q, columns=columns).to_csv(f"../modelService/q{i+1}.csv", index=False)
