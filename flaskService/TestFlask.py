@@ -18,6 +18,10 @@ from Getters import GetEventByIdList
 from Getters import SearchGroupLinkedToEventByEventSysID
 from Getters import GetGroupSchuedle
 
+
+# Mutable for members
+from Mutable import AddGrandPollResult
+
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
@@ -50,6 +54,7 @@ api.add_resource(SearchGroupLinkedToEventByEventSysID, "/search_group/by_event_s
 
 api.add_resource(GetGroupSchuedle, "/search_group/get_schedule", methods=['GET'])
 
+api.add_resource(AddGrandPollResult, '/member/add_poll_result', methods=['POST'])
 
 #
 docs.register(GetGrandAuthorizationValidation)
@@ -64,6 +69,8 @@ docs.register(GetSearchEventByType)
 docs.register(SearchGroupLinkedToEventByEventSysID)
 
 docs.register(GetGroupSchuedle)
+
+docs.register(AddGrandPollResult)
 
 if __name__ == '__main__':
     app.run(debug=True)

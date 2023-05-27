@@ -48,6 +48,18 @@ def addMemberScript(grand_ma_mos_id: List[int], date_of_registration: List[str],
     insert_query += ";"
     put_request(query=insert_query)
 
+    granny_system_ids = get_request(query=f"SELECT SYS_ID_grand FROM StaticMember WHERE EXTERNAL_ID_grand in {tuple(grand_ma_mos_id)}", execute_many=True)
+    granny_system_ids = [_[0] for _ in granny_system_ids]
+    insert_query = \
+        f"""
+        INSERT INTO NoOldMen.DynamicPollMember (SYS_ID_grand, PollWasPassed)
+        VALUES 
+        """
+    for i in range(len(grand_name)):
+        insert_query += f"({granny_system_ids[i]}, {False}),"
+    insert_query = insert_query[:-1]
+    insert_query += ";"
+    put_request(query=insert_query)
 
 if __name__ == '__main__':
     addMemberScript(

@@ -1,7 +1,7 @@
 import unittest
 from dbService import get_request
 
-TABLES_NEED_TO_BE = {('memberEmbedding',), ('EventGroupMap',), ('StaticEvent',), ('StaticMember',), ('StaticGroup',), ('EventEmbedding',), ('AttendanceGroup',), ('DynamicGroup',), ('StaticCiteEventID',)}
+TABLES_NEED_TO_BE = {('memberEmbedding',), ('EventGroupMap',), ('StaticEvent',), ('StaticMember',), ('StaticGroup',), ('EventEmbedding',), ('AttendanceGroup',), ('DynamicGroup',), ('StaticCiteEventID',), ('DynamicPollMember',), ('StaticPoolResult',)}
 
 
 class TestCorrectInitialize(unittest.TestCase):

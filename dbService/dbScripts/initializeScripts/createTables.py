@@ -139,6 +139,31 @@ create table NoOldMen.AttendanceGroup
             on update cascade on delete cascade
 )
     comment 'Таблица посещаемости групп бабушками';
+
+create table NoOldMen.DynamicPollMember
+(
+    SYS_ID_grand  int                not null comment 'Системный ID бабушки',
+    PollWasPassed bool default FALSE null comment 'Был ли пройден опрос',
+    constraint DynamicPollMember_pk
+        primary key (SYS_ID_grand),
+    constraint DynamicPollMember_StaticMember_null_fk
+        foreign key (SYS_ID_grand) references NoOldMen.StaticMember (SYS_ID_grand)
+            on update cascade on delete cascade
+)
+    comment 'Таблица показывающая проходила ли бабушка опрос';
+
+create table NoOldMen.StaticPoolResult
+(
+    SYS_ID_grand    int  not null comment 'системный id бабушки'
+        primary key,
+    selected_Events json not null comment 'Какие мероприятия выбрала бабушка во время опроса',
+    constraint StaticPoolResult_StaticMember_null_fk
+        foreign key (SYS_ID_grand) references NoOldMen.StaticMember (SYS_ID_grand)
+            on update cascade on delete cascade
+)
+    comment 'Результат прохождения опроса бабушкой';
+
+
 """
 
 creation_request += \
