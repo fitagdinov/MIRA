@@ -2,25 +2,23 @@ const SET_FIRST_ANSWER = "SET_FIRST_ANSWER"
 
 
 const defaultState = {
-    sport: 0,
-    theater: 0,
-    work: 0,
-    walk: 0,
-    hunting: 0,
-    excursions: 0,
-}
-// редюсер мероприятий 
+        grand_poll_passing: {
+            "question1": [0, 0, 0, 0 ,0, 0],
+            "question2": [0, 0, 0, 0, 0, 0, 0],
+            "question3": [0, 0, 0, 0],
+            "question4": [0, 0, 0, 0, 0],
+            "question5": [0, 0, 0, 0, 0],
+        },
+        grand_sys_id: 3,
+    }
+
 export default function firstAnswerReducer(state = defaultState, action) {
     switch (action.type) {
         case SET_FIRST_ANSWER:
             return {
                 ...state,
-                sport: action.server_answer.sport,
-                theater: action.server_answer.theater,
-                work: action.server_answer.work,
-                walk: action.server_answer.walk,
-                hunting: action.server_answer.hunting,
-                excursions: action.server_answer.excursions,
+                grand_poll_passing: action.server_answer,
+                grand_sys_id: action.server_answer
             }
         default:
             return state

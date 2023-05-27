@@ -39,9 +39,12 @@ const Test = () => {
             {/*</div>*/}
             <br/>
             <div className={'text-center'} style={{marginLeft: '25%', width: '50%',fontSize: 22}}>
-                <Button variant={'outline-success'} size={'lg'}>
-                    <b>Авторизация</b>
-                </Button>
+                <ButtonGroup>
+                    <Button variant={'outline-success'} size={'lg'}>
+                        <b>Авторизация</b>
+                    </Button>
+                </ButtonGroup>
+
                 <br/>
                 <br/>
 
@@ -95,7 +98,7 @@ const Test = () => {
                                                 description={event.description_event}
                                                 sys_event_id={event.sys_event_id}
                                                 // image={babka}
-                                                link={`/event/${event.sys_event_id}`
+                                                link={`/event/${event.sys_event_id}`            
                                             }
                                 />
                             </CardGroup>

@@ -20,7 +20,7 @@ class ResponseGrandAuthorizationValidation(Schema):
     grand_exist = fields.Boolean(required=True, desciption='Содержится ли бабушка в базе данных')
 
     # Optional Fields
-    grand_sys_id = fields.Boolean(required=True, desciption='Системный ID бабушки')
+    grand_sys_id = fields.Integer(required=False, desciption='Системный ID бабушки')
     grand_name = fields.String(required=False, default='None', description='Имя бабушки')
     grand_surname = fields.String(required=False, default='None', description='Фамилия бабушки')
     grand_sex = fields.String(required=False, description='Адрес бабушки')
@@ -46,9 +46,9 @@ class GetGrandAuthorizationValidation(MethodResource, Resource):
             grand_in_sys, grand_name, grand_surname, grand_sex, grand_address = \
                 grand_obj[0], grand_obj[4], grand_obj[5], grand_obj[6], grand_obj[7]
 
-            grand_poll_status = get_request(query=f"SELECT PollWasPassed FROM DynamicPollMember WHERE SYS_ID_grand={grand_in_sys}")
+            grand_poll_status = get_request(query=f"SELECT PollWasPassed FROM DynamicPollMember WHERE SYS_ID_grand={grand_in_sys}")[0]
             return {"grand_exist": grand_exist,
-                    "grand_in_sys": grand_in_sys,
+                    "grand_sys_id": grand_in_sys,
                     "grand_name": grand_name,
                     "grand_surname": grand_surname,
                     "grand_sex": grand_sex,

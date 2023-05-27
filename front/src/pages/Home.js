@@ -16,6 +16,7 @@ import { CardGroup } from 'react-bootstrap';
 import RecomendationCard from '../components/RecomendationCard';
 import { useState } from 'react';
 import { authUser } from '../action/auth';
+import { getAnswer } from '../action/setAnswers'
 
 
 const Home = () => {
@@ -34,12 +35,13 @@ const Home = () => {
         setShow(false) // закрывает окно авторизации
         dispatch(authUser(fio, birthDate)) // заполняем store таской на закгрузку данных и обновления state
     }
-    // useEffect(() => {
-    //     dispatch(showByTypeEvents('Для ума'))
-    //   }, []);
+    const results = useSelector(state => state.firstAnswer)
 
+    // console.log(results)
     return (
+
         <div>
+            {/* <Button onClick={() => dispatch(getAnswer(results.grand_poll_passing,results.grand_sys_id))}>TEST</Button> */}
             <br/><br/>
             <div className={'text-center'}>
                 <h1> <FaHeart size={'20px'} style={{color: 'green', marginRight: '10px'}}/>
@@ -140,7 +142,6 @@ const Home = () => {
             <br/>
 
             <CategorySelector />
-{console.log(isFetching)}
             <br/>
             <h1> {
                     isFetching === false
