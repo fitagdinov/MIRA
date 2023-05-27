@@ -27,12 +27,23 @@ const SearchSelector = () => {
 
     return (
         <Form size={'lg'} show={show} onHide={handleClose}>
-                <Form.Label>
+
+            <Form.Label>
+                <h4> Сортировка </h4>
+            </Form.Label>
+
+            <Form.Select style={{width: '100%'}} aria-label="Сортировать">
+                <option>по названию</option>
+                <option value="1">по дате</option>
+            </Form.Select>
+            <br/>
+
+                <Form.Label >
                     <h4> Формат </h4>
                 </Form.Label>
 
                 <Form.Group>
-                <ToggleButtonGroup type="checkbox" className="mb-2">
+                <ToggleButtonGroup size={'lg'} type="checkbox" className="mb-2">
                     <ToggleButton variant={'outline-success'} id="tbg-check-1" value={1}>
                         Очно
                     </ToggleButton>
