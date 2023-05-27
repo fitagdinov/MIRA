@@ -5,3 +5,4 @@ mysqlConfiguration:
     database: 'NoOldMen'
 
     embedding_size: 312
+    

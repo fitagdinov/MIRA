@@ -6,12 +6,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from "redux-thunk";
 import eventReducer from "./eventReducer";
 import allEventsReducer from "./allEventsReducer";
+import byEventsTypeReducer from "./byEventTypeReducer";
 
 const rootReducer = combineReducers({ // главный редюсер, хранит в себе вс существующие
     repos: reposReducer,
     authTest: authReducer,
     events: eventReducer,
     allEvents: allEventsReducer,
+    byTypeEvents: byEventsTypeReducer, 
 
 
 })
