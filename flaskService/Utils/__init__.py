@@ -1,3 +1,3 @@
 import flaskService.Utils.AvailableTags as TAGS
+from .Basic import *
 
-from flaskService.Utils.Basic import *
