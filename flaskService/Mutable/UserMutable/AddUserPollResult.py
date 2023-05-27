@@ -1,4 +1,4 @@
-from dbService import put_request
+from dbService import put_request, get_request
 from flaskService import TAGS
 
 from flask_apispec.views import MethodResource

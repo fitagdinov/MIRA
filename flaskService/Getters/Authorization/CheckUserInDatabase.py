@@ -23,7 +23,7 @@ class ResponseGrandAuthorizationValidation(Schema):
     grand_sys_id = fields.Integer(required=False, desciption='Системный ID бабушки')
     grand_name = fields.String(required=False, default='None', description='Имя бабушки')
     grand_surname = fields.String(required=False, default='None', description='Фамилия бабушки')
-    grand_sex = fields.String(required=False, description='Адрес бабушки')
+    grand_sex = fields.String(required=False, description='Пол бабушки')
     grand_address = fields.String(required=False, description='Адрес бабушки')
     grand_poll_status = fields.Boolean(required=False, description='Проходила ли бабушка опрос')
 

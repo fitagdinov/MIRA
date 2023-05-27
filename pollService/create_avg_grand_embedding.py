@@ -16,4 +16,4 @@ avg_emb = [get_request(
 
 columns = [f"avg_grand_embedding_{i}" for i in range(embedding_size)]
 
-pd.DataFrame(avg_emb, columns=columns).to_csv("avg_grand_embedding.csv", index=False)
+pd.DataFrame(avg_emb, columns=columns).to_csv("../dbService/dbScripts/fillScripts/fileStorage/avg_grand_embedding.csv", index=False)

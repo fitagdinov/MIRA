@@ -1,6 +1,7 @@
 from dbService.dbConfiguration import get_request, put_request
 import pandas as pd
 import numpy as np
+from getInitialEmbedding import getInitialEmbedding
 
 
 def cos_dist(a, b):
@@ -79,14 +80,20 @@ def get_group_info(sys_id_group: int) -> pd.DataFrame:
     return data
 
 
-def get_top_n_events_for_grand(sys_id_grand: int, top_n=10):
+def get_top_n_events_for_grand(sys_id_grand: int,
+                               top_n=10,
+                               offline_filter=False,
+                               online_filter=False,
+                               area_filter=False,):
+    query = f"""
+            SELECT * FROM NoOldMen.EventEmbedding 
+            """
+
     events = get_request(
-        query=f"""
-        SELECT * FROM NoOldMen.EventEmbedding;
-        """,
+        query=query,
         execute_many=True)
 
-    grand_emb = get_grand_embedding(sys_id_grand)
+    grand_emb = get_grand_embedding(sys_id_grand) + getInitialEmbedding(sys_id_grand)
     # print(events)
     idx = np.argsort([cos_dist(grand_emb,
                                np.array(event[1:])) for event in events])[::-1]
@@ -94,4 +101,7 @@ def get_top_n_events_for_grand(sys_id_grand: int, top_n=10):
 
 
 if __name__ == '__main__':
-    print(get_top_n_events_for_grand(48209))
+    print(get_top_n_events_for_grand(66968))
+
+# [894, 838, 854, 695, 689, 895, 73, 899, 228, 194]
+# [73, 894, 695, 689, 727, 228, 751, 688, 706, 37]
