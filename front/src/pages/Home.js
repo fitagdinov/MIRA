@@ -5,6 +5,7 @@ import {
     Form,
     InputGroup,
     Row,
+    Modal
 } from "react-bootstrap";
 import {FaHeart, FaSearch} from "react-icons/fa";
 import CategorySelector from '../components/CategorySelector'
@@ -13,10 +14,26 @@ import { useEffect } from 'react';
 import { showByTypeEvents } from '../action/showEvents';
 import { CardGroup } from 'react-bootstrap';
 import RecomendationCard from '../components/RecomendationCard';
+import { useState } from 'react';
+import { authUser } from '../action/auth';
+
 
 const Home = () => {
     const dispatch = useDispatch()
     const byEvent = useSelector(state => state.byTypeEvents)
+    const isFetching = useSelector(state => state.byTypeEvents.isFetching)
+    const [show, setShow] = useState(false) 
+    const [showOpros, setShowOpros] = useState(false)
+    const [fio, setFio] = useState(101387414) 
+    const [birthDate, setBirthDate] = useState('1937-02-17') 
+    // const [showOpros, setShowOpros] = useState(false)
+    const handleShow = () => setShow(true) 
+    const handleClose = () => setShow(false)
+    const handleShowOpros = (fio, birthDate) => { // хранит в себе 3 функции
+        setShowOpros(true) // открывает окно "пройдите опрос"
+        setShow(false) // закрывает окно авторизации
+        dispatch(authUser(fio, birthDate)) // заполняем store таской на закгрузку данных и обновления state
+    }
     // useEffect(() => {
     //     dispatch(showByTypeEvents('Для ума'))
     //   }, []);
@@ -34,10 +51,50 @@ const Home = () => {
             <br/>
             <div className={'text-center'} style={{marginLeft: '25%', width: '50%',fontSize: 22}}>
                 <ButtonGroup>
-                    <Button variant={'outline-success'} size={'lg'}>
+                    <Button variant={'outline-success'}
+                            size={'lg'}
+                            onClick={handleShow}>
                         <b>Авторизация</b>
                     </Button>
                 </ButtonGroup>
+
+                <Modal size={'lg'} show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Пожалуйста введите свое ФИО и дату рождения для авторизации
+                        </Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group controlId="fromBasicEmail">
+                                <Form.Label>ФИО</Form.Label>
+                                <Form.Control
+                                    className={'name'}
+                                    placeholder="ФИО"
+                                    value={fio}
+                                    onChange={(e) => setFio(e.target.value)}/>
+
+                            </Form.Group>
+                            <Form.Group controlId="fromBasicEmail">
+                                <Form.Label>Дата рождения</Form.Label>
+                                <Form.Control
+                                    className={'date'}
+                                    placeholder="Дата рождения"
+                                    value={birthDate}
+                                    onChange={(e) => setBirthDate(e.target.value)}/>
+                            </Form.Group>
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer >
+                        <Button
+                            className={'mx-auto'}
+                            variant={'success'}
+                            onClick={() => {handleShowOpros(fio, birthDate);}} // при нажатии вызываем функцию происходит действи (описано выше)
+                        >
+                            Готово</Button>
+                    </Modal.Footer>
+                </Modal>
 
                 <br/>
                 <br/>
@@ -83,9 +140,12 @@ const Home = () => {
             <br/>
 
             <CategorySelector />
-
+{console.log(isFetching)}
             <br/>
-            <h1>{byEvent.linked_groups.map((event, k) =>
+            <h1> {
+                    isFetching === false
+                    ?
+                    byEvent.linked_groups.map((event, k) =>
                     <div key={k}>
                             <CardGroup className='card-group mt-3'>
                                 <RecomendationCard title={event.short_event_name}
@@ -97,6 +157,8 @@ const Home = () => {
                                 />
                             </CardGroup>
                     </div>)
+                    :
+                    <div>Загруза</div>
                 }
             </h1>
 
