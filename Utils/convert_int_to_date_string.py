@@ -13,4 +13,4 @@ def database_convert_int_to_string(int_list: List[int], with_time=True):
     print(converted)
 
 if __name__ == '__main__':
-    database_convert_int_to_string([-325391400], False)
+    database_convert_int_to_string([-433305000], False)
