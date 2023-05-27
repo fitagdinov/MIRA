@@ -19,9 +19,14 @@ def getInitialEmbedding(sys_user_id):
         query=f"""SELECT {grand_emb_cols} FROM NoOldMen.memberEmbedding""",
         execute_many=False
     ))
-
-    q = [pd.read_csv(f"q{i+1}.csv").values for i in range(number_of_questions)]
-
+    if os.name == 'nt':
+        default_path = '\\'.join(__file__.split(']]')[:-1])
+    else:
+        default_path = '/'.join(__file__.split('/')[:-1])
+    if os.name == 'nt':
+        q = [pd.read_csv(f"{default_path}\\q{i+1}.csv").values for i in range(number_of_questions)]
+    else:
+        q = [pd.read_csv(f"{default_path}/q{i + 1}.csv").values for i in range(number_of_questions)]
     pool_was_passed = get_request(
         query=f"""SELECT PollWasPassed FROM NoOldMen.DynamicPollMember WHERE SYS_ID_grand={sys_user_id}""",
         execute_many=False
