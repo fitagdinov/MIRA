@@ -12,7 +12,7 @@ if __name__ == '__main__':
 
     even_emb_cols = ""
     for i in range(embedding_size):
-        even_emb_cols += f"SUM(d.event_embedding_vector_{i}), "
+        even_emb_cols += f"AVG(d.event_embedding_vector_{i}), "
     even_emb_cols = even_emb_cols[:-2]
 
     em = get_request(
@@ -21,7 +21,6 @@ if __name__ == '__main__':
     )
 
     emb_dict = dict([(el[0], np.array(el[1:])) for el in em])
-
 
     for user_id in tqdm.tqdm(all_users):
 
@@ -50,6 +49,3 @@ if __name__ == '__main__':
             VALUES ({_id},{vals});
             """
         )
-
-
-
