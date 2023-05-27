@@ -25,6 +25,7 @@ class ResponseGrandAuthorizationValidation(Schema):
     grand_surname = fields.String(required=False, default='None', description='Фамилия бабушки')
     grand_sex = fields.String(required=False, description='Адрес бабушки')
     grand_address = fields.String(required=False, description='Адрес бабушки')
+    grand_poll_status = fields.Boolean(required=False, description='Проходила ли бабушка опрос')
 
 
 @doc(tags=[TAGS.auth_tag])
@@ -44,12 +45,15 @@ class GetGrandAuthorizationValidation(MethodResource, Resource):
             grand_exist = True
             grand_in_sys, grand_name, grand_surname, grand_sex, grand_address = \
                 grand_obj[0], grand_obj[4], grand_obj[5], grand_obj[6], grand_obj[7]
+
+            grand_poll_status = get_request(query=f"SELECT PollWasPassed FROM DynamicPollMember WHERE SYS_ID_grand={grand_in_sys}")
             return {"grand_exist": grand_exist,
                     "grand_in_sys": grand_in_sys,
                     "grand_name": grand_name,
                     "grand_surname": grand_surname,
                     "grand_sex": grand_sex,
-                    "grand_address": grand_address}, 200
+                    "grand_address": grand_address,
+                    "grand_poll_status": grand_poll_status}, 200
         else:
             grand_exist = False
             return {"grand_exist": grand_exist}, 200
