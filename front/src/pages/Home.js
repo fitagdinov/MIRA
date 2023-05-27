@@ -19,10 +19,8 @@ const Home = () => {
         dispatch(authUser(fio, birthDate))
       }, []);
 
-    if (auth.grand_exist === true){
         return (
             <>
-                
                 <h1>{allEvents.map((event, k) =>
                     <div key={k}>
                             <CardGroup className='card-group mt-3'>
@@ -39,7 +37,6 @@ const Home = () => {
 
             </>
         );
-    }
 };
 
 export default Home;
