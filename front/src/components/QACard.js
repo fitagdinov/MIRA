@@ -1,12 +1,97 @@
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
 import React, {useState}from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import { getAnswer } from "../action/setAnswers";
 
 
 const QACard = () => {
         const [show, setShow] = useState(false);
         const handleClose = () => setShow(false);
         const handleShow = () => setShow(true);
-
+        const [grandSysId, setGrandSysId] = useState(localStorage.getItem('grandSysId'))
+        const dispatch = useDispatch()
+        let results = useSelector(state => state.firstAnswer)
+        results.grand_sys_id = grandSysId
+        const question1 = (k) => {
+            if (results.grand_poll_passing.question1[k] === 0){
+                results.grand_poll_passing.question1[k] = 1
+            }
+            else {
+                results.grand_poll_passing.question1[k] = 0
+            }
+        }
+        const question1_1 = (k) => {
+            if (results.grand_poll_passing.question1[k] === 0){
+                results.grand_poll_passing.question1[k] = 1
+            }
+            else {
+                results.grand_poll_passing.question1[k] = 0
+            }
+        }
+        const question2 = (k) => {
+            if (results.grand_poll_passing.question2[k] === 0){
+                results.grand_poll_passing.question2[k] = 1
+            }
+            else {
+                results.grand_poll_passing.question2[k] = 0
+            }
+        }
+        const question2_2 = (k) => {
+            if (results.grand_poll_passing.question2[k] === 0){
+                results.grand_poll_passing.question2[k] = 1
+            }
+            else {
+                results.grand_poll_passing.question2[k] = 0
+            }
+        }
+        const question3 = (k) => {
+            if (results.grand_poll_passing.question3[k] === 0){
+                results.grand_poll_passing.question3[k] = 1
+            }
+            else {
+                results.grand_poll_passing.question3[k] = 0
+            }
+        }
+        const question3_3 = (k) => {
+            if (results.grand_poll_passing.question3[k] === 0){
+                results.grand_poll_passing.question3[k] = 1
+            }
+            else {
+                results.grand_poll_passing.question3[k] = 0
+            }
+        }
+        const question4 = (k) => {
+            if (results.grand_poll_passing.question4[k] === 0){
+                results.grand_poll_passing.question4[k] = 1
+            }
+            else {
+                results.grand_poll_passing.question4[k] = 0
+            }
+        }
+        const question4_4 = (k) => {
+            if (results.grand_poll_passing.question4[k] === 0){
+                results.grand_poll_passing.question4[k] = 1
+            }
+            else {
+                results.grand_poll_passing.question4[k] = 0
+            }
+        }
+        const question5 = (k) => {
+            if (results.grand_poll_passing.question5[k] === 0){
+                results.grand_poll_passing.question5[k] = 1
+            }
+            else {
+                results.grand_poll_passing.question5[k] = 0
+            }
+        }
+        const question5_5 = (k) => {
+            if (results.grand_poll_passing.question5[k] === 0){
+                results.grand_poll_passing.question5[k] = 1
+            }
+            else {
+                results.grand_poll_passing.question5[k] = 0
+            }
+        }
         return (
             <>
             <Button variant="primary" onClick={handleShow}>
@@ -37,14 +122,15 @@ const QACard = () => {
                         <Col md={5}>
                         {['занятие спортом и физкультурой',
                             'походы в театр, музеи, выставки',
-                            'работа по дому и огороду'].map((option) => (
-                            <div className="mb-3">
+                            'работа по дому и огороду'].map((option, key) => (
+                            <div className="mb-3" key={key}>
                                 <Form.Check
                                     label={option}
                                     name="group1"
                                     type='checkbox'
                                     id={option}
                                     style={{fontSize: '18px'}}
+                                    onChange={() => question1(key)}
                                 />
                             </div>
                         ))}
@@ -53,15 +139,15 @@ const QACard = () => {
                         <Col md={5}>
                         {['гулять в парках и на природе',
                             'рыбалка и охота',
-                            'ходить на экскурсии'].map((option) => (
-                            <div className="mb-3">
+                            'ходить на экскурсии'].map((option, key) => (
+                            <div className="mb-3" key={key}>
                                 <Form.Check
                                     label={option}
                                     name="group1"
                                     type='checkbox'
                                     id={option}
                                     style={{fontSize: '18px'}}
-                                    // onChange={this.}
+                                    onChange={() => question1_1(key+3)}
                                 />
                             </div>
                         ))}
@@ -86,14 +172,15 @@ const QACard = () => {
                             {['образование и наука',
                                 'искусство и гуманитарные науки',
                                 'сфера обслуживания',
-                                'техническая сфера'].map((option) => (
-                                <div className="mb-3">
+                                'техническая сфера'].map((option, key) => (
+                                <div className="mb-3" key={key}>
                                     <Form.Check
                                         label={option}
                                         name="group1"
                                         type='checkbox'
                                         id={option}
                                         style={{fontSize: '18px'}}
+                                        onChange={() => question2(key)}
                                     />
                                 </div>
                             ))}
@@ -102,14 +189,15 @@ const QACard = () => {
                         <Col md={5}>
                             {['медицина и здравоохранение',
                                 'служба в военных структурах и внутренних органах',
-                                'спортивная сфера'].map((option) => (
-                                <div className="mb-3">
+                                'спортивная сфера'].map((option, key) => (
+                                <div className="mb-3" key={key}>
                                     <Form.Check
                                         label={option}
                                         name="group1"
                                         type='checkbox'
                                         id={option}
                                         style={{fontSize: '18px'}}
+                                        onChange={() => question2_2(key+4)}
                                     />
                                 </div>
                             ))}
@@ -131,14 +219,15 @@ const QACard = () => {
                         <Col md={1}/>
                         <Col md={5}>
                             {['выпуски новостей, док. фильмы, интеллектуальные телевикторины',
-                                'танцевальные и музыкальные'].map((option) => (
-                                <div className="mb-3">
+                                'танцевальные и музыкальные'].map((option, key) => (
+                                <div className="mb-3" key={key}>
                                     <Form.Check
                                         label={option}
                                         name="group1"
                                         type='checkbox'
                                         id={option}
                                         style={{fontSize: '18px'}}
+                                        onChange={() => question3(key)}
                                     />
                                 </div>
                             ))}
@@ -146,14 +235,15 @@ const QACard = () => {
 
                         <Col md={5}>
                             {['спортивные трансляции и передачи про здоровье',
-                                'кулинарные шоу, передачи про ремонт, садоводство и т.п.'].map((option) => (
-                                <div className="mb-3">
+                                'кулинарные шоу, передачи про ремонт, садоводство и т.п.'].map((option, key) => (
+                                <div className="mb-3" key={key}>
                                     <Form.Check
                                         label={option}
                                         name="group1"
                                         type='checkbox'
                                         id={option}
                                         style={{fontSize: '18px'}}
+                                        onChange={() => question3_3(key+2)}
                                     />
                                 </div>
                             ))}
@@ -176,14 +266,15 @@ const QACard = () => {
                         <Col md={5}>
                             {['новостные газеты и статьи',
                                 'модные журналы',
-                                'спортивные статьи и новости'].map((option) => (
-                                <div className="mb-3">
+                                'спортивные статьи и новости'].map((option,key) => (
+                                <div className="mb-3" key={key}>
                                     <Form.Check
                                         label={option}
                                         name="group1"
                                         type='checkbox'
                                         id={option}
                                         style={{fontSize: '18px'}}
+                                        onChange={() => question4(key)}
                                     />
                                 </div>
                             ))}
@@ -191,14 +282,15 @@ const QACard = () => {
 
                         <Col md={5}>
                             {['художественная литература',
-                                'научно-популярная литература'].map((option) => (
-                                <div className="mb-3">
+                                'научно-популярная литература'].map((option, key) => (
+                                <div className="mb-3" key={key}>
                                     <Form.Check
                                         label={option}
                                         name="group1"
                                         type='checkbox'
                                         id={option}
                                         style={{fontSize: '18px'}}
+                                        onChange={() => question4_4(key+3)}
                                     />
                                 </div>
                             ))}
@@ -221,14 +313,15 @@ const QACard = () => {
                         <Col md={5}>
                             {['занятие спортом и физкультурой',
                                 'танцевальные и музыкальные занятия',
-                                'экскурсии и прогулки на свежем воздухе'].map((option) => (
-                                <div className="mb-3">
+                                'экскурсии и прогулки на свежем воздухе'].map((option, key) => (
+                                <div className="mb-3" key={key}>
                                     <Form.Check
                                         label={option}
                                         name="group1"
                                         type='checkbox'
                                         id={option}
                                         style={{fontSize: '18px'}}
+                                        onChange={() => question5(key)}
                                     />
                                 </div>
                             ))}
@@ -237,14 +330,15 @@ const QACard = () => {
 
                         <Col md={5}>
                             {['интеллектуальные игры и викторины',
-                                'искусство и рукоделие'].map((option) => (
-                                <div className="mb-3">
+                                'искусство и рукоделие'].map((option, key) => (
+                                <div className="mb-3" key={key}>
                                     <Form.Check
                                         label={option}
                                         name="group1"
                                         type='checkbox'
                                         id={option}
                                         style={{fontSize: '18px'}}
+                                        onChange={() => question5_5(key+3)}
                                     />
                                 </div>
                             ))}
@@ -253,7 +347,10 @@ const QACard = () => {
                     </Row>
                     </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success" type="submit" size={'lg'}>
+                    <Button variant="success"
+                            type="submit"
+                            size={'lg'}
+                            onClick={() => dispatch(getAnswer(results))}>
                         Готово
                     </Button>
                 </Modal.Footer>
