@@ -1,7 +1,6 @@
-import {Button, Dropdown, Form, FormCheck, FormGroup, InputGroup, ToggleButtonGroup} from "react-bootstrap";
+import {Button, Form, FormGroup, InputGroup, ToggleButtonGroup} from "react-bootstrap";
 import React, {useState}from 'react'
 import ToggleButton from "react-bootstrap/ToggleButton";
-import DropdownToggle from "react-bootstrap/DropdownToggle";
 
 
 const SearchSelector = () => {
@@ -9,21 +8,21 @@ const SearchSelector = () => {
 
     const handleClose = () => setShow(false);
     let categories1 = ["игры", "языки"];
-    let categories2 = [["игры", "языки"], ["игры", "языки"]]
+    // let categories2 = [["игры", "языки"], ["игры", "языки"]]
 
-    function checkBox(list) {
-        return (
-            list.map((item) => (
-                    <Form.Check
-                        label={item}
-                        name={item}
-                        type='checkbox'
-                        id={item}
-                        style={{fontSize: '18px'}}
-                    />
-            ))
-        );
-    }
+    // function checkBox(list) {
+    //     return (
+    //         list.map((item) => (
+    //                 <Form.Check
+    //                     label={item}
+    //                     name={item}
+    //                     type='checkbox'
+    //                     id={item}
+    //                     style={{fontSize: '18px'}}
+    //                 />
+    //         ))
+    //     );
+    // }
 
     return (
         <Form size={'lg'} show={show} onHide={handleClose}>
