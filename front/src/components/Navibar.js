@@ -27,7 +27,7 @@ export default function Navibar (){
 
         return(
             <>
-                <Navbar style={{fontSize: '20px', position: 'sticky',
+                <Navbar style={{fontSize: '20px', position: 'sticky', zIndex: 100,
                     top: '0', width: '100%'}} collapseOnSelect expand='lg' bg='dark' variant="dark">
                     <Navbar.Brand className="navbar-brand px-3">
                         <img style={{height: '50px'}} src={logo} alt={'Logo'}/> {auth.grand_sex}
