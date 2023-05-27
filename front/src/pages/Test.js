@@ -1,24 +1,26 @@
 import React from 'react';
-import Nav from 'react-bootstrap/Nav';
-import image from "../image/img.jpg"
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     Button,
-    ButtonToolbar, Card, CardGroup, Col,
     Form,
     InputGroup,
     Row,
-    ToggleButton,
-    ToggleButtonGroup
 } from "react-bootstrap";
 import {FaHeart, FaSearch} from "react-icons/fa";
-import {showEvents} from "../action/showEvents";
-import CategorySelector from "../components/CategorySelector";
+import CategorySelector from '../components/CategorySelector'
 import ButtonGroup from "react-bootstrap/ButtonGroup";
+import { useEffect } from 'react';
+import { showByTypeEvents } from '../action/showEvents';
+import { CardGroup } from 'react-bootstrap';
+import RecomendationCard from '../components/RecomendationCard';
 import QACard from "../components/QACard";
 
 const Test = () => {
     const dispatch = useDispatch()
+    const byEvent = useSelector(state => state.byTypeEvents)
+    // useEffect(() => {
+    //     dispatch(showByTypeEvents('Для ума'))
+    //   }, []);
 
     return (
         <div>
@@ -42,11 +44,11 @@ const Test = () => {
                 </Button>
                 <br/>
                 <br/>
+
                 <h4 style={{color: '#363636'}}>
                     Авторизуйтесь, чтобы получить весь спектр возможностей
                     и воспользуйтесь личными рекомендациями
                 </h4>
-
             </div>
             <br/>
 
@@ -83,73 +85,23 @@ const Test = () => {
             </div>
             <br/>
 
-            <CategorySelector/>
-
-            {/*<Row className={ 'text-center'}>*/}
-            {/*    <Col sm={1}/>*/}
-            {/*    <Col sm={10}>*/}
-            {/*        <CardGroup className='card-group'>*/}
-            {/*            <Card style={{width: "18rem"}}>*/}
-            {/*                <Card.Body className={'text-center'}>*/}
-            {/*                    <div className={'item-margin-sm'}>*/}
-            {/*                        <Button size={'lg'} variant='outline-success'*/}
-            {/*                                href={'/template'}*/}
-            {/*                        > <b>Для ума</b>*/}
-            {/*                        </Button>*/}
-            {/*                    </div>*/}
-
-            {/*                    <Card.Text>*/}
-            {/*                        <i style={{fontSize: 18}}>*/}
-            {/*                            Интеллектуальные игры и образовательные мероприятия.*/}
-            {/*                            Они предназначены для расширения знаний и взаимопонимания отдельных лиц в различных областях.*/}
-            {/*                        </i>*/}
-            {/*                    </Card.Text>*/}
-            {/*                </Card.Body>*/}
-            {/*            </Card>*/}
-
-
-            {/*            <Card style={{width: "18rem"}}>*/}
-            {/*                <Card.Body className={'text-center'}>*/}
-            {/*                    <div className={'item-margin-sm'}>*/}
-            {/*                        <Button size={'lg'} variant='outline-success'*/}
-            {/*                                href={'/template'}*/}
-            {/*                        ><b> Для тела</b>*/}
-            {/*                        </Button>*/}
-            {/*                    </div>*/}
-
-            {/*                    <Card.Text>*/}
-            {/*                        <i style={{fontSize: 18}}>*/}
-            {/*                            Групповые занятия фитнесом и приключения на свежем воздухе.*/}
-            {/*                            Эти мероприятия направлены на продвижение здорового образа жизни и улучшение физического самочувствия.*/}
-            {/*                        </i>*/}
-            {/*                    </Card.Text>*/}
-            {/*                </Card.Body>*/}
-            {/*            </Card>*/}
-
-
-            {/*            <Card style={{width: "18rem"}}>*/}
-            {/*                <Card.Body className={'text-center'}>*/}
-            {/*                    <div className={'item-margin-sm'}>*/}
-            {/*                        <Button size={'lg'} variant='outline-success'*/}
-            {/*                                href={'/template'}*/}
-            {/*                        > <b>Для души</b>*/}
-            {/*                        </Button>*/}
-            {/*                    </div>*/}
-
-            {/*                    <Card.Text>*/}
-            {/*                        <i style={{fontSize: 18}}>*/}
-            {/*                            Медитация, творчество и семинары по осознанности.*/}
-            {/*                            Эти мероприятия направлены на духовный и эмоциональный рост, а также достижение внутреннего покоя.*/}
-            {/*                        </i>*/}
-            {/*                    </Card.Text>*/}
-            {/*                </Card.Body>*/}
-            {/*            </Card>*/}
-            {/*        </CardGroup>*/}
-            {/*    </Col>*/}
-            {/*    <Col sm={1}/>*/}
-            {/*</Row>*/}
+            <CategorySelector />
 
             <br/>
+            <h1>{byEvent.linked_groups.map((event, k) =>
+                    <div key={k}>
+                            <CardGroup className='card-group mt-3'>
+                                <RecomendationCard title={event.short_event_name}
+                                                description={event.description_event}
+                                                sys_event_id={event.sys_event_id}
+                                                // image={babka}
+                                                link={`/event/${event.sys_event_id}`
+                                            }
+                                />
+                            </CardGroup>
+                    </div>)
+                }
+            </h1>
 
 
         </div>

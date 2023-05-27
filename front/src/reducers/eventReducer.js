@@ -9,7 +9,7 @@ const defaultState = {
     level2_event: "",
     level3_event: "",
     short_event_name: "",
-    sys_event_id: 0
+    sys_event_id: 0,
 }
 // редюсер мероприятий 
 export default function eventReducer(state = defaultState, action) {
@@ -24,7 +24,7 @@ export default function eventReducer(state = defaultState, action) {
                 level2_event: action.server_answer.level2_event,
                 level3_event: action.server_answer.level3_event,
                 short_event_name: action.server_answer.short_event_name,
-                sys_event_id: action.server_answer.sys_event_id
+                sys_event_id: action.server_answer.sys_event_id,
             }
         default:
             return state
@@ -34,4 +34,5 @@ export default function eventReducer(state = defaultState, action) {
 
 // ответ от сервера = event
 export const setEvent = (event) => ({type:SET_EVENT, server_answer:event})
+
 

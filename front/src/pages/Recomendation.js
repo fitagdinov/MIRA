@@ -18,7 +18,6 @@ const Recomendation = () => {
         dispatch(showEvents(1));
         dispatch(authUser(localStorage.getItem('fio'), localStorage.getItem('birthDate'))) // хард код для авторизации
       }, []);
-    if (auth.grand_exist == true) {
         return (
             <>
                 <Row>
@@ -117,11 +116,6 @@ const Recomendation = () => {
 
                 // <Link >Opros</Link>
         );
-    } else {
-        return (
-            <div>lox {localStorage.getItem('isAuth')}</div>
-        );
-    }
 };
 
 export default Recomendation;
