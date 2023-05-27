@@ -1,1 +1,1 @@
-from Utils import TAGS
+from .Utils import TAGS

@@ -1,7 +1,7 @@
 from dbService.dbConfiguration import get_request, put_request
 import pandas as pd
 import numpy as np
-from getInitialEmbedding import getInitialEmbedding
+from .getInitialEmbedding import getInitialEmbedding
 
 
 def cos_dist(a, b):
@@ -101,7 +101,7 @@ def get_top_n_events_for_grand(sys_id_grand: int,
 
 
 if __name__ == '__main__':
-    print(get_top_n_events_for_grand(66968))
+    print(get_top_n_events_for_grand(2))
 
 # [894, 838, 854, 695, 689, 895, 73, 899, 228, 194]
 # [73, 894, 695, 689, 727, 228, 751, 688, 706, 37]
