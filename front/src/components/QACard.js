@@ -1,5 +1,5 @@
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
-import React, {useEffect, useState}from 'react'
+import React, { useState}from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { getAnswer } from "../action/setAnswers";
 
@@ -7,7 +7,7 @@ import { getAnswer } from "../action/setAnswers";
 const QACard = () => {
         const [show, setShow] = useState(false);
         const handleClose = () => setShow(false);
-        const handleShow = () => setShow(true);
+        // const handleShow = () => setShow(true);
         const dispatch = useDispatch()
         let results = useSelector(state => state.firstAnswer)
         results.grand_sys_id = localStorage.getItem('grandSysId')

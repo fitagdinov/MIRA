@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {Card, Button} from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import '../styles/Opros.css';
-import { useSelector } from 'react-redux';
 
 export default class OprosCard extends React.Component {
     render() {
