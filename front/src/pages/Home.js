@@ -157,9 +157,9 @@ const Home = () => {
             <br/>
             <div className={'text-center'}>
                 <h1>
-                {localStorage.getItem('isAuth') === true ? <>хуй</> : <>моча</>}
+                {/* {byBeautyEvent ? <>хуй</> : <>моча</>} */}
                 <CardGroup className='card-group mt-3'>
-                    <RecomendationCard title={""}
+                    <RecomendationCard title={byBeautyEvent.short_event_name}
                             description={byBeautyEvent.description_event}
                             sys_event_id={byBeautyEvent.sys_event_id}
                             link={`/event/${byBeautyEvent.sys_event_id}`            

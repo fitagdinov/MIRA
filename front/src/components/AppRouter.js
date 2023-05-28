@@ -3,10 +3,11 @@ import Home from "../pages/Home"
 import {Routes, Route} from 'react-router-dom'
 import Event from "../pages/Event";
 import Recomendation from '../pages/Recomendation';
-import Test from "../pages/Test";
 import Search from '../pages/Search';
 import QA from '../pages/QA';
-import TestRecomendation from '../pages/TestRecomendations';
+import Groups from '../pages/Groups';
+import GroupModal from '../pages/GroupModal';
+
 
 
 
@@ -23,12 +24,13 @@ const AppRouter = () => {
         // </Switch>
         <Routes>
             <Route path="/" element={<Home />}/>
-            <Route path="/TestRecomendation" element={<TestRecomendation />}/>
             <Route path="/QA" element={<QA />}/>
+            <Route path="/groupmodal" element={<GroupModal />}/>
+            <Route path="/groups/:sys_event_id" element={<Groups/>}/>
+
             <Route path="/event/:event_id" element={<Event/>}/>
             <Route path="/search" element={<Search />}/>
             <Route path="/recomendation" element={<Recomendation />}/>
-            <Route path="/test_event" element={<Event />}/>
         </Routes>
     );
 };

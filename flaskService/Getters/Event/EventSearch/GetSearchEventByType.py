@@ -12,10 +12,12 @@ from flaskService.Getters.Utils import SmallEventCardDescription, AvailableTypes
 
 class RequestGetSearchEventByType(Schema):
     event_level_3 = fields.String(required=True, description="Для ума | Для тела | Для души")
+    format_ = fields.String(required=False, default="All", description="формат мероприятия")
 
 
 class ResponseGetSearchEventByType(Schema):
     number_of_events = fields.Integer(required=True, default=None, description='Сколько есть мероприятий')
+    format_ = fields.String(required=False, default="All", description="формат мероприятия")
     linked_groups = fields.List(fields.Nested(SmallEventCardDescription, required=True), required=True, description='Список удовлетворяющих мероприятий')
 
 
@@ -23,11 +25,12 @@ class ResponseGetSearchEventByType(Schema):
 class GetSearchEventByType(MethodResource, Resource):
     @marshal_with(ResponseGetSearchEventByType)
     @use_kwargs(RequestGetSearchEventByType, location='query')
-    def get(self, event_level_3):
+    def get(self, event_level_3, format_="All"):
         linked_groups_list = []
         scrap_all_events = get_request(query=f"SELECT * FROM StaticEvent WHERE event_level_3='{str(AvailableTypes.convert_any_to_enum(event_level_3))}'", execute_many=True)
         beauty_codes = get_request(query=f"SELECT * FROM StaticCiteEventID WHERE CITE_ID_event in {tuple([_[2] for _ in scrap_all_events])}", execute_many=True)
         beauty_codes = [_[1] for _ in beauty_codes]
+
         for num, event in enumerate(scrap_all_events):
             linked_groups_list.append(
                 SmallEventCardDescription.constructor(
@@ -41,7 +44,18 @@ class GetSearchEventByType(MethodResource, Resource):
                     level3_event=event[7]
                 )
             )
+
+        if format_ not in ["All", "Online", "Offline"]:
+            format_ = "All"
+
+        if format_ == "Online":
+            linked_groups_list = [event for event in linked_groups_list if "онлайн" in event["short_event_name"].lower()]
+        elif format_ == "Offline":
+            linked_groups_list = [event for event in linked_groups_list if "онлайн" not in event["short_event_name"].lower()]
+
+
         return {
             "number_of_events": len(scrap_all_events),
-            "linked_groups": linked_groups_list
+            "linked_groups": linked_groups_list,
+            "format_": format_
         }

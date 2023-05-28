@@ -1,2 +1,4 @@
 from .MakeGeneralRecommendation import MakeGeneralRecommendation
 from .MakeHistoryBasedRecomendation import MakeHistoryBasedRecommendation
+from .MakeNewBasedRecommendation import MakeNewBasedRecommendation
+from .MakeSimilarBasedRecomendation import MakeSimilarBasedRecommendation
