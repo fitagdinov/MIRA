@@ -48,7 +48,7 @@ def scrap_coords(_in):
 
 if __name__ == '__main__':
     all_grans = get_request(query=f"SELECT * FROM StaticMember", execute_many=True)
-    get_strings = list(map(lambda x: make_request_string(x[-1]), all_grans[:25]))
+    get_strings = list(map(lambda x: make_request_string(x[-1]), all_grans))
     results = []
     async def main():
         async with aiohttp.ClientSession() as session:
