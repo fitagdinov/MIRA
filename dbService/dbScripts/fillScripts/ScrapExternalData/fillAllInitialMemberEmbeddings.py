@@ -1,3 +1,5 @@
+import warnings
+
 import numpy as np
 import pandas as pd
 import os
@@ -45,10 +47,15 @@ if __name__ == '__main__':
             )[0]
 
             events = json.loads(events_json)
-            mask_questions = [events[f"question{i+1}"] for i in range(number_of_questions)]
-
+            try:
+                mask_questions = [events[f"question{i+1}"] for i in range(number_of_questions)]
+            except KeyError:
+                warnings.warn("Old format pool keys. Unable to convert to mask")
             for i in range(number_of_questions):
-                init_emb += (np.array(q[i]).T * np.array(mask_questions[i])).T.sum(axis=0)
+                try:
+                    init_emb += (np.array(q[i]).T * np.array(mask_questions[i])).T.sum(axis=0)
+                except:
+                    continue
         init_emb = str(init_emb.astype(float).tolist())[1:-1]
 
         put_request(
