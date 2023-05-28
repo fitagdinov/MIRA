@@ -1,1 +1,2 @@
 from .MakeGeneralRecommendation import MakeGeneralRecommendation
+from .MakeHistoryBasedRecomendation import MakeHistoryBasedRecommendation
