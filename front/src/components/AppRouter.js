@@ -7,6 +7,7 @@ import Search from '../pages/Search';
 import QA from '../pages/QA';
 import Groups from '../pages/Groups';
 import GroupModal from '../pages/GroupModal';
+import ModalRec from '../pages/RecModal';
 
 
 
@@ -26,6 +27,7 @@ const AppRouter = () => {
             <Route path="/" element={<Home />}/>
             <Route path="/QA" element={<QA />}/>
             <Route path="/groupmodal" element={<GroupModal />}/>
+            <Route path="/modalrec" element={<ModalRec />}/>
             <Route path="/groups/:sys_event_id" element={<Groups/>}/>
 
             <Route path="/event/:event_id" element={<Event/>}/>

@@ -33,18 +33,11 @@ const Event = () => {
                 <Button variant={'success'}
                      size={"lg"}
                      href={`/groups/${event.sys_event_id}`}>Посмотреть группы </Button>
-                <h6>Осталось мест: 10 из 15</h6>
                 <br/>
 
-                <h5>Время: 15:00
-                </h5>
-                <h5>Длительность: 3 часа</h5>
-                <h5> Адрес: Тверь, могила Круга</h5>
-                <h5> Метро: Беговая</h5>
-
                 <br/>
-                <h3>Формат: онлайн / очно </h3>
-                <h2>КОД МЕРОПРИЯТИЯ: {event.beauty_code_event} </h2>
+                <h2>Описание: {event.description_event} </h2>
+                <h3>КОД МЕРОПРИЯТИЯ: {event.beauty_code_event} </h3>
 
             </Col>
         </Row>

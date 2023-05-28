@@ -19,9 +19,9 @@ const Groups = () => {
     const param = useParams()
     const handleClose = () => setShow(false) //закрывает окно авторизации
     const handleShow = () => setShow(true) 
-
+    console.log(1)
     useEffect(() => {
-        dispatch(showGroups(1));
+        dispatch(showGroups(groups));
       }, []);
    return(
                 
