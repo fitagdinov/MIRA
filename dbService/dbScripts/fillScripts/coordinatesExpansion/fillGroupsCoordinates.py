@@ -18,7 +18,7 @@ def make_request_string(address_string: str):
         return None
     if not 'москва' in parsed[0].lower():
         return None
-
+    city = parsed[0].lower().replace('г.', '').replace('город', '')
     house_number = house_number[0]
     house_number = house_number.split(' ')[-1]
     house_number = house_number.split('/')[0]
@@ -28,13 +28,15 @@ def make_request_string(address_string: str):
         street = street[1:]
     final += '+'.join(street.split(' '))
     final += ',+'
-    final += 'москва'
+    final += f'{city}'
     final += '&addressdetails=1/'
     return final
 
 
 def scrap_coords(_in):
     if type(_in) == list:
+        if len(_in) == 0:
+            return None
         _in = _in[0]
     if ('lat' in _in) and ('lon' in _in):
         _out = {"lat": _in["lat"], "lon": _in["lon"]}
@@ -45,8 +47,8 @@ def scrap_coords(_in):
 
 
 if __name__ == '__main__':
-    all_grans = get_request(query=f"SELECT * FROM StaticMember", execute_many=True)
-    get_strings = list(map(lambda x: make_request_string(x[-1]), all_grans))
+    all_grans = get_request(query=f"SELECT * FROM StaticGroup", execute_many=True)
+    get_strings = list(map(lambda x: make_request_string(x[-3]), all_grans[:3]))
     results = []
     async def main():
         async with aiohttp.ClientSession() as session:
@@ -62,13 +64,18 @@ if __name__ == '__main__':
 
     asyncio.run(main())
     # print(len(np.unique([_[0] for _ in results])))
+    # print([_[0][0] for _ in results])
+    # print([_[1] for _ in results])
     grand_ids = [_[0][0] for _ in results]
     coords = [scrap_coords(_[1]) for _ in results]
     coords = [f'{str(json.dumps(_))}' for _ in coords]
+    # print(grand_ids)
+
+    # print(coords)
     # query=f'INSERT INTO StaticMemberCoordinates (SYS_ID_grand, coordinates) VALUES ({tuple(grand_ids)}, {tuple(coords)});', commit=True)
     insert_query = \
         f"""
-        INSERT INTO NoOldMen.StaticMemberCoordinates (SYS_ID_grand, coordinates)
+        INSERT INTO NoOldMen.StaticGroupsCoordinates (SYS_ID_GROUP, coordinates)
         VALUES
         """
 
