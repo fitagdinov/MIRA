@@ -6,11 +6,11 @@ s=time.time()
 place = 'Moscow, Russia'
 G = ox.graph_from_place(place, network_type='walk')
 ox.plot_graph(G)
-# origin_point=(55.783602, 37.567915)
-# destination_point=(55.792230, 37.572309)
-# orig_node = ox.distance.nearest_nodes(G, origin_point[1], origin_point[0])
-# destination_node = ox.distance.nearest_nodes(G,
-#     destination_point[1], destination_point[0])
+origin_point=(55.783602, 37.567915)
+destination_point=(55.792230, 37.572309)
+orig_node = ox.distance.nearest_nodes(G, origin_point[1], origin_point[0])
+destination_node = ox.distance.nearest_nodes(G,
+    destination_point[1], destination_point[0])
 print(time.time()-s)
 # find shortest path based on travel time
 route = nx.shortest_path(G, orig_node, destination_node, weight='travel_time')
