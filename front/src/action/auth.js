@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 import { setAuth, setCurrentLocation} from '../reducers/authReducer';
-const API_URL = 'http://178.170.197.162:80/auth_grand'
+const API_URL = 'http://178.170.197.162:4999/auth_grand'
 
 
 export const authUser = (fio, birthDate) => {
