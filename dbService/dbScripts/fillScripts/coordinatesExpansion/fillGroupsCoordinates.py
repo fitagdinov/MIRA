@@ -34,16 +34,19 @@ def make_request_string(address_string: str):
 
 
 def scrap_coords(_in):
-    if type(_in) == list:
-        if len(_in) == 0:
-            return None
-        _in = _in[0]
-    if ('lat' in _in) and ('lon' in _in):
-        _out = {"lat": _in["lat"], "lon": _in["lon"]}
-    else:
-        _out = None
+    try:
+        if type(_in) == list:
+            if len(_in) == 0:
+                return None
+            _in = _in[0]
+        if ('lat' in _in) and ('lon' in _in):
+            _out = {"lat": _in["lat"], "lon": _in["lon"]}
+        else:
+            _out = None
 
-    return _out
+        return _out
+    except:
+        return None
 
 
 if __name__ == '__main__':
