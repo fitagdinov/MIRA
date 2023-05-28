@@ -22,6 +22,9 @@ from Getters import GetGroupSchuedle
 # Mutable for members
 from Mutable import AddGrandPollResult
 
+# Recommendation service
+from Getters import MakeGeneralRecommendation
+
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
@@ -56,6 +59,8 @@ api.add_resource(GetGroupSchuedle, "/search_group/get_schedule", methods=['GET']
 
 api.add_resource(AddGrandPollResult, '/member/add_poll_result', methods=['POST'])
 
+api.add_resource(MakeGeneralRecommendation, '/member/make_classic_recommendation', methods=['GET'])
+
 #
 docs.register(GetGrandAuthorizationValidation)
 
@@ -72,5 +77,6 @@ docs.register(GetGroupSchuedle)
 
 docs.register(AddGrandPollResult)
 
+docs.register(MakeGeneralRecommendation)
 if __name__ == '__main__':
     app.run(debug=True)
