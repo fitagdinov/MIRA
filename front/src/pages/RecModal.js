@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 
 
-const GroupModal = () => {
+const ModalRec = () => {
     const [show, setShow] = useState(true);
     const handleClose = () => setShow(false);
     const handleCloseReady = () => {
@@ -17,15 +17,15 @@ const GroupModal = () => {
         <Modal size={'lg'} show={show} onHide={handleClose}>
         <Modal.Header closeButton>
             <Modal.Title>
-            Вы записаны в группу!
+            Для просмотра рекомендаций необходима авторизация
             </Modal.Title>
         </Modal.Header>
 
         <Modal.Footer className={'text-center'}>
-            <Form className={'p-3'}>
+            <Form className={'p-3'} >
     
                 <Button href="/" variant='success'
-                >Спасибо</Button>
+                >Авторизация</Button>
             </Form>
         </Modal.Footer>
     </Modal> 
@@ -33,4 +33,4 @@ const GroupModal = () => {
     );
 };
 
-export default GroupModal;
+export default ModalRec;

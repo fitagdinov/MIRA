@@ -19,6 +19,20 @@ export default function Navibar (){
     const handleClose = () => setShow(false) //закрывает окно авторизации
     const handleShow = () => setShow(true) // открывает окно авторизации
     const handleCloseOpros = () => setShowOpros(false) // закрывает окно "пройдите опрос"
+    const [isAuth, setIsAuth] = useState(false)
+
+    useEffect(() => {
+        const isAuth = localStorage.getItem('isAuth')
+      }, []);
+
+    const reclink = () => {
+        if (isAuth){
+            return '/modalrec'
+        }
+        else {
+            return '/recomendation'
+        }
+    }
 
     const handleShowOpros = (fio, birthDate) => { // хранит в себе 3 функции
         setShowOpros(true) // открывает окно "пройдите опрос"
@@ -38,7 +52,7 @@ export default function Navibar (){
                         <Nav className='mx-auto'>
                             <Nav.Link href={'/'}><FaHome/> Главная</Nav.Link>
                             <Nav.Link href={'/search'}><FaSearch/> Расширеный поиск</Nav.Link>
-                            <Nav.Link href={'/recomendation'}> <FaEye/> Рекомендации </Nav.Link>
+                            <Nav.Link href={reclink()}> <FaEye/> Рекомендации </Nav.Link>
                             <Nav.Link><FaHistory/> Мои мероприятия </Nav.Link>
                             <Nav.Link><FaHeart/> Избранное</Nav.Link>
                         </Nav>

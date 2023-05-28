@@ -26,5 +26,5 @@ export default function allGroupsReducer(state = defaultStateAll, action) {
     }
 }
 
-export const setAllGroupsEvents = (linked_groups) => ({type:SET_ALL_GROUPS_EVENTS, server_answer:linked_groups})
+export const setAllGroupsEvents = (allgroup) => ({type:SET_ALL_GROUPS_EVENTS, server_answer:allgroup})
 export const setGroupsIsFetching = (isFetching) => ({type:SET_IS_FETCHING, server_answer:isFetching})

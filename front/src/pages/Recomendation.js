@@ -18,12 +18,14 @@ const Recomendation = () => {
     const isFetching = useSelector(state => state.recommendationEvents.isFetching)
     const [search, setSearch] = useState('')
     useEffect(() => { //при обновлении строницы загружаем инфу по карточке  зависимости от номера
-        dispatch(showEvents(1));
+        dispatch(showEvents(recEvents));
         
         dispatch(authUser(localStorage.getItem('fio'), localStorage.getItem('birthDate'))) // хард код для авторизации
       }, []);
     console.log(recEvents)
         return (
+
+
             <>
                 <Row>
                 <InputGroup className={'mt-4'} style={{marginLeft: '25%', width: '50%'}} size="lg" >

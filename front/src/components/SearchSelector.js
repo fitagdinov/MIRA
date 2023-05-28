@@ -19,19 +19,6 @@ const SearchSelector = () => {
     const placesDict = places.map(toDict)
     const animatedComponents = makeAnimated();
 
-    // function checkBox(list) {
-    //     return (
-    //         list.map((item) => (
-    //                 <Form.Check
-    //                     label={item}
-    //                     name={item}
-    //                     type='checkbox'
-    //                     id={item}
-    //                     style={{fontSize: '18px'}}
-    //                 />
-    //         ))
-    //     );
-    // }
 
     return (
 
