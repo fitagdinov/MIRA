@@ -5,6 +5,7 @@ import { setAllEvents } from '../reducers/allEventsReducer';
 import { setByTypeEvents }  from '../reducers/byEventTypeReducer';
 import { setIsFetching } from '../reducers/allEventsReducer';
 import { setByBeautyEvent } from '../reducers/byBeautyCodeEvent';
+import { setRecommendationEvents } from '../reducers/recommendationReducer';
 
 const API_URL = 'http://localhost:5000'
 
@@ -47,8 +48,9 @@ export const showAllEvents = () => {
 export const showREcommendationEvents = (grand_sys_id) => {
     return async (dispatch) => {
         try {
+            dispatch(setIsFetching(true))
             const response = await axios.get(`${API_URL}/member/make_classic_recommendation?grand_sys_id=${6}`) // шлем get запрос достаем ивент
-            dispatch(setAllEvents(response.data)) // заполняем store таской на обновление данных данными по ивенту
+            dispatch(setRecommendationEvents(response.data)) // заполняем store таской на обновление данных данными по ивент
         } catch (error) {
             console.log('Ошибка соединения при рекомендациях showREcommendationEvents')
         }
