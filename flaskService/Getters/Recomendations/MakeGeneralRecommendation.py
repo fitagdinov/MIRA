@@ -18,7 +18,7 @@ from flaskService.Utils import BasicEventDescription
 
 
 class RequestMakeGeneralRecommendation(Schema):
-    grand_sys_id = fields.Integer(required=True, description="ID бабушки в формате mos.ru. Аналогично логину")
+    grand_sys_id = fields.Integer(required=True, description="ID бабушки в системном формате. Аналогично логину")
     number_of_recommendations = fields.Integer(required=False, default=10, description="Количество рекомендаций для возврата")
 
 

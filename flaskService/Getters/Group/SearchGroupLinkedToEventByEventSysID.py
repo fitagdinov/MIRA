@@ -30,26 +30,26 @@ class SearchGroupLinkedToEventByEventSysID(MethodResource, Resource):
         scrap_matched_static_event = get_request(query=f"SELECT * FROM StaticEvent WHERE SYS_ID_event={sys_event_id}")
         get_all_linked_groups = get_request(query=f"SELECT * FROM EventGroupMap WHERE SYS_ID_event={sys_event_id}", execute_many=True)
         groups_ids = [_[1] for _ in get_all_linked_groups]
-        get_all_groups_info = get_request(query=f"SELECT * FROM StaticGroup WHERE SYS_ID_group in {tuple(groups_ids)}", execute_many=True)
         linked_groups_list = []
-        all_cite_id_s = tuple([_[1] for _ in get_all_groups_info])
-        get_all_pretty_names = get_request(query=f"SELECT * FROM StaticCiteEventID WHERE CITE_ID_event in {all_cite_id_s}", execute_many=True)
-        for num, group in enumerate(get_all_groups_info):
-            linked_groups_list.append(
-                BasicGroupDescription.constructor(
-                    sys_group_id=group[0],
-                    extend_group_id=group[2],
-                    short_event_name=scrap_matched_static_event[3].split('_')[-1],
-                    parent_event_sys_id=sys_event_id,
-                    description_group=scrap_matched_static_event[4],
-                    beauty_code_group=get_all_pretty_names[num][1],
-                    online_status_group=False,
-                    address_group=group[5],
-                    geo_group=group[6],
-                    area_group=group[7]
+        if len(groups_ids) != 0:
+            get_all_groups_info = get_request(query=f"SELECT * FROM StaticGroup WHERE SYS_ID_group in {tuple(groups_ids)}", execute_many=True)
+            all_cite_id_s = tuple([_[1] for _ in get_all_groups_info])
+            get_all_pretty_names = get_request(query=f"SELECT * FROM StaticCiteEventID WHERE CITE_ID_event in {all_cite_id_s}", execute_many=True)
+            for num, group in enumerate(get_all_groups_info):
+                linked_groups_list.append(
+                    BasicGroupDescription.constructor(
+                        sys_group_id=group[0],
+                        extend_group_id=group[2],
+                        short_event_name=scrap_matched_static_event[3].split('_')[-1],
+                        parent_event_sys_id=sys_event_id,
+                        description_group=scrap_matched_static_event[4],
+                        beauty_code_group=get_all_pretty_names[num][1],
+                        online_status_group=False,
+                        address_group=group[5],
+                        geo_group=group[6],
+                        area_group=group[7]
+                    )
                 )
-            )
-
         return {
             'sys_event_id': sys_event_id,
             'number_of_nested_groups': len(linked_groups_list),
