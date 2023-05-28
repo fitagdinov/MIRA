@@ -23,7 +23,7 @@ class RequestMakeGeneralRecommendation(Schema):
 
 
 class ResponseMakeGeneralRecommendation(Schema):
-    grand_sys_id = fields.Integer(required=True, description="ID бабушки в формате mos.ru. Аналогично логину")
+    grand_sys_id = fields.Integer(required=True, description="ID бабушки в системном формате. Аналогично логину")
     # TODO: change required to True
     number_of_recommendations = fields.String(required=False, description='Дата рождения бабушки. Аналогично паролю')
     recommended_events = fields.List(fields.Nested(BasicEventDescription, required=True), required=True)
