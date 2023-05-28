@@ -81,10 +81,7 @@ def get_group_info(sys_id_group: int) -> pd.DataFrame:
 
 
 def get_top_n_events_for_grand(sys_id_grand: int,
-                               top_n=10,
-                               offline_filter=False,
-                               online_filter=False,
-                               area_filter=False,):
+                               top_n=10):
     query = f"""
             SELECT * FROM NoOldMen.EventEmbedding 
             """
@@ -93,7 +90,7 @@ def get_top_n_events_for_grand(sys_id_grand: int,
         query=query,
         execute_many=True)
 
-    grand_emb = get_grand_embedding(sys_id_grand) + getInitialEmbedding(sys_id_grand)
+    grand_emb = get_grand_embedding(sys_id_grand) + 0.1 * getInitialEmbedding(sys_id_grand)
     # print(events)
     idx = np.argsort([cos_dist(grand_emb,
                                np.array(event[1:])) for event in events])[::-1]
