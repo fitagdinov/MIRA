@@ -9,6 +9,7 @@ import Event from "../pages/Event";
 import Recomendation from '../pages/Recomendation';
 import Test from "../pages/Test";
 import TemplateDemo from "../pages/TemplateDemo";
+import TestRecomendations from "../pages/TestRecomendations";
 
 
 
@@ -34,6 +35,7 @@ const AppRouter = () => {
             <Route path="/test_event" element={<Event />}/>
             <Route path="/test_for_ivan" element={<Test />}/>
             <Route path="/template" element={<TemplateDemo />}/>
+            <Route path="/test_recomendation" element={<TestRecomendations />}/>
         </Routes>
     );
 };
