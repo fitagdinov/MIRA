@@ -19,7 +19,6 @@ const Recomendation = () => {
     const [search, setSearch] = useState('')
     useEffect(() => { //при обновлении строницы загружаем инфу по карточке  зависимости от номера
         dispatch(showEvents(recEvents));
-        
         dispatch(authUser(localStorage.getItem('fio'), localStorage.getItem('birthDate'))) // хард код для авторизации
       }, []);
     console.log(recEvents.recommended_events)
