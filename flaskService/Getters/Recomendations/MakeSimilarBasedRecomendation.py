@@ -17,12 +17,12 @@ import pytz
 from flaskService.Utils import BasicEventDescription
 
 
-class RequestMakeHistoryBasedRecommendation(Schema):
+class RequestMakeSimilarBasedRecommendation(Schema):
     grand_sys_id = fields.Integer(required=True, description="ID бабушки в формате mos.ru. Аналогично логину")
     number_of_recommendations = fields.Integer(required=False, default=10, description="Количество рекомендаций для возврата")
     format = fields.String(required=False, default="All", description="формат мероприятия (All, Online, Offline)")
 
-class ResponseMakeHistoryBasedRecommendation(Schema):
+class ResponseMakeSimilarBasedRecommendation(Schema):
     grand_sys_id = fields.Integer(required=True, description="ID бабушки в формате mos.ru. Аналогично логину")
     # TODO: change required to True
     number_of_recommendations = fields.Integer(required=False, description='Количество рекомендаций по каждому направлению')
@@ -42,9 +42,9 @@ class ResponseMakeHistoryBasedRecommendation(Schema):
         }
 
 @doc(tags=[TAGS.recommendation_requests])
-class MakeHistoryBasedRecommendation(MethodResource, Resource):
-    @marshal_with(ResponseMakeHistoryBasedRecommendation)
-    @use_kwargs(RequestMakeHistoryBasedRecommendation, location='query')
+class MakeSimilarBasedRecommendation(MethodResource, Resource):
+    @marshal_with(ResponseMakeSimilarBasedRecommendation)
+    @use_kwargs(RequestMakeSimilarBasedRecommendation, location='query')
     def get(self, grand_sys_id, number_of_recommendations=2, format="All", **kwargs):
         ROOT_URL = request.url_root
 
@@ -55,11 +55,12 @@ class MakeHistoryBasedRecommendation(MethodResource, Resource):
         recommended_events_body = []
         recommended_events_brain = []
 
-        history = [el[0] for el in get_request(query=f"""SELECT DISTINCT b.SYS_ID_event 
-                   FROM NoOldMen.AttendanceGroup a 
-                   JOIN NoOldMen.EventGroupMap b ON a.SYS_ID_group = b.SYS_ID_group
-                   WHERE a.SYS_ID_grand={grand_sys_id}""",
-                                               execute_many=True)]
+        history = [el[0] for el in get_request(query=f"""SELECT DISTINCT SYS_ID_event 
+           FROM NoOldMen.AttendanceGroup a 
+           JOIN NoOldMen.EventGroupMap b ON a.SYS_ID_group = b.SYS_ID_group
+           WHERE SYS_ID_grand={grand_sys_id}""",
+                              execute_many=True)]
+
 
         if format not in ["All", "Online", "Offline"]:
             format = "All"
@@ -70,15 +71,6 @@ class MakeHistoryBasedRecommendation(MethodResource, Resource):
             render_event = [event for event in render_event if "онлайн" not in event["short_event_name"].lower()]
 
         for event in render_event:
-            if event["sys_event_id"] in history:
-                if event["level3_event"] == "Для тела" and len(recommended_events_body) < number_of_recommendations:
-                    recommended_events_body.append(event)
-                elif event["level3_event"] == "Для души" and len(recommended_events_soul) < number_of_recommendations:
-                    recommended_events_soul.append(event)
-                elif event["level3_event"] == "Для ума" and len(recommended_events_brain) < number_of_recommendations:
-                    recommended_events_brain.append(event)
-
-        for event in render_event:
             if event["sys_event_id"] not in history:
                 if event["level3_event"] == "Для тела" and len(recommended_events_body) < number_of_recommendations:
                     recommended_events_body.append(event)
@@ -86,10 +78,9 @@ class MakeHistoryBasedRecommendation(MethodResource, Resource):
                     recommended_events_soul.append(event)
                 elif event["level3_event"] == "Для ума" and len(recommended_events_brain) < number_of_recommendations:
                     recommended_events_brain.append(event)
-
         recommended_events = recommended_events_soul + recommended_events_body + recommended_events_brain
 
-        return ResponseMakeHistoryBasedRecommendation.constructor(
+        return ResponseMakeSimilarBasedRecommendation.constructor(
             grand_sys_id=grand_sys_id,
             number_of_recommendations=number_of_recommendations,
             format=format,

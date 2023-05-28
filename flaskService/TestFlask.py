@@ -25,6 +25,8 @@ from Mutable import AddGrandPollResult
 # Recommendation service
 from Getters import MakeGeneralRecommendation
 from Getters import MakeHistoryBasedRecommendation
+from Getters import MakeNewBasedRecommendation
+from Getters import MakeSimilarBasedRecommendation
 
 app = Flask(__name__)
 CORS(app)
@@ -62,7 +64,8 @@ api.add_resource(AddGrandPollResult, '/member/add_poll_result', methods=['POST']
 
 api.add_resource(MakeGeneralRecommendation, '/member/make_classic_recommendation', methods=['GET'])
 api.add_resource(MakeHistoryBasedRecommendation, '/member/make_history_based_recommendation', methods=['GET'])
-
+api.add_resource(MakeNewBasedRecommendation, '/member/make_new_based_recommendation', methods=['GET'])
+api.add_resource(MakeSimilarBasedRecommendation, '/member/make_similar_based_recommendation', methods=['GET'])
 #
 docs.register(GetGrandAuthorizationValidation)
 
@@ -81,5 +84,8 @@ docs.register(AddGrandPollResult)
 
 docs.register(MakeGeneralRecommendation)
 docs.register(MakeHistoryBasedRecommendation)
+docs.register(MakeNewBasedRecommendation)
+docs.register(MakeSimilarBasedRecommendation)
+
 if __name__ == '__main__':
     app.run(debug=True)
