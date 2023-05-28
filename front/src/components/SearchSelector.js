@@ -34,7 +34,16 @@ const SearchSelector = () => {
     // }
 
     return (
+
         <Form size={'lg'} show={show} onHide={handleClose}>
+                        <div className={'text-center'}>
+                <Button variant="success" size={'lg'}>
+                    Поиск
+                </Button>
+                <Button style={{margin: '10px'}} type='submit' variant="danger" size={'lg'}>
+                    Cброс
+                </Button>
+            </div>
 
             <Form.Label>
                 <h4> Сортировка </h4>
@@ -129,14 +138,6 @@ const SearchSelector = () => {
                 </FormGroup>
             </InputGroup>
 
-            <div className={'text-center'}>
-                <Button variant="success" size={'lg'}>
-                    Поиск
-                </Button>
-                <Button style={{margin: '10px'}} type='submit' variant="danger" size={'lg'}>
-                    Cброс
-                </Button>
-            </div>
         </Form>
     )
 }
