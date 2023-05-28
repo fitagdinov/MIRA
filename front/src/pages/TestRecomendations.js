@@ -9,7 +9,7 @@ import { showEvents } from '../action/showEvents';
 import { useSelector, useDispatch } from 'react-redux';
 import { authUser } from '../action/auth';
 
-const Recomendation = () => {
+const TestRecomendation = () => {
     const dispatch = useDispatch()
     const events = useSelector( state => state.events )
     const auth = useSelector(state => state.authTest)
@@ -77,4 +77,4 @@ const Recomendation = () => {
     );
 };
 
-export default Recomendation;
+export default TestRecomendation;

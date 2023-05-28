@@ -6,6 +6,7 @@ import Recomendation from '../pages/Recomendation';
 import Test from "../pages/Test";
 import Search from '../pages/Search';
 import QA from '../pages/QA';
+import TestRecomendation from '../pages/TestRecomendations';
 
 
 
@@ -22,6 +23,7 @@ const AppRouter = () => {
         // </Switch>
         <Routes>
             <Route path="/" element={<Home />}/>
+            <Route path="/TestRecomendation" element={<TestRecomendation />}/>
             <Route path="/QA" element={<QA />}/>
             <Route path="/event/:event_id" element={<Event/>}/>
             <Route path="/search" element={<Search />}/>
