@@ -5,6 +5,7 @@ import {FaSearch, FaHistory, FaHeart, FaEye, FaHome} from "react-icons/fa";
 import { authUser } from "../action/auth";
 import { useDispatch, useSelector } from 'react-redux';
 import logo from '../image/Logo.svg'
+import QACard from "./QACard";
 
 
 export default function Navibar (){
@@ -89,16 +90,15 @@ export default function Navibar (){
                 <Modal size={'lg'} show={showOpros} onHide={handleCloseOpros}>
                     <Modal.Header closeButton>
                         <Modal.Title>
-                            Ответьте на 3 вопроса, чтобы мы могли предложить Вам действительно интересные мероприятия.
+                        Чтоб мы могли посоветовать мероприятия, которые вам обязательно захочется посетить, пройдите, пожалуйста опрос
                         </Modal.Title>
                     </Modal.Header>
 
                     <Modal.Footer className={'text-center'}>
                         <Form className={'p-3'}>
-                            <Button variant={'success'} className={'mx-auto'} href={'/opros/1'}>Начать</Button>
+                            <QACard question={'Вы дед'}/>
                         </Form>
                     </Modal.Footer>
-
                 </Modal>
             </>
         )

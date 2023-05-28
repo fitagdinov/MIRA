@@ -8,6 +8,7 @@ import eventReducer from "./eventReducer";
 import allEventsReducer from "./allEventsReducer";
 import byEventsTypeReducer from "./byEventTypeReducer";
 import firstAnswerReducer from "./QaReducer";
+import byBeautyEventReducer from "./byBeautyCodeEvent";
 
 const rootReducer = combineReducers({ // главный редюсер, хранит в себе вс существующие
     repos: reposReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({ // главный редюсер, хран
     allEvents: allEventsReducer,
     byTypeEvents: byEventsTypeReducer, 
     firstAnswer: firstAnswerReducer,
+    byBeautyEvent: byBeautyEventReducer
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
