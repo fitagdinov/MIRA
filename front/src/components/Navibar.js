@@ -21,9 +21,9 @@ export default function Navibar (){
     const handleCloseOpros = () => setShowOpros(false) // закрывает окно "пройдите опрос"
     const [isAuth, setIsAuth] = useState(false)
 
-    useEffect(() => {
-        const isAuth = localStorage.getItem('isAuth')
-      }, []);
+    // useEffect(() => {
+    //     const isAuth = localStorage.getItem('isAuth')
+    //   }, []);
 
     const reclink = () => {
         if (isAuth){
