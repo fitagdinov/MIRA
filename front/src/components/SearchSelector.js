@@ -9,6 +9,7 @@ const SearchSelector = () => {
     const handleClose = () => setShow(false);
     let categories1 = ["игры", "языки"];
     // let categories2 = [["игры", "языки"], ["игры", "языки"]]
+    let places = ['Строгино', 'Патриаршие пруды', 'Замоскворечье', 'Хамовники']
 
     // function checkBox(list) {
     //     return (
@@ -67,6 +68,19 @@ const SearchSelector = () => {
                             />
                     ))}
                 </Form.Group>
+
+            <br/>
+            <select className="selectpicker" data-live-search="true">
+                {places.map((item) => (
+                        <option datatokens> {item}</option>
+                    ))}
+            </select>
+
+            <select className="selectpicker" data-live-search="true">
+                <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+                <option data-tokens="mustard">Burger, Shake and a Smile</option>
+                <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+            </select>
 
 
             <br/>
