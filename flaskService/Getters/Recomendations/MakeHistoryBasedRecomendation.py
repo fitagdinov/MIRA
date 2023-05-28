@@ -20,36 +20,32 @@ from flaskService.Utils import BasicEventDescription
 class RequestMakeHistoryBasedRecommendation(Schema):
     grand_sys_id = fields.Integer(required=True, description="ID бабушки в формате mos.ru. Аналогично логину")
     number_of_recommendations = fields.Integer(required=False, default=10, description="Количество рекомендаций для возврата")
-
+    format = fields.String(required=False, default="All", description="формат мероприятия")
 
 class ResponseMakeHistoryBasedRecommendation(Schema):
     grand_sys_id = fields.Integer(required=True, description="ID бабушки в формате mos.ru. Аналогично логину")
     # TODO: change required to True
-    number_of_recommendations = fields.String(required=False, description='Количество рекомендаций по каждому направлению')
-    recommended_events_soul = fields.List(fields.Nested(BasicEventDescription, required=True), required=True)
-    recommended_events_body = fields.List(fields.Nested(BasicEventDescription, required=True), required=True)
-    recommended_events_brain = fields.List(fields.Nested(BasicEventDescription, required=True), required=True)
-
+    number_of_recommendations = fields.Integer(required=False, description='Количество рекомендаций по каждому направлению')
+    format = fields.String(required=True, description="формат мероприятия")
+    recommended_events = fields.List(fields.Nested(BasicEventDescription, required=True), required=True)
     @classmethod
     def constructor(cls,
                     grand_sys_id,
                     number_of_recommendations,
-                    recommended_events_soul,
-                    recommended_events_body,
-                    recommended_events_brain):
+                    format,
+                    recommended_events):
         return {
             "grand_sys_id": grand_sys_id,
             "number_of_recommendations": number_of_recommendations,
-            "recommended_events_soul": recommended_events_soul,
-            "recommended_events_body": recommended_events_body,
-            "recommended_events_brain": recommended_events_brain
+            "format": format,
+            "recommended_events": recommended_events
         }
 
 @doc(tags=[TAGS.recommendation_requests])
 class MakeHistoryBasedRecommendation(MethodResource, Resource):
     @marshal_with(ResponseMakeHistoryBasedRecommendation)
     @use_kwargs(RequestMakeHistoryBasedRecommendation, location='query')
-    def get(self, grand_sys_id, number_of_recommendations=2, **kwargs):
+    def get(self, grand_sys_id, number_of_recommendations=2, format="All", **kwargs):
         ROOT_URL = request.url_root
 
         _recommended = get_top_n_events_for_grand(sys_id_grand=grand_sys_id, top_n=899)
@@ -58,6 +54,15 @@ class MakeHistoryBasedRecommendation(MethodResource, Resource):
         recommended_events_soul = []
         recommended_events_body = []
         recommended_events_brain = []
+
+        if format not in ["All", "Online", "Offline"]:
+            format = "All"
+
+        if format == "Online":
+            render_event = [event for event in render_event if "онлайн" in event["short_event_name"].lower()]
+        elif format == "Offline":
+            render_event = [event for event in render_event if "онлайн" not in event["short_event_name"].lower()]
+
         for event in render_event:
             if event["level3_event"] == "Для тела" and len(recommended_events_body) < number_of_recommendations:
                 recommended_events_body.append(event)
@@ -65,10 +70,10 @@ class MakeHistoryBasedRecommendation(MethodResource, Resource):
                 recommended_events_soul.append(event)
             elif event["level3_event"] == "Для ума" and len(recommended_events_brain) < number_of_recommendations:
                 recommended_events_brain.append(event)
+        recommended_events = recommended_events_soul + recommended_events_body + recommended_events_brain
 
         return ResponseMakeHistoryBasedRecommendation.constructor(
             grand_sys_id=grand_sys_id,
             number_of_recommendations=number_of_recommendations,
-            recommended_events_soul=recommended_events_soul,
-            recommended_events_body=recommended_events_body,
-            recommended_events_brain=recommended_events_brain), 200
+            format=format,
+            recommended_events=recommended_events), 200
