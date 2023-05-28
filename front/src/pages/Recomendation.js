@@ -8,25 +8,26 @@ import { showEvents, showREcommendationEvents } from '../action/showEvents';
 import { useSelector, useDispatch } from 'react-redux';
 import { authUser } from '../action/auth';
 import { setRecommendationEvents } from '../reducers/recommendationReducer';
+import CategorySelectorRec from "../components/CategorySelectorRec";
 
 const Recomendation = () => {
     const dispatch = useDispatch()
     const events = useSelector( state => state.events )
     const auth = useSelector(state => state.authTest)
     const recEvents = useSelector(state => state.recommendationEvents)
-    const isFetching = useSelector(state => state.byTypeEvents.isFetching)
+    const isFetching = useSelector(state => state.recommendationEvents.isFetching)
     const [search, setSearch] = useState('')
     useEffect(() => { //при обновлении строницы загружаем инфу по карточке  зависимости от номера
         dispatch(showEvents(1));
-        dispatch(showREcommendationEvents(localStorage.getItem('grandSysId')))
+        
         dispatch(authUser(localStorage.getItem('fio'), localStorage.getItem('birthDate'))) // хард код для авторизации
       }, []);
-    //   console.log(dispatch(setRecommendationEvents(localStorage.getItem('grandSysId'))))
+    console.log(recEvents)
         return (
             <>
                 <Row>
-                <InputGroup className={'mt-4'} style={{marginLeft: '25%', width: '50%'}} size="lg">
-                    <InputGroup.Text id="inputGroup-sizing-lg">
+                <InputGroup className={'mt-4'} style={{marginLeft: '25%', width: '50%'}} size="lg" >
+                    <InputGroup.Text id="inputGroup">
                         <FaSearch/>
                     </InputGroup.Text>
                     <Form.Control
@@ -36,23 +37,25 @@ const Recomendation = () => {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
-                    <div className={'input-group-append'}>
-                        <Button variant='primary'
+                    <div className={'input-group-append'} >
+                        <Button variant='success'
                                 size={"lg"}
                                 onClick={() => {dispatch(showEvents(search))}}>Искать</Button> 
-                                <h1>{events.description_event}</h1>
+                            
                     </div>
-                    <div className={'input-group-append'}></div>
+            
                 </InputGroup>
                 </Row>
             <Container>
                 <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
                 <Form>
+                <CategorySelectorRec />
                 <h1> {
-                    isFetching === true
+                    isFetching === false
                     ?
                     recEvents.recommended_events.map((event, k) =>
                     <div key={k}>
+                        
                             <CardGroup className='card-group mt-3'>
                                 <RecomendationCard title={event.short_event_name}
                                                 description={event.description_event}
@@ -64,7 +67,7 @@ const Recomendation = () => {
                             </CardGroup>
                     </div>)
                     :
-                    <div>Загруза</div>
+                    <div className={'text-center'}>Загруза</div>
                 }
             </h1>
  

@@ -3,10 +3,10 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { showByTypeEvents } from '../action/showEvents';
+import { showByTypeEvents, showREcommendationEvents } from '../action/showEvents';
 
 
-function CategorySelector() {
+function CategorySelectorRec() {
     const [radioValue, setRadioValue] = useState('1');
     const dispatch = useDispatch()
     const byEvent = useSelector(state => state.byTypeEvents)
@@ -36,7 +36,7 @@ function CategorySelector() {
                         justified
                         className={'w-100'}
 
-                        onClick={() => dispatch(showByTypeEvents(radio.name))}
+                        onClick={() => dispatch(showREcommendationEvents(radio.name))}
                     >
                         {radio.name}
                     </ToggleButton>
@@ -46,4 +46,4 @@ function CategorySelector() {
     );
 }
 
-export default CategorySelector;
+export default CategorySelectorRec;

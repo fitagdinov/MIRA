@@ -145,7 +145,6 @@ const Home = () => {
                         <Button 
                             variant='success'
                             size={"lg"}
-                     
                             onClick={() => dispatch(showByBeautyEvent(search))}>
                             Искать
                         </Button> 
