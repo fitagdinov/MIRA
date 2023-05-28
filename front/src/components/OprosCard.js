@@ -19,7 +19,6 @@ export default class OprosCard extends React.Component {
                         <div className={'item-margin-sm'}>
                             <Button variant={'success'}
                                 href={this.props.link}
-                                
                             >
                                     Выбрать
                                 </Button>
