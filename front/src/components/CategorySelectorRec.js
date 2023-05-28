@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { showByTypeEvents, showREcommendationEvents } from '../action/showEvents';
-
+import {showByTypeEvents, showEvents, showREcommendationEvents} from '../action/showEvents';
+import {authUser} from "../action/auth";
 
 function CategorySelectorRec() {
     const [radioValue, setRadioValue] = useState('1');
+
     const dispatch = useDispatch()
-    const byEvent = useSelector(state => state.byTypeEvents)
+    const user = useSelector(state => state.authTest)
     const radios = [
         { name: 'Для ума', value: '1' },
         { name: 'Для тела', value: '2' },
         { name: 'Для души', value: '3' },
 
     ];
+   useEffect(() => { //при обновлении строницы загружаем инфу по карточке  зависимости от номера
+        dispatch(authUser(localStorage.getItem('fio'), localStorage.getItem('birthDate'))) // хард код для авторизации
+      }, []);
 
     const typeGilter = () => {
         
@@ -36,7 +40,7 @@ function CategorySelectorRec() {
                         justified
                         className={'w-100'}
 
-                        onClick={() => dispatch(showREcommendationEvents(radio.name))}
+                        onClick={() => dispatch(showREcommendationEvents(user.grand_sys_id, radio.name))}
                     >
                         {radio.name}
                     </ToggleButton>

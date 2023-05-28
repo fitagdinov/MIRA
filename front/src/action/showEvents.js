@@ -45,11 +45,17 @@ export const showAllEvents = () => {
     }
 }
 
-export const showREcommendationEvents = (grand_sys_id) => {
+export const showREcommendationEvents = (grand_sys_id, search_string) => {
     return async (dispatch) => {
         try {
             dispatch(setIsFetching(true))
-            const response = await axios.get(`${API_URL}/member/make_classic_recommendation?grand_sys_id=${6}`) // шлем get запрос достаем ивент
+            const response = await axios.get(`${API_URL}/member/make_classic_recommendation?grand_sys_id=${grand_sys_id}&number_of_recommendations=30`) // шлем get запрос достаем ивент
+            console.log(response.data)
+            console.log('search string', search_string)
+            const filtered = response.data.recommended_events.filter((event) => {
+                if (event.level3_event === search_string) {return true} else {return false}
+            })
+            response.data.recommended_events = filtered
             dispatch(setRecommendationEvents(response.data)) // заполняем store таской на обновление данных данными по ивент
         } catch (error) {
             console.log('Ошибка соединения при рекомендациях showREcommendationEvents')

@@ -42,7 +42,10 @@ def getInitialEmbedding(sys_user_id):
         mask_questions = [events[f"question{i+1}"] for i in range(number_of_questions)]
 
         for i in range(number_of_questions):
-            init_emb += (np.array(q[i]).T * np.array(mask_questions[i])).T.sum(axis=0)
+            try:
+                init_emb += (np.array(q[i]).T * np.array(mask_questions[i])).T.sum(axis=0)
+            except ValueError:
+                continue
     return init_emb
 
 

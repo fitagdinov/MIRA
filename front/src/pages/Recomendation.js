@@ -21,7 +21,7 @@ const Recomendation = () => {
         dispatch(showEvents(recEvents));
         dispatch(authUser(localStorage.getItem('fio'), localStorage.getItem('birthDate'))) // хард код для авторизации
       }, []);
-    console.log(recEvents)
+    console.log(recEvents.recommended_events)
         return (
 
 
