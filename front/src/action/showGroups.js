@@ -3,7 +3,7 @@ import axios from 'axios'
 import { setAllGroupsEvents } from '../reducers/allGroupsReducer';
 import { setGroupsIsFetching } from '../reducers/allGroupsReducer';
 
-const API_URL = 'http://localhost:5000'
+const API_URL = 'http://178.170.197.162:4999'
 
 export const showGroups = (sys_event_id) => { 
     return async (dispatch) => {

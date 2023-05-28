@@ -41,8 +41,7 @@ class MakeGeneralRecommendation(MethodResource, Resource):
     @marshal_with(ResponseMakeGeneralRecommendation)
     @use_kwargs(RequestMakeGeneralRecommendation, location='query')
     def get(self, grand_sys_id, number_of_recommendations=10, **kwargs):
-        ROOT_URL = request.url_root
-
+        ROOT_URL = 'http://178.170.197.162:4999'
         _recommended = get_top_n_events_for_grand(sys_id_grand=grand_sys_id, top_n=number_of_recommendations)
         answer = requests.get(url=f"{ROOT_URL}/search_event/by_id_list", params={'event_id_list': _recommended}).json()
         render_event = answer['linked_groups']

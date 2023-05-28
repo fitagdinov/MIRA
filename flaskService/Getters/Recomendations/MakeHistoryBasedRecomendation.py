@@ -46,7 +46,7 @@ class MakeHistoryBasedRecommendation(MethodResource, Resource):
     @marshal_with(ResponseMakeHistoryBasedRecommendation)
     @use_kwargs(RequestMakeHistoryBasedRecommendation, location='query')
     def get(self, grand_sys_id, number_of_recommendations=2, format="All", **kwargs):
-        ROOT_URL = request.url_root
+        ROOT_URL = 'http://178.170.197.162:4999'
 
         _recommended = get_top_n_events_for_grand(sys_id_grand=grand_sys_id, top_n=899)
         answer = requests.get(url=f"{ROOT_URL}/search_event/by_id_list", params={'event_id_list': _recommended}).json()
