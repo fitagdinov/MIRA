@@ -1,6 +1,8 @@
 import {Button, Form, FormGroup, InputGroup, ToggleButtonGroup} from "react-bootstrap";
 import React, {useState}from 'react'
 import ToggleButton from "react-bootstrap/ToggleButton";
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated';
 
 
 const SearchSelector = () => {
@@ -10,6 +12,12 @@ const SearchSelector = () => {
     let categories1 = ["игры", "языки"];
     // let categories2 = [["игры", "языки"], ["игры", "языки"]]
     let places = ['Строгино', 'Патриаршие пруды', 'Замоскворечье', 'Хамовники']
+    function toDict(item) {
+        return {value: item, label: item}
+    }
+
+    const placesDict = places.map(toDict)
+    const animatedComponents = makeAnimated();
 
     // function checkBox(list) {
     //     return (
@@ -33,6 +41,7 @@ const SearchSelector = () => {
             </Form.Label>
 
             <Form.Select style={{width: '100%'}} aria-label="Сортировать">
+                <option>по релевантности</option>
                 <option>по названию</option>
                 <option value="1">по дате</option>
             </Form.Select>
@@ -70,17 +79,16 @@ const SearchSelector = () => {
                 </Form.Group>
 
             <br/>
-            <select className="selectpicker" data-live-search="true">
-                {places.map((item) => (
-                        <option datatokens> {item}</option>
-                    ))}
-            </select>
 
-            <select className="selectpicker" data-live-search="true">
-                <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
-                <option data-tokens="mustard">Burger, Shake and a Smile</option>
-                <option data-tokens="frosting">Sugar, Spice and all things nice</option>
-            </select>
+            <Form.Label>
+                <h4>Район</h4>
+            </Form.Label>
+            <Select
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                isMulti
+                options={placesDict}
+            />
 
 
             <br/>
