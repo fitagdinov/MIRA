@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 export default class RecomendationCard extends React.Component {
 
     render() {
-        // {console.log(this.props.sys_event_id)}
         return (
             <Card style={{width: "17rem", margin: "5px"}}>
                 <Card.Img variant='top' src={this.props.image}/>

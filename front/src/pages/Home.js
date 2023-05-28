@@ -15,11 +15,13 @@ import RecomendationCard from '../components/RecomendationCard';
 import { useState } from 'react';
 import { authUser } from '../action/auth';
 import { showByBeautyEvent } from '../action/showEvents';
+import { useEffect } from 'react';
 
 const Home = () => {
     const dispatch = useDispatch()
     const byEvent = useSelector(state => state.byTypeEvents)
     const isFetching = useSelector(state => state.byTypeEvents.isFetching)
+    const isAuth = useSelector(state => state.authTest)
     const byBeautyEvent = useSelector(state => state.byBeautyEvent)
     const [show, setShow] = useState(false) 
     // const [showOpros, setShowOpros] = useState(false)
@@ -29,18 +31,15 @@ const Home = () => {
     // const [showOpros, setShowOpros] = useState(false)
     const handleShow = () => setShow(true) 
     const handleClose = () => setShow(false)
-    const [codeDirty, setCodeDirty] = useState(false)
-    const [codeError, setCodeError] = useState('Поле не может быть пустым')
     const handleShowOpros = (fio, birthDate) => { // хранит в себе 3 функции
         // setShowOpros(true) // открывает окно "пройдите опрос"
         setShow(false) // закрывает окно авторизации
         dispatch(authUser(fio, birthDate)) // заполняем store таской на закгрузку данных и обновления state
     }
+    // useEffect(() => {
+    //     const isAuth = localStorage.getItem('isAuth')
+    //   }, []);
     // const results = useSelector(state => state.firstAnswer)
-    const blurHandler = (e) => {
-        setCodeDirty(true)
-    }
-
     return (
 
         <div>
@@ -96,6 +95,7 @@ const Home = () => {
                         <Button
                             className={'mx-auto'}
                             variant={'success'}
+                            href='/QA'
                             onClick={() => {handleShowOpros(fio, birthDate);}} // при нажатии вызываем функцию происходит действи (описано выше)
                         >
                             Готово
@@ -130,7 +130,7 @@ const Home = () => {
             <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
             <Row>
                 <InputGroup className={'mt-1'} style={{marginLeft: '25%', width: '50%'}} size="lg">
-                    <h3>{(codeDirty && codeError) && <div style={{color: 'red'}}>{codeError}</div>}</h3>
+                    {/* <h3>{(codeDirty && codeError) && <div style={{color: 'red'}}>{codeError}</div>}</h3> */}
                     <InputGroup.Text id="inputGroup-sizing-lg">
                         <FaSearch />
                     </InputGroup.Text>
@@ -139,7 +139,6 @@ const Home = () => {
                         aria-describedby="inputGroup-sizing-sm"
                         placeholder={'Введите код мероприятия'}
                         value={search}
-                        onBlur={(e) => blurHandler(e)}
                         onChange={(e) => setSearch(e.target.value)}
                     />
                     <div className={'input-group-append'}>
@@ -159,11 +158,11 @@ const Home = () => {
             <br/>
             <div className={'text-center'}>
                 <h1>
+                {localStorage.getItem('isAuth') === true ? <>хуй</> : <>моча</>}
                 <CardGroup className='card-group mt-3'>
                     <RecomendationCard title={""}
                             description={byBeautyEvent.description_event}
                             sys_event_id={byBeautyEvent.sys_event_id}
-                            // image={babka}
                             link={`/event/${byBeautyEvent.sys_event_id}`            
                                             }
                         />

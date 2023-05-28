@@ -4,20 +4,24 @@ import {Container, Row, Form, CardGroup, InputGroup, Button} from 'react-bootstr
 import RecomendationCard from "../components/RecomendationCard";
 import "../styles/Opros.css"
 import {FaSearch} from "react-icons/fa";
-import {TEST_EVENT} from "../utils/consts";
-import { showEvents } from '../action/showEvents';
+import { showEvents, showREcommendationEvents } from '../action/showEvents';
 import { useSelector, useDispatch } from 'react-redux';
 import { authUser } from '../action/auth';
+import { setRecommendationEvents } from '../reducers/recommendationReducer';
 
 const Recomendation = () => {
     const dispatch = useDispatch()
     const events = useSelector( state => state.events )
     const auth = useSelector(state => state.authTest)
+    const recEvents = useSelector(state => state.recommendationEvents)
+    const isFetching = useSelector(state => state.byTypeEvents.isFetching)
     const [search, setSearch] = useState('')
     useEffect(() => { //при обновлении строницы загружаем инфу по карточке  зависимости от номера
         dispatch(showEvents(1));
+        dispatch(showREcommendationEvents(localStorage.getItem('grandSysId')))
         dispatch(authUser(localStorage.getItem('fio'), localStorage.getItem('birthDate'))) // хард код для авторизации
       }, []);
+    //   console.log(dispatch(setRecommendationEvents(localStorage.getItem('grandSysId'))))
         return (
             <>
                 <Row>
@@ -40,81 +44,35 @@ const Recomendation = () => {
                     </div>
                     <div className={'input-group-append'}></div>
                 </InputGroup>
-
-
                 </Row>
             <Container>
                 <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
                 <Form>
-                    <Row>
-                            <h3 className={'text-center mt-4'}>проверенное</h3>
+                <h1> {
+                    isFetching === true
+                    ?
+                    recEvents.recommended_events.map((event, k) =>
+                    <div key={k}>
                             <CardGroup className='card-group mt-3'>
-                                <RecomendationCard title={events.beauty_code_event}
-                                                description={events.description_event}
-                                                image={babka}
-                                                link={'/test_event'}
-                                />
-                                <RecomendationCard title={'второе мероприятие'}
-                                                description={'описание'}
-                                                image={babka}
-                                                link={'#'}
-                                />
-
-                                <RecomendationCard title={'третье мероприятие'}
-                                                description={'описание'}
-                                                image={babka}
-                                                link={'#'}
+                                <RecomendationCard title={event.short_event_name}
+                                                description={event.description_event}
+                                                sys_event_id={event.sys_event_id}
+                                                // image={babka}
+                                                link={`/event/${event.sys_event_id}`            
+                                            }
                                 />
                             </CardGroup>
-                        <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
-                        <h3 className={'text-center mt-4'}>новенькое</h3>
-                        <CardGroup className='card-group mt-3'>
-                            <RecomendationCard title={'первое мероприятие'}
-                                            description={'описание'}
-                                            image={babka}
-                                            link={'#'}
-                            />
-                            <RecomendationCard title={'второе мероприятие'}
-                                            description={'описание'}
-                                            image={babka}
-                                            link={'#'}
-                            />
-
-                            <RecomendationCard title={'третье мероприятие'}
-                                            description={'описание'}
-                                            image={babka}
-                                            link={'#'}
-                            />
-                            </CardGroup>
-                        <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
-                        <h3 className={'text-center mt-4'}>нравится остальным</h3>
-                            <CardGroup className='card-group mt-3'>
-                                <RecomendationCard title={'первое мероприятие'}
-                                                description={'описание'}
-                                                image={babka}
-                                                link={'#'}
-                                />
-                                <RecomendationCard title={'второе мероприятие'}
-                                                description={'описание'}
-                                                image={babka}
-                                                link={'#'}
-                                />
-
-                                <RecomendationCard title={'третье мероприятие'}
-                                                description={'описание'}
-                                                image={babka}
-                                                link={'#'}
-                                />
-                            </CardGroup>
-                    </Row>
+                    </div>)
+                    :
+                    <div>Загруза</div>
+                }
+            </h1>
+ 
                 </Form>
             </Container>
 
             </>
 
-                // <Link>Home</Link>
-
-                // <Link >Opros</Link>
         );
 };
 
