@@ -42,4 +42,4 @@ def getInitialEmbedding(sys_user_id):
 
 
 if __name__ == '__main__':
-    print(getInitialEmbedding(66968))
+    print(getInitialEmbedding(100543))
