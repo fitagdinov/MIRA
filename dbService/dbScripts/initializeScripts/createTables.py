@@ -140,12 +140,13 @@ create table NoOldMen.AttendanceGroup
 )
     comment 'Таблица посещаемости групп бабушками';
     
-create table NoOldMen.StaticGroupsCoordinates
+    
+create table NoOldMen.StaticMemberCoordinates
 (
-    SYS_ID_GROUP int  not null,
-    coordinates  json null,
-    constraint StaticGroupsCoordinates_StaticGroup_null_fk
-        foreign key (SYS_ID_GROUP) references NoOldMen.StaticGroup (SYS_ID_group)
+    SYS_ID_grand int          null,
+    coordinates  varchar(255) null,
+    constraint StaticMemberCoordinates_StaticMember_null_fk
+        foreign key (SYS_ID_grand) references NoOldMen.StaticMember (SYS_ID_grand)
 );
 
 
@@ -175,7 +176,7 @@ create table NoOldMen.StaticPoolResult
 create table NoOldMen.StaticMemberCoordinates
 (
     SYS_ID_grand int  null,
-    coordinates  json null,
+    coordinates  varchar(255) null,
     constraint StaticMemberCoordinates_StaticMember_null_fk
         foreign key (SYS_ID_grand) references NoOldMen.StaticMember (SYS_ID_grand)
 );
