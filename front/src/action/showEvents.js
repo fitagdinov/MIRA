@@ -6,7 +6,7 @@ import { setByTypeEvents }  from '../reducers/byEventTypeReducer';
 import { setIsFetching } from '../reducers/allEventsReducer';
 import { setByBeautyEvent } from '../reducers/byBeautyCodeEvent';
 
-const API_URL = 'http://localhost:5000/'
+const API_URL = 'http://localhost:5000'
 
 export const showEvents = (sys_event_id) => { 
     return async (dispatch) => {

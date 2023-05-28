@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { setFirstAnwer } from '../reducers/QaReducer';
 
-const API_URL = 'http://localhost:5000/'
+const API_URL = 'http://localhost:5000'
 
 
 export const getAnswer = (results) => { 
