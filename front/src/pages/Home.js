@@ -10,15 +10,10 @@ import {
 import {FaHeart, FaSearch} from "react-icons/fa";
 import CategorySelector from '../components/CategorySelector'
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import { useEffect } from 'react';
-import { showByTypeEvents } from '../action/showEvents';
 import { CardGroup } from 'react-bootstrap';
 import RecomendationCard from '../components/RecomendationCard';
 import { useState } from 'react';
 import { authUser } from '../action/auth';
-import { getAnswer } from '../action/setAnswers'
-import QACard from '../components/QACard';
-import { setByBeautyEvent } from '../reducers/byBeautyCodeEvent';
 import { showByBeautyEvent } from '../action/showEvents';
 
 const Home = () => {
@@ -27,24 +22,29 @@ const Home = () => {
     const isFetching = useSelector(state => state.byTypeEvents.isFetching)
     const byBeautyEvent = useSelector(state => state.byBeautyEvent)
     const [show, setShow] = useState(false) 
-    const [showOpros, setShowOpros] = useState(false)
+    // const [showOpros, setShowOpros] = useState(false)
     const [search, setSearch] = useState('')
     const [fio, setFio] = useState(101387414) 
     const [birthDate, setBirthDate] = useState('1937-02-17') 
     // const [showOpros, setShowOpros] = useState(false)
     const handleShow = () => setShow(true) 
     const handleClose = () => setShow(false)
+    const [codeDirty, setCodeDirty] = useState(false)
+    const [codeError, setCodeError] = useState('Поле не может быть пустым')
     const handleShowOpros = (fio, birthDate) => { // хранит в себе 3 функции
-        setShowOpros(true) // открывает окно "пройдите опрос"
+        // setShowOpros(true) // открывает окно "пройдите опрос"
         setShow(false) // закрывает окно авторизации
         dispatch(authUser(fio, birthDate)) // заполняем store таской на закгрузку данных и обновления state
     }
-    const results = useSelector(state => state.firstAnswer)
+    // const results = useSelector(state => state.firstAnswer)
+    const blurHandler = (e) => {
+        setCodeDirty(true)
+    }
 
     return (
 
         <div>
-            {/* <Button onClick={() => dispatch(getAnswer(results.grand_poll_passing,results.grand_sys_id))}>TEST</Button> */}
+            
             <br/><br/>
 
             <div className={'text-center'}>
@@ -130,20 +130,23 @@ const Home = () => {
             <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
             <Row>
                 <InputGroup className={'mt-1'} style={{marginLeft: '25%', width: '50%'}} size="lg">
+                    <h3>{(codeDirty && codeError) && <div style={{color: 'red'}}>{codeError}</div>}</h3>
                     <InputGroup.Text id="inputGroup-sizing-lg">
-                        <FaSearch/>
+                        <FaSearch />
                     </InputGroup.Text>
                     <Form.Control
                         aria-label="Large"
                         aria-describedby="inputGroup-sizing-sm"
                         placeholder={'Введите код мероприятия'}
                         value={search}
+                        onBlur={(e) => blurHandler(e)}
                         onChange={(e) => setSearch(e.target.value)}
                     />
                     <div className={'input-group-append'}>
                         <Button 
                             variant='success'
                             size={"lg"}
+                     
                             onClick={() => dispatch(showByBeautyEvent(search))}>
                             Искать
                         </Button> 
