@@ -10,3 +10,5 @@ geolocation server: http://87.242.95.93/coord
 
 root-api service: http://178.170.197.162:4999/test/#/ 
 
+(test.csv)
+csv-storage;https://drive.google.com/drive/folders/1ucbNV8FRlS27Jd-D7czpOYj-7rsod8Ml 
