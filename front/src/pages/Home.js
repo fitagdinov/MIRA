@@ -95,6 +95,7 @@ const Home = () => {
                         <Button
                             className={'mx-auto'}
                             variant={'success'}
+                            href='/QA'
                             onClick={() => {handleShowOpros(fio, birthDate);}} // при нажатии вызываем функцию происходит действи (описано выше)
                         >
                             Готово

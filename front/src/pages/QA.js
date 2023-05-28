@@ -359,6 +359,7 @@ const QA = () => {
                     </Modal.Body>
                 <Modal.Footer>
                     <Button variant="success"
+                            href="/"
                             type="submit"
                             size={'lg'}
                             onClick={() => handleCloseReady()}>

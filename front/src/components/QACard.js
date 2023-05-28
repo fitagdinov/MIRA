@@ -359,7 +359,8 @@ const QACard = () => {
                     </Row>
                     </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success"
+                    <Button href="/"
+                            variant="success"
                             type="submit"
                             size={'lg'}
                             onClick={() => handleCloseReady()}>

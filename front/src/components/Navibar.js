@@ -82,12 +82,13 @@ export default function Navibar (){
                         <Button
                             className={'mx-auto'}
                             variant={'success'}
+                            href="/QA"
                             onClick={() => {handleShowOpros(fio, birthDate);}} // при нажатии вызываем функцию происходит действи (описано выше)
                         >
                             Готово</Button>
                     </Modal.Footer>
                 </Modal>
-                <Modal size={'lg'} show={showOpros} onHide={handleCloseOpros}>
+                {/* <Modal size={'lg'} show={showOpros} onHide={handleCloseOpros}>
                     <Modal.Header closeButton>
                         <Modal.Title>
                         Чтоб мы могли посоветовать мероприятия, которые вам обязательно захочется посетить, пройдите, пожалуйста опрос
@@ -98,10 +99,11 @@ export default function Navibar (){
                         <Form className={'p-3'}>
                             <QACard question={'Вы дед'}
                                     />
-                            <Button >Начть</Button>
+                            <Button href="/QA"
+                            >Начть</Button>
                         </Form>
                     </Modal.Footer>
-                </Modal>
+                </Modal> */}
             </>
         )
 }
