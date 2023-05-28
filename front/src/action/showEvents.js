@@ -4,6 +4,7 @@ import { setEvent } from '../reducers/eventReducer';
 import { setAllEvents } from '../reducers/allEventsReducer';
 import { setByTypeEvents }  from '../reducers/byEventTypeReducer';
 import { setIsFetching } from '../reducers/allEventsReducer';
+import { setByBeautyEvent } from '../reducers/byBeautyCodeEvent';
 
 const API_URL = 'http://localhost:5000/'
 
@@ -11,6 +12,13 @@ export const showEvents = (sys_event_id) => {
     return async (dispatch) => {
         const response = await axios.get(`${API_URL}/search_event/by_sys_id?sys_external_id=${sys_event_id}`) // шлем get запрос достаем ивент
         dispatch(setEvent(response.data)) // заполняем store таской на обновление данных данными по ивенту
+    }
+}
+
+export const showByBeautyEvent = (beauty_code_event) => { 
+    return async (dispatch) => {
+        const response = await axios.get(`${API_URL}/search_event/by_beauty_word?beauty_string=${beauty_code_event}`) // шлем get запрос достаем ивент
+        dispatch(setByBeautyEvent(response.data)) // заполняем store таской на обновление данных данными по ивенту
     }
 }
 

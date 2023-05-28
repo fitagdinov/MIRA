@@ -1,5 +1,5 @@
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
-import React, {useState}from 'react'
+import React, {useEffect, useState}from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { getAnswer } from "../action/setAnswers";
 
@@ -8,10 +8,16 @@ const QACard = () => {
         const [show, setShow] = useState(false);
         const handleClose = () => setShow(false);
         const handleShow = () => setShow(true);
-        const [grandSysId, setGrandSysId] = useState(localStorage.getItem('grandSysId'))
         const dispatch = useDispatch()
         let results = useSelector(state => state.firstAnswer)
-        results.grand_sys_id = grandSysId
+        results.grand_sys_id = localStorage.getItem('grandSysId')
+        const handleCloseReady = () => {
+            setShow(false)
+            dispatch(getAnswer(results))
+        }
+
+
+
         const question1 = (k) => {
             if (results.grand_poll_passing.question1[k] === 0){
                 results.grand_poll_passing.question1[k] = 1
@@ -94,10 +100,6 @@ const QACard = () => {
         }
         return (
             <>
-            <Button variant="primary" onClick={handleShow}>
-                Launch demo modal
-            </Button>
-
             <Modal size={'lg'} show={show} onHide={handleClose}>
                 <Modal.Header className={'text-center'} closeButton>
                     <Modal.Title>
@@ -131,6 +133,7 @@ const QACard = () => {
                                     id={option}
                                     style={{fontSize: '18px'}}
                                     onChange={() => question1(key)}
+                                    onClick={() => console.log(key)}
                                 />
                             </div>
                         ))}
@@ -148,6 +151,7 @@ const QACard = () => {
                                     id={option}
                                     style={{fontSize: '18px'}}
                                     onChange={() => question1_1(key+3)}
+                                    onClick={() => console.log(key+3)}
                                 />
                             </div>
                         ))}
@@ -181,6 +185,7 @@ const QACard = () => {
                                         id={option}
                                         style={{fontSize: '18px'}}
                                         onChange={() => question2(key)}
+                                        onClick={() => console.log(key)}
                                     />
                                 </div>
                             ))}
@@ -198,6 +203,7 @@ const QACard = () => {
                                         id={option}
                                         style={{fontSize: '18px'}}
                                         onChange={() => question2_2(key+4)}
+                                        onClick={() => console.log(key+4)}
                                     />
                                 </div>
                             ))}
@@ -228,6 +234,7 @@ const QACard = () => {
                                         id={option}
                                         style={{fontSize: '18px'}}
                                         onChange={() => question3(key)}
+                                        onClick={() => console.log(key)}
                                     />
                                 </div>
                             ))}
@@ -244,6 +251,7 @@ const QACard = () => {
                                         id={option}
                                         style={{fontSize: '18px'}}
                                         onChange={() => question3_3(key+2)}
+                                        onClick={() => console.log(key+2)}
                                     />
                                 </div>
                             ))}
@@ -275,6 +283,7 @@ const QACard = () => {
                                         id={option}
                                         style={{fontSize: '18px'}}
                                         onChange={() => question4(key)}
+                                        onClick={() => console.log(key)}
                                     />
                                 </div>
                             ))}
@@ -291,6 +300,7 @@ const QACard = () => {
                                         id={option}
                                         style={{fontSize: '18px'}}
                                         onChange={() => question4_4(key+3)}
+                                        onClick={() => console.log(key+3)}
                                     />
                                 </div>
                             ))}
@@ -322,6 +332,7 @@ const QACard = () => {
                                         id={option}
                                         style={{fontSize: '18px'}}
                                         onChange={() => question5(key)}
+                                        onClick={() => console.log(key)}
                                     />
                                 </div>
                             ))}
@@ -339,6 +350,7 @@ const QACard = () => {
                                         id={option}
                                         style={{fontSize: '18px'}}
                                         onChange={() => question5_5(key+3)}
+                                        onClick={() => console.log(key+3)}
                                     />
                                 </div>
                             ))}
@@ -350,7 +362,7 @@ const QACard = () => {
                     <Button variant="success"
                             type="submit"
                             size={'lg'}
-                            onClick={() => dispatch(getAnswer(results))}>
+                            onClick={() => handleCloseReady()}>
                         Готово
                     </Button>
                 </Modal.Footer>

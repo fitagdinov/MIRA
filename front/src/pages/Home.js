@@ -17,14 +17,18 @@ import RecomendationCard from '../components/RecomendationCard';
 import { useState } from 'react';
 import { authUser } from '../action/auth';
 import { getAnswer } from '../action/setAnswers'
-
+import QACard from '../components/QACard';
+import { setByBeautyEvent } from '../reducers/byBeautyCodeEvent';
+import { showByBeautyEvent } from '../action/showEvents';
 
 const Home = () => {
     const dispatch = useDispatch()
     const byEvent = useSelector(state => state.byTypeEvents)
     const isFetching = useSelector(state => state.byTypeEvents.isFetching)
+    const byBeautyEvent = useSelector(state => state.byBeautyEvent)
     const [show, setShow] = useState(false) 
     const [showOpros, setShowOpros] = useState(false)
+    const [search, setSearch] = useState('')
     const [fio, setFio] = useState(101387414) 
     const [birthDate, setBirthDate] = useState('1937-02-17') 
     // const [showOpros, setShowOpros] = useState(false)
@@ -37,12 +41,12 @@ const Home = () => {
     }
     const results = useSelector(state => state.firstAnswer)
 
-    // console.log(results)
     return (
 
         <div>
             {/* <Button onClick={() => dispatch(getAnswer(results.grand_poll_passing,results.grand_sys_id))}>TEST</Button> */}
             <br/><br/>
+
             <div className={'text-center'}>
                 <h1> <FaHeart size={'20px'} style={{color: 'green', marginRight: '10px'}}/>
                     Здесь найдутся занятия по душе
@@ -94,7 +98,8 @@ const Home = () => {
                             variant={'success'}
                             onClick={() => {handleShowOpros(fio, birthDate);}} // при нажатии вызываем функцию происходит действи (описано выше)
                         >
-                            Готово</Button>
+                            Готово
+                        </Button>
                     </Modal.Footer>
                 </Modal>
 
@@ -125,18 +130,42 @@ const Home = () => {
             <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
             <Row>
                 <InputGroup className={'mt-1'} style={{marginLeft: '25%', width: '50%'}} size="lg">
-                    <InputGroup.Text id="inputGroup-sizing-lg"><FaSearch/></InputGroup.Text>
+                    <InputGroup.Text id="inputGroup-sizing-lg">
+                        <FaSearch/>
+                    </InputGroup.Text>
                     <Form.Control
                         aria-label="Large"
                         aria-describedby="inputGroup-sizing-sm"
                         placeholder={'Введите код мероприятия'}
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
                     />
-                    <div className={'input-group-append'}><Button variant='success' size={"lg"}>Искать</Button> </div>
+                    <div className={'input-group-append'}>
+                        <Button 
+                            variant='success'
+                            size={"lg"}
+                            onClick={() => dispatch(showByBeautyEvent(search))}>
+                            Искать
+                        </Button> 
+                    </div>
+
                 </InputGroup>
             </Row>
+            
             <br/>
             <br/>
             <div className={'text-center'}>
+                <h1>
+                <CardGroup className='card-group mt-3'>
+                    <RecomendationCard title={""}
+                            description={byBeautyEvent.description_event}
+                            sys_event_id={byBeautyEvent.sys_event_id}
+                            // image={babka}
+                            link={`/event/${byBeautyEvent.sys_event_id}`            
+                                            }
+                        />
+                </CardGroup>
+                </h1>
                 <h2> Направления занятий </h2>
             </div>
             <br/>
@@ -162,8 +191,6 @@ const Home = () => {
                     <div>Загруза</div>
                 }
             </h1>
-
-
         </div>
     );
 };
