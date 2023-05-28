@@ -37,7 +37,7 @@ export default function Navibar (){
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className='mx-auto'>
                             <Nav.Link href={'/'}><FaHome/> Главная</Nav.Link>
-                            <Nav.Link><FaSearch/> Расширеный поиск</Nav.Link>
+                            <Nav.Link href={'/search'}><FaSearch/> Расширеный поиск</Nav.Link>
                             <Nav.Link href={'/recomendation'}> <FaEye/> Рекомендации </Nav.Link>
                             <Nav.Link><FaHistory/> Мои мероприятия </Nav.Link>
                             <Nav.Link><FaHeart/> Избранное</Nav.Link>
@@ -96,7 +96,9 @@ export default function Navibar (){
 
                     <Modal.Footer className={'text-center'}>
                         <Form className={'p-3'}>
-                            <QACard question={'Вы дед'}/>
+                            <QACard question={'Вы дед'}
+                                    />
+                            <Button >Начть</Button>
                         </Form>
                     </Modal.Footer>
                 </Modal>
