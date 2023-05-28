@@ -18,12 +18,12 @@ from flaskService.Utils import BasicEventDescription
 
 
 class RequestMakeGeneralRecommendation(Schema):
-    grand_sys_id = fields.Integer(required=True, description="ID бабушки в формате mos.ru. Аналогично логину")
+    grand_sys_id = fields.Integer(required=True, description="ID бабушки в системном формате. Аналогично логину")
     number_of_recommendations = fields.Integer(required=False, default=10, description="Количество рекомендаций для возврата")
 
 
 class ResponseMakeGeneralRecommendation(Schema):
-    grand_sys_id = fields.Integer(required=True, description="ID бабушки в формате mos.ru. Аналогично логину")
+    grand_sys_id = fields.Integer(required=True, description="ID бабушки в системном формате. Аналогично логину")
     # TODO: change required to True
     number_of_recommendations = fields.String(required=False, description='Дата рождения бабушки. Аналогично паролю')
     recommended_events = fields.List(fields.Nested(BasicEventDescription, required=True), required=True)

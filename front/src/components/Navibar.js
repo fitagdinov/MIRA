@@ -37,7 +37,7 @@ export default function Navibar (){
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className='mx-auto'>
                             <Nav.Link href={'/'}><FaHome/> Главная</Nav.Link>
-                            <Nav.Link><FaSearch/> Расширеный поиск</Nav.Link>
+                            <Nav.Link href={'/search'}><FaSearch/> Расширеный поиск</Nav.Link>
                             <Nav.Link href={'/recomendation'}> <FaEye/> Рекомендации </Nav.Link>
                             <Nav.Link><FaHistory/> Мои мероприятия </Nav.Link>
                             <Nav.Link><FaHeart/> Избранное</Nav.Link>
@@ -82,12 +82,13 @@ export default function Navibar (){
                         <Button
                             className={'mx-auto'}
                             variant={'success'}
+                            href="/QA"
                             onClick={() => {handleShowOpros(fio, birthDate);}} // при нажатии вызываем функцию происходит действи (описано выше)
                         >
                             Готово</Button>
                     </Modal.Footer>
                 </Modal>
-                <Modal size={'lg'} show={showOpros} onHide={handleCloseOpros}>
+                {/* <Modal size={'lg'} show={showOpros} onHide={handleCloseOpros}>
                     <Modal.Header closeButton>
                         <Modal.Title>
                         Чтоб мы могли посоветовать мероприятия, которые вам обязательно захочется посетить, пройдите, пожалуйста опрос
@@ -96,10 +97,13 @@ export default function Navibar (){
 
                     <Modal.Footer className={'text-center'}>
                         <Form className={'p-3'}>
-                            <QACard question={'Вы дед'}/>
+                            <QACard question={'Вы дед'}
+                                    />
+                            <Button href="/QA"
+                            >Начть</Button>
                         </Form>
                     </Modal.Footer>
-                </Modal>
+                </Modal> */}
             </>
         )
 }

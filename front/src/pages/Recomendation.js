@@ -4,25 +4,30 @@ import {Container, Row, Form, CardGroup, InputGroup, Button} from 'react-bootstr
 import RecomendationCard from "../components/RecomendationCard";
 import "../styles/Opros.css"
 import {FaSearch} from "react-icons/fa";
-import {TEST_EVENT} from "../utils/consts";
-import { showEvents } from '../action/showEvents';
+import { showEvents, showREcommendationEvents } from '../action/showEvents';
 import { useSelector, useDispatch } from 'react-redux';
 import { authUser } from '../action/auth';
+import { setRecommendationEvents } from '../reducers/recommendationReducer';
+import CategorySelectorRec from "../components/CategorySelectorRec";
 
 const Recomendation = () => {
     const dispatch = useDispatch()
     const events = useSelector( state => state.events )
     const auth = useSelector(state => state.authTest)
+    const recEvents = useSelector(state => state.recommendationEvents)
+    const isFetching = useSelector(state => state.recommendationEvents.isFetching)
     const [search, setSearch] = useState('')
     useEffect(() => { //при обновлении строницы загружаем инфу по карточке  зависимости от номера
         dispatch(showEvents(1));
+        
         dispatch(authUser(localStorage.getItem('fio'), localStorage.getItem('birthDate'))) // хард код для авторизации
       }, []);
+    console.log(recEvents)
         return (
             <>
                 <Row>
-                <InputGroup className={'mt-4'} style={{marginLeft: '25%', width: '50%'}} size="lg">
-                    <InputGroup.Text id="inputGroup-sizing-lg">
+                <InputGroup className={'mt-4'} style={{marginLeft: '25%', width: '50%'}} size="lg" >
+                    <InputGroup.Text id="inputGroup">
                         <FaSearch/>
                     </InputGroup.Text>
                     <Form.Control
@@ -32,89 +37,45 @@ const Recomendation = () => {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
-                    <div className={'input-group-append'}>
-                        <Button variant='primary'
+                    <div className={'input-group-append'} >
+                        <Button variant='success'
                                 size={"lg"}
                                 onClick={() => {dispatch(showEvents(search))}}>Искать</Button> 
-                                <h1>{events.description_event}</h1>
+                            
                     </div>
-                    <div className={'input-group-append'}></div>
+            
                 </InputGroup>
-
-
                 </Row>
             <Container>
                 <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
                 <Form>
-                    <Row>
-                            <h3 className={'text-center mt-4'}>проверенное</h3>
+                <CategorySelectorRec />
+                <h1> {
+                    isFetching === false
+                    ?
+                    recEvents.recommended_events.map((event, k) =>
+                    <div key={k}>
+                        
                             <CardGroup className='card-group mt-3'>
-                                <RecomendationCard title={events.beauty_code_event}
-                                                description={events.description_event}
-                                                image={babka}
-                                                link={'/test_event'}
-                                />
-                                <RecomendationCard title={'второе мероприятие'}
-                                                description={'описание'}
-                                                image={babka}
-                                                link={'#'}
-                                />
-
-                                <RecomendationCard title={'третье мероприятие'}
-                                                description={'описание'}
-                                                image={babka}
-                                                link={'#'}
+                                <RecomendationCard title={event.short_event_name}
+                                                description={event.description_event}
+                                                sys_event_id={event.sys_event_id}
+                                                // image={babka}
+                                                link={`/event/${event.sys_event_id}`            
+                                            }
                                 />
                             </CardGroup>
-                        <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
-                        <h3 className={'text-center mt-4'}>новенькое</h3>
-                        <CardGroup className='card-group mt-3'>
-                            <RecomendationCard title={'первое мероприятие'}
-                                            description={'описание'}
-                                            image={babka}
-                                            link={'#'}
-                            />
-                            <RecomendationCard title={'второе мероприятие'}
-                                            description={'описание'}
-                                            image={babka}
-                                            link={'#'}
-                            />
-
-                            <RecomendationCard title={'третье мероприятие'}
-                                            description={'описание'}
-                                            image={babka}
-                                            link={'#'}
-                            />
-                            </CardGroup>
-                        <hr className={'mt-4'} width="100%" size="2" color="#ff0000" />
-                        <h3 className={'text-center mt-4'}>нравится остальным</h3>
-                            <CardGroup className='card-group mt-3'>
-                                <RecomendationCard title={'первое мероприятие'}
-                                                description={'описание'}
-                                                image={babka}
-                                                link={'#'}
-                                />
-                                <RecomendationCard title={'второе мероприятие'}
-                                                description={'описание'}
-                                                image={babka}
-                                                link={'#'}
-                                />
-
-                                <RecomendationCard title={'третье мероприятие'}
-                                                description={'описание'}
-                                                image={babka}
-                                                link={'#'}
-                                />
-                            </CardGroup>
-                    </Row>
+                    </div>)
+                    :
+                    <div className={'text-center'}>Загруза</div>
+                }
+            </h1>
+ 
                 </Form>
             </Container>
 
             </>
 
-                // <Link>Home</Link>
-
-                // <Link >Opros</Link>
         );
 };
 

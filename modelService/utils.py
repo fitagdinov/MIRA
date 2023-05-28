@@ -50,7 +50,7 @@ def get_grand_meetings_info(sys_id_grand: int) -> pd.DataFrame:
     return data
 
 
-def get_group_info(sys_id_group: int) -> pd.DataFrame:
+def get_group_info(sys_id_group: int) -> dict:
     group = get_request(
         query=f"""
                 SELECT 
@@ -71,20 +71,18 @@ def get_group_info(sys_id_group: int) -> pd.DataFrame:
                 """,
         execute_many=True
     )
-    data = pd.DataFrame(group, columns=["SYS_ID_event",
-                                        "SYS_ID_grand",
-                                        "event_short_name",
-                                        "group_address",
-                                        "group_online_status",
-                                        "group_schedule_raw"])
+    data = dict()
+    data["SYS_ID_event"] = group[0][0]
+    data["SYS_IDs_grand"] = [group[i][1] for i in range(len(group))]
+    data["event_short_name"] = group[0][2]
+    data["group_address"] = group[0][3]
+    data["group_online_status"] = group[0][4]
+    data["group_schedule_raw"] = group[0][4]
     return data
 
 
 def get_top_n_events_for_grand(sys_id_grand: int,
-                               top_n=10,
-                               offline_filter=False,
-                               online_filter=False,
-                               area_filter=False,):
+                               top_n=10):
     query = f"""
             SELECT * FROM NoOldMen.EventEmbedding 
             """
@@ -93,7 +91,7 @@ def get_top_n_events_for_grand(sys_id_grand: int,
         query=query,
         execute_many=True)
 
-    grand_emb = get_grand_embedding(sys_id_grand) + getInitialEmbedding(sys_id_grand)
+    grand_emb = get_grand_embedding(sys_id_grand) + 0.1 * getInitialEmbedding(sys_id_grand)
     # print(events)
     idx = np.argsort([cos_dist(grand_emb,
                                np.array(event[1:])) for event in events])[::-1]
@@ -101,7 +99,7 @@ def get_top_n_events_for_grand(sys_id_grand: int,
 
 
 if __name__ == '__main__':
-    print(get_top_n_events_for_grand(2))
+    print(get_top_n_events_for_grand(59999))
 
 # [894, 838, 854, 695, 689, 895, 73, 899, 228, 194]
 # [73, 894, 695, 689, 727, 228, 751, 688, 706, 37]

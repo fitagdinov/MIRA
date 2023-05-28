@@ -139,6 +139,16 @@ create table NoOldMen.AttendanceGroup
             on update cascade on delete cascade
 )
     comment 'Таблица посещаемости групп бабушками';
+    
+    
+create table NoOldMen.StaticMemberCoordinates
+(
+    SYS_ID_grand int          null,
+    coordinates  varchar(255) null,
+    constraint StaticMemberCoordinates_StaticMember_null_fk
+        foreign key (SYS_ID_grand) references NoOldMen.StaticMember (SYS_ID_grand)
+);
+
 
 create table NoOldMen.DynamicPollMember
 (
@@ -162,6 +172,14 @@ create table NoOldMen.StaticPoolResult
             on update cascade on delete cascade
 )
     comment 'Результат прохождения опроса бабушкой';
+
+create table NoOldMen.StaticMemberCoordinates
+(
+    SYS_ID_grand int  null,
+    coordinates  varchar(255) null,
+    constraint StaticMemberCoordinates_StaticMember_null_fk
+        foreign key (SYS_ID_grand) references NoOldMen.StaticMember (SYS_ID_grand)
+);
 
 
 """
